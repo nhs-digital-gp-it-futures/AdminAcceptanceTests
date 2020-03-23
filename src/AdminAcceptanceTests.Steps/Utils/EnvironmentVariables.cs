@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using AdminAcceptanceTests.TestData;
 using Newtonsoft.Json.Linq;
 
 namespace AdminAcceptanceTests.Steps.Utils
@@ -73,8 +74,18 @@ namespace AdminAcceptanceTests.Steps.Utils
 
             return uri;
         }
-    }
 
+        internal static User AdminUser()
+        {
+            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), "Utils",
+                "tokens.json");
+            var jsonSection = JObject.Parse(File.ReadAllText(path))["adminUser"];
+            var user = jsonSection.ToObject<User>();
+            user.Username = string.IsNullOrEmpty(user.Username) ? "bobsmith@email.com" : user.Username;
+            user.Password = string.IsNullOrEmpty(user.Password) ? "Pass123$" : user.Password;
+            return user;
+        }
+    }
 
     public static class ConnectionString
     {

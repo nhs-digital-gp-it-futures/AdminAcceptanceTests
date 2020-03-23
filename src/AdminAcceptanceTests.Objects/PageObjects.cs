@@ -1,4 +1,5 @@
 ﻿using AdminAcceptanceTests.Objects.Collections;
+using AdminAcceptanceTests.Objects.Pages;
 
 namespace AdminAcceptanceTests.Objects
 {
@@ -8,7 +9,8 @@ namespace AdminAcceptanceTests.Objects
         {
             Pages = new PageCollection
             {
-
+                Homepage = new Homepage(),
+                Login = new Login()
             };
         }
         public PageCollection Pages { get; set; }
