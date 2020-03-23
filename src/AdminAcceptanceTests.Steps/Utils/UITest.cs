@@ -13,7 +13,7 @@ namespace AdminAcceptanceTests.Steps.Utils
         internal IWebDriver Driver;
         internal string ExpectedSectionLinkInErrorMessage;
         internal PageActionCollection Pages;
-        internal string url;
+        internal readonly string url;
 
         public UITest()
         {
@@ -21,6 +21,9 @@ namespace AdminAcceptanceTests.Steps.Utils
 
             Driver = new BrowserFactory().Driver;
             Pages = new PageActions(Driver).PageActionCollection;
+            url = EnvironmentVariables.Url();
+
+            GoToUrl();
         }
 
         public void GoToUrl()

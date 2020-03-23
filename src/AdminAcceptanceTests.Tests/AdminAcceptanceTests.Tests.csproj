@@ -19,4 +19,8 @@
     <Folder Include="Utils\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\AdminAcceptanceTests.Steps\AdminAcceptanceTests.Steps.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAcceptanceTests.Object
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAcceptanceTests.TestData", "AdminAcceptanceTests.TestData\AdminAcceptanceTests.TestData.csproj", "{AFE52CF6-30BE-46B2-91F4-EB4EE52351A8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAcceptanceTests.Specflow", "AdminAcceptanceTests.Specflow\AdminAcceptanceTests.Specflow.csproj", "{BD4D3C9A-68CC-4BE3-B2DD-E8BEE81F1133}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AdminAcceptanceTests.Tests", "AdminAcceptanceTests.Tests\AdminAcceptanceTests.Tests.csproj", "{C2D441B9-8B89-4CE7-8E06-69DDD8E7668A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{AFE52CF6-30BE-46B2-91F4-EB4EE52351A8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFE52CF6-30BE-46B2-91F4-EB4EE52351A8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFE52CF6-30BE-46B2-91F4-EB4EE52351A8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BD4D3C9A-68CC-4BE3-B2DD-E8BEE81F1133}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BD4D3C9A-68CC-4BE3-B2DD-E8BEE81F1133}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BD4D3C9A-68CC-4BE3-B2DD-E8BEE81F1133}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BD4D3C9A-68CC-4BE3-B2DD-E8BEE81F1133}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2D441B9-8B89-4CE7-8E06-69DDD8E7668A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2D441B9-8B89-4CE7-8E06-69DDD8E7668A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2D441B9-8B89-4CE7-8E06-69DDD8E7668A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2D441B9-8B89-4CE7-8E06-69DDD8E7668A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

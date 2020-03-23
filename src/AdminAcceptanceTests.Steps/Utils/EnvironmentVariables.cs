@@ -69,9 +69,8 @@ namespace AdminAcceptanceTests.Steps.Utils
 
         private static string DefaultUri()
         {
-            var uri = "http://gpitfutures-bc-admin.buyingcatalogue/admin/organisations";
-            if (Debugger.IsAttached)
-                uri = uri.Replace("gpitfutures-bc-admin.buyingcatalogue", "docker.host.internal.localhost");
+            var uri = "https://host.docker.internal";
+
             return uri;
         }
     }
