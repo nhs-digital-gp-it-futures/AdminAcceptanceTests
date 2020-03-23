@@ -38,5 +38,15 @@ namespace AdminAcceptanceTests.Actions.Pages
                 throw new WebDriverException("Log out text incorrect");
             }
         }
+
+        public bool AdminTileIsDisplayed()
+        {
+            return driver.FindElements(pages.Homepage.AdminTile).Count > 0;
+        }
+
+        public void ClickAdminTile()
+        {
+            driver.FindElement(pages.Homepage.AdminTile).Click();
+        }
     }
 }

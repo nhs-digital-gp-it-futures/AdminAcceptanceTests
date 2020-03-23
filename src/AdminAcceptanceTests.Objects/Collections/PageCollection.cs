@@ -9,5 +9,6 @@ namespace AdminAcceptanceTests.Objects.Collections
     {
         public Homepage Homepage { get; set; }
         public Login Login { get; set; }
+        public OrganisationDashboard OrganisationDashboard { get; set; }
     }
 }

@@ -13,7 +13,8 @@ namespace AdminAcceptanceTests.Actions
             PageActionCollection = new PageActionCollection
             {
                 Homepage = new Pages.Homepage(driver),
-                Authorization = new Pages.Authorization(driver)
+                Authorization = new Pages.Authorization(driver),
+                OrganisationDashboard = new Pages.OrganisationDashboard(driver)
             };
         }
 
