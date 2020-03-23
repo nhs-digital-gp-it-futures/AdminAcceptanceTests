@@ -21,4 +21,10 @@
     <ProjectReference Include="..\AdminAcceptanceTests.TestData\AdminAcceptanceTests.TestData.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="Utils\tokens.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>

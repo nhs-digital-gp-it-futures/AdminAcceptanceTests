@@ -81,8 +81,10 @@ namespace AdminAcceptanceTests.Steps.Utils
                 "tokens.json");
             var jsonSection = JObject.Parse(File.ReadAllText(path))["adminUser"];
             var user = jsonSection.ToObject<User>();
-            user.Username = string.IsNullOrEmpty(user.Username) ? "bobsmith@email.com" : user.Username;
-            user.Password = string.IsNullOrEmpty(user.Password) ? "Pass123$" : user.Password;
+            if (user.Username.Contains("#{") || user.Password.Contains("#{"))
+            {
+                user = new User { Username = "BobSmith@email.com", Password = "Pass123$" };
+            }
             return user;
         }
     }
