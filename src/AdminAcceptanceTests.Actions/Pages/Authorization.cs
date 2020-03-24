@@ -23,5 +23,15 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Driver.FindElement(Pages.Login.LoginButton).Submit();
         }
+
+        public bool RequestAnAccountLinkIsDisplayed()
+        {
+            return Driver.FindElements(Pages.Login.RequestAnAccountLink).Count > 0;
+        }
+
+        public void ClickRequestAnAccountLink()
+        {
+            Driver.FindElement(Pages.Login.RequestAnAccountLink).Click();
+        }
     }
 }

@@ -11,6 +11,7 @@ namespace AdminAcceptanceTests.Objects
             {
                 Homepage = new Homepage(),
                 Login = new Login(),
+                RequestAnAccount = new RequestAnAccount(),
                 OrganisationDashboard = new OrganisationDashboard()
             };
         }

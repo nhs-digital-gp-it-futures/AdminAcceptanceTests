@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using AdminAcceptanceTests.Objects.Utils;
+using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Objects.Pages
 {
@@ -7,5 +8,6 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By Username => By.Id("EmailAddress");
         public By Password => By.Id("Password");
         public By LoginButton => By.CssSelector("button[type=submit]");
+        public By RequestAnAccountLink => CustomBy.DataTestId("request-account-link");
     }
 }
