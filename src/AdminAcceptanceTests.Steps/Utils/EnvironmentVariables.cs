@@ -27,7 +27,7 @@ namespace AdminAcceptanceTests.Steps.Utils
 
         internal static string Url()
         {
-            var uri = Environment.GetEnvironmentVariable("AURL") ?? DefaultUri();
+            var uri = Environment.GetEnvironmentVariable("PBURL") ?? DefaultUri();
             return uri.TrimEnd('/');
         }
 

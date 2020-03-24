@@ -11,25 +11,25 @@ namespace AdminAcceptanceTests.Actions.Pages
         }
         public void PageDisplayed()
         {
-            wait.Until(s => s.FindElement(pages.Homepage.Title).Displayed);
+            Wait.Until(s => s.FindElement(Pages.Homepage.Title).Displayed);
         }
 
         public void ClickLoginButton()
         {
-            driver.FindElement(pages.Homepage.LoginLogoutLink).Click();
+            Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
         }
 
         public string LoginLogoutLinkText()
         {
-            wait.Until(s => s.FindElement(pages.Homepage.LoginLogoutLink).Displayed);
-            return driver.FindElement(pages.Homepage.LoginLogoutLink).Text;
+            Wait.Until(s => s.FindElement(Pages.Homepage.LoginLogoutLink).Displayed);
+            return Driver.FindElement(Pages.Homepage.LoginLogoutLink).Text;
         }
 
         public void LogOut()
         {
             if (LoginLogoutLinkText().Equals("Log out", StringComparison.OrdinalIgnoreCase))
             {
-                driver.FindElement(pages.Homepage.LoginLogoutLink).Click();
+                Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
             }
             else
             {
@@ -39,12 +39,12 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool AdminTileIsDisplayed()
         {
-            return driver.FindElements(pages.Homepage.AdminTile).Count > 0;
+            return Driver.FindElements(Pages.Homepage.AdminTile).Count > 0;
         }
 
         public void ClickAdminTile()
         {
-            driver.FindElement(pages.Homepage.AdminTile).Click();
+            Driver.FindElement(Pages.Homepage.AdminTile).Click();
         }
     }
 }

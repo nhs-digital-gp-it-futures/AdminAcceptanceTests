@@ -12,17 +12,17 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-            wait.Until(s => s.FindElement(pages.OrganisationDashboard.OrgDashboardTitle).Displayed);
+            Wait.Until(s => s.FindElement(Pages.OrganisationDashboard.OrgDashboardTitle).Displayed);
         }
 
         public bool AddOrganisationsButtonIsDisplayed()
         {
-            return driver.FindElements(pages.OrganisationDashboard.AddOrgButton).Count > 0;
+            return Driver.FindElements(Pages.OrganisationDashboard.AddOrgButton).Count > 0;
         }
 
         public bool LinksToManageOrganisationsAreDisplayed()
         {
-            return driver.FindElements(pages.OrganisationDashboard.OrganisationLinks).Count > 0;
+            return Driver.FindElements(Pages.OrganisationDashboard.OrganisationLinks).Count > 0;
         }
     }
 }

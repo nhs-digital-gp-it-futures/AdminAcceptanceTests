@@ -14,12 +14,12 @@ namespace AdminAcceptanceTests.Steps.Steps
         [Given(@"that an Authority User has logged in on Public Browse")]
         public void GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse()
         {
-            _test.Pages.Homepage.ClickLoginButton();
+            Test.Pages.Homepage.ClickLoginButton();
             var user = EnvironmentVariables.AdminUser();
-            _test.Pages.Authorization.EnterUsername(user.Username);
-            _test.Pages.Authorization.EnterPassword(user.Password);
-            _test.Pages.Authorization.Login();
-            _test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
+            Test.Pages.Authorization.EnterUsername(user.Username);
+            Test.Pages.Authorization.EnterPassword(user.Password);
+            Test.Pages.Authorization.Login();
+            Test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
         }
 
     }

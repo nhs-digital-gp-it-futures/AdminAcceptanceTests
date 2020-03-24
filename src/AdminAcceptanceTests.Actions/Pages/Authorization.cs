@@ -11,17 +11,17 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void EnterPassword(string password)
         {
-            driver.FindElement(pages.Login.Password).SendKeys(password);
+            Driver.FindElement(Pages.Login.Password).SendKeys(password);
         }
 
         public void EnterUsername(string username)
         {
-            driver.FindElement(pages.Login.Username).SendKeys(username);
+            Driver.FindElement(Pages.Login.Username).SendKeys(username);
         }
 
         public void Login()
         {
-            driver.FindElement(pages.Login.LoginButton).Submit();
+            Driver.FindElement(Pages.Login.LoginButton).Submit();
         }
     }
 }

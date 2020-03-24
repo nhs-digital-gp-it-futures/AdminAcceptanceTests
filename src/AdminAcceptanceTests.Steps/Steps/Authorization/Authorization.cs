@@ -16,7 +16,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Given(@"that a User is not logged in")]
         public void GivenThatAUserIsNotLoggedIn()
         {
-            _test.Pages.Homepage.ClickLoginButton();
+            Test.Pages.Homepage.ClickLoginButton();
         }
 
         [When(@"a User provides a (true|false) username")]
@@ -25,7 +25,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             if (usernameCorrect)
             {
                 var user = EnvironmentVariables.AdminUser();
-                _test.Pages.Authorization.EnterUsername(user.Username);
+                Test.Pages.Authorization.EnterUsername(user.Username);
             }
         }
 
@@ -35,7 +35,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             if (passwordCorrect)
             {
                 var user = EnvironmentVariables.AdminUser();
-                _test.Pages.Authorization.EnterPassword(user.Password);
+                Test.Pages.Authorization.EnterPassword(user.Password);
             }
         }
 
@@ -43,21 +43,21 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         public void WhenAUserProvidesRecognisedAuthenticationDetailsToLoginLocally()
         {
             var user = EnvironmentVariables.AdminUser();
-            _test.Pages.Authorization.EnterUsername(user.Username);
-            _test.Pages.Authorization.EnterPassword(user.Password);
-            _test.Pages.Authorization.Login();
+            Test.Pages.Authorization.EnterUsername(user.Username);
+            Test.Pages.Authorization.EnterPassword(user.Password);
+            Test.Pages.Authorization.Login();
         }
 
         [Then(@"the User will be logged in")]
         public void ThenTheUserWillBeLoggedIn()
         {
-            _test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
+            Test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
         }
 
         [Then(@"the User will not be logged in")]
         public void ThenTheUserWillNotBeLoggedIn()
         {
-            _test.Pages.Authorization.Login();
+            Test.Pages.Authorization.Login();
         }
 
         [Then(@"the User will be informed the login attempt was unsuccessful Email (.*), password (.*)")]
@@ -65,12 +65,12 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         {
             if (!email)
             {
-                _test.Driver.FindElement(By.CssSelector("[data-valmsg-for=EmailAddress]")).Displayed.Should().BeTrue();
+                Test.Driver.FindElement(By.CssSelector("[data-valmsg-for=EmailAddress]")).Displayed.Should().BeTrue();
             }
 
             if (!password)
             {
-                _test.Driver.FindElement(By.CssSelector("[data-valmsg-for=Password]")).Displayed.Should().BeTrue();
+                Test.Driver.FindElement(By.CssSelector("[data-valmsg-for=Password]")).Displayed.Should().BeTrue();
             }
         }
 
@@ -84,13 +84,13 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [When(@"the User logs out")]
         public void WhenTheUserLogsOut()
         {
-            _test.Pages.Homepage.LogOut();
+            Test.Pages.Homepage.LogOut();
         }
 
         [Then(@"the User is logged out")]
         public void ThenTheUserIsLoggedOut()
         {
-            _test.Pages.Homepage.LoginLogoutLinkText().Should().BeEquivalentTo("Log in");
+            Test.Pages.Homepage.LoginLogoutLinkText().Should().BeEquivalentTo("Log in");
         }
 
     }

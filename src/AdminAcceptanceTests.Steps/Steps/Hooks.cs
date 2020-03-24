@@ -13,7 +13,7 @@ namespace AdminAcceptanceTests.Steps.Steps
         [AfterScenario]
         public void AfterScenario()
         {
-            _test.Driver.Quit();
+            Test.Driver.Quit();
         }
     }
 }
