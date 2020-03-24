@@ -1,4 +1,5 @@
 ﻿using AdminAcceptanceTests.Actions.Utils;
+using AdminAcceptanceTests.TestData.Information;
 using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Actions.Pages
@@ -23,6 +24,26 @@ namespace AdminAcceptanceTests.Actions.Pages
         public bool LinksToManageOrganisationsAreDisplayed()
         {
             return Driver.FindElements(Pages.OrganisationDashboard.OrganisationLinks).Count > 0;
+        }
+
+        public string SelectOrganisation(int? index = null)
+        {
+            var organisations = Driver.FindElements(Pages.OrganisationDashboard.OrganisationLinks);
+
+            IWebElement org;
+
+            if (index is null)
+            {
+                org = RandomInformation.GetRandomItem(organisations);
+            }
+            else
+            {
+                org = organisations[index.Value];
+            }
+
+            string orgName = org.Text;
+            org.Click();
+            return orgName;
         }
     }
 }

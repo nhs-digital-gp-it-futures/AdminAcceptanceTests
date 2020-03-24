@@ -8,5 +8,6 @@ namespace AdminAcceptanceTests.Objects.Collections
         public Login Login { get; set; }
         public RequestAnAccount RequestAnAccount { get; set; }
         public OrganisationDashboard OrganisationDashboard { get; set; }
+        public UserAccountsDashboard UserAccountsDashboard { get; set; }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using AdminAcceptanceTests.Actions.Collections;
+using AdminAcceptanceTests.Actions.Pages;
 using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Actions
@@ -11,6 +12,7 @@ namespace AdminAcceptanceTests.Actions
             {
                 Homepage = new Pages.Homepage(driver),
                 Authorization = new Pages.Authorization(driver),
+                UserAccountsDashboard = new UserAccountsDashboard(driver),
                 RequestAnAccount = new Pages.RequestAnAccount(driver),
                 OrganisationDashboard = new Pages.OrganisationDashboard(driver)
             };

@@ -8,6 +8,6 @@ namespace AdminAcceptanceTests.Actions.Collections
         public Authorization Authorization { get; set; }
         public RequestAnAccount RequestAnAccount { get; set; }
         public OrganisationDashboard OrganisationDashboard { get; set; }
-
+        public UserAccountsDashboard UserAccountsDashboard { get; set; }
     }
 }
