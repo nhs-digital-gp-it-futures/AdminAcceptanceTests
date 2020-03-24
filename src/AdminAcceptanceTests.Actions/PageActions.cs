@@ -12,8 +12,9 @@ namespace AdminAcceptanceTests.Actions
             {
                 Homepage = new Pages.Homepage(driver),
                 Authorization = new Pages.Authorization(driver),
-                OrganisationDashboard = new Pages.OrganisationDashboard(driver),
-                UserAccountsDashboard = new UserAccountsDashboard(driver)
+                UserAccountsDashboard = new UserAccountsDashboard(driver),
+                RequestAnAccount = new Pages.RequestAnAccount(driver),
+                OrganisationDashboard = new Pages.OrganisationDashboard(driver)
             };
         }
 

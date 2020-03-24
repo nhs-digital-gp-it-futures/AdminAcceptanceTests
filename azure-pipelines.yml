@@ -17,7 +17,7 @@ jobs:
   - job : Setup
     steps:
       - bash: 
-          "curl -k -i $(AURL) --fail --connect-timeout 30"
+          "curl -k -i $(PBURL) --fail --connect-timeout 30"
         displayName: 'Check URL is reachable'    
     
 
@@ -61,5 +61,5 @@ jobs:
       displayName: "Run Admin Acceptance Tests"
       inputs:
         command: 'test'
-        projects: 'src/AdminAcceptanceTests.Specflow/*csproj'
+        projects: 'src/AdminAcceptanceTests.Tests/*csproj'
         arguments: '-v n'        
