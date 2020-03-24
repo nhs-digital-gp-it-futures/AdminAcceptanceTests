@@ -11,7 +11,8 @@ namespace AdminAcceptanceTests.Objects
             {
                 Homepage = new Homepage(),
                 Login = new Login(),
-                OrganisationDashboard = new OrganisationDashboard()
+                OrganisationDashboard = new OrganisationDashboard(),
+                UserAccountsDashboard = new UserAccountsDashboard()
             };
         }
         public PageCollection Pages { get; set; }

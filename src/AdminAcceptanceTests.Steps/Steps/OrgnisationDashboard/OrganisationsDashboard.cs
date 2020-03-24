@@ -2,7 +2,7 @@
 using FluentAssertions;
 using TechTalk.SpecFlow;
 
-namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
+namespace AdminAcceptanceTests.Steps.Steps.OrganisationDashboard
 {
     [Binding]
     public class OrganisationsDashboard : TestBase
@@ -12,7 +12,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
 
         }
 
-        [When(@"an Authority User clicks the admin tile on the Public Browse homepage")]
+        [StepDefinition(@"an Authority User clicks the admin tile on the Public Browse homepage")]
         public void WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage()
         {
             Test.Pages.Homepage.ClickAdminTile();
@@ -40,6 +40,18 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         public void ThenTheUserCanSelectAnOrganisation()
         {
             Test.Pages.OrganisationDashboard.LinksToManageOrganisationsAreDisplayed().Should().BeTrue();
+        }
+
+        [When(@"an organisation is selected")]
+        public void WhenAnOrganisationIsSelected()
+        {
+            Context.Add("Organisation", Test.Pages.OrganisationDashboard.SelectOrganisation());
+        }
+
+        [Then(@"the User Accounts Dashboard for that organisation is displayed")]
+        public void ThenTheUserAccountsDashboardForThatOrganisationIsDisplayed()
+        {
+            Test.Pages.UserAccountsDashboard.OrganisationNameMatches((string)Context["Organisation"]);
         }
     }
 }
