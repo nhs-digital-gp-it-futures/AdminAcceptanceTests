@@ -4,13 +4,13 @@ namespace AdminAcceptanceTests.Steps.Utils
 {
     public abstract class TestBase
     {
-        public readonly ScenarioContext _context;
-        public readonly UITest _test;
+        internal readonly ScenarioContext Context;
+        internal readonly UITest Test;
 
-        public TestBase(UITest test, ScenarioContext context)
+        protected TestBase(UITest test, ScenarioContext context)
         {
-            _test = test;
-            _context = context;
+            Test = test;
+            Context = context;
         }
     }
 }

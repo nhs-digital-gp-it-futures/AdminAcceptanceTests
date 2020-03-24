@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using AdminAcceptanceTests.Actions;
+﻿using AdminAcceptanceTests.Actions;
 using AdminAcceptanceTests.Actions.Collections;
 using OpenQA.Selenium;
 

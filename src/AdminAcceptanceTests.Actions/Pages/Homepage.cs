@@ -1,8 +1,6 @@
 ﻿using AdminAcceptanceTests.Actions.Utils;
 using OpenQA.Selenium;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AdminAcceptanceTests.Actions.Pages
 {

@@ -1,8 +1,5 @@
 ﻿using AdminAcceptanceTests.Actions.Collections;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AdminAcceptanceTests.Actions
 {

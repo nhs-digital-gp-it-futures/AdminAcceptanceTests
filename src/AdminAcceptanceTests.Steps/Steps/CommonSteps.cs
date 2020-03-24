@@ -1,8 +1,5 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps
@@ -18,7 +15,6 @@ namespace AdminAcceptanceTests.Steps.Steps
         public void GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse()
         {
             _test.Pages.Homepage.ClickLoginButton();
-            _test.Pages.Homepage.PageDisplayed();
             var user = EnvironmentVariables.AdminUser();
             _test.Pages.Authorization.EnterUsername(user.Username);
             _test.Pages.Authorization.EnterPassword(user.Password);

@@ -1,9 +1,6 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
 using FluentAssertions;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps.Authorization
@@ -13,7 +10,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
     {
 
         public Authorization(UITest test, ScenarioContext context) : base(test, context)
-        { 
+        {
         }
 
         [Given(@"that a User is not logged in")]

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AdminAcceptanceTests.TestData
+﻿namespace AdminAcceptanceTests.TestData
 {
     public sealed class User
     {

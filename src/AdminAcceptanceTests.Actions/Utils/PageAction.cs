@@ -3,28 +3,26 @@ using AdminAcceptanceTests.Objects.Collections;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AdminAcceptanceTests.Actions.Utils
 {
     public abstract class PageAction
     {
-        internal readonly IWebDriver driver;
-        internal readonly WebDriverWait wait;
-        internal PageCollection pages;
+        internal readonly IWebDriver Driver;
+        internal readonly WebDriverWait Wait;
+        internal PageCollection Pages;
 
         protected PageAction(IWebDriver driver)
         {
-            this.driver = driver;
+            this.Driver = driver;
 
             // Initialize a WebDriverWait that can be reutilized by all that inherit from this class
             // Polls every 0.1 seconds for 10 seconds maximum
-            wait = new WebDriverWait(new SystemClock(), this.driver, TimeSpan.FromSeconds(10),
+            Wait = new WebDriverWait(new SystemClock(), this.Driver, TimeSpan.FromSeconds(10),
                 TimeSpan.FromMilliseconds(100));
 
             // Initialize the page objects
-            pages = new PageObjects().Pages;
+            Pages = new PageObjects().Pages;
         }
     }
 }

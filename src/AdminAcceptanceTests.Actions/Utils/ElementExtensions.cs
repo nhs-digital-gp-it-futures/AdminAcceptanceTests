@@ -28,7 +28,7 @@ namespace AdminAcceptanceTests.Actions.Utils
         /// <param name="elementBy"></param>
         /// <param name="value">default is empty string</param>
         /// <param name="index">default is 0</param>
-        public static void EnterTextViaJS(this IWebDriver driver, WebDriverWait wait, By elementBy, string value = "",
+        public static void EnterTextViaJs(this IWebDriver driver, WebDriverWait wait, By elementBy, string value = "",
             int index = 0)
         {
             wait.Until(s => s.FindElements(elementBy)[index].Enabled);

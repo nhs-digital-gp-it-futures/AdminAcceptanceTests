@@ -1,7 +1,7 @@
 ﻿Feature: Organisations Dashboard
 	As an Authority User 
-I want to add new Organisations or undertake other activities related to existing Organisations
-So that I can manage Organisations and their Users
+	I want to add new Organisations or undertake other activities related to existing Organisations
+	So that I can manage Organisations and their Users
 
 Scenario: Tile on Public Browse Homepage
 	Given that an Authority User has logged in on Public Browse
