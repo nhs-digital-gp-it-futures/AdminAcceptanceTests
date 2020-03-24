@@ -61,5 +61,5 @@ jobs:
       displayName: "Run Admin Acceptance Tests"
       inputs:
         command: 'test'
-        projects: 'src/AdminAcceptanceTests.Specflow/*csproj'
+        projects: 'src/AdminAcceptanceTests.Tests/*csproj'
         arguments: '-v n'        
