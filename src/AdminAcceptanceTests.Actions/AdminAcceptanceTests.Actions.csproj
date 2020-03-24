@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Polly" Version="7.2.0" />
+    <PackageReference Include="Selenium.WebDriver" Version="3.141.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AdminAcceptanceTests.Objects\AdminAcceptanceTests.Objects.csproj" />
+    <ProjectReference Include="..\AdminAcceptanceTests.TestData\AdminAcceptanceTests.TestData.csproj" />
+  </ItemGroup>
+
+</Project>
