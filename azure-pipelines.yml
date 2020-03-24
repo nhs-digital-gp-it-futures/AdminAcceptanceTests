@@ -17,7 +17,7 @@ jobs:
   - job : Setup
     steps:
       - bash: 
-          "curl -k -i $(AURL) --fail --connect-timeout 30"
+          "curl -k -i $(PBURL) --fail --connect-timeout 30"
         displayName: 'Check URL is reachable'    
     
 
