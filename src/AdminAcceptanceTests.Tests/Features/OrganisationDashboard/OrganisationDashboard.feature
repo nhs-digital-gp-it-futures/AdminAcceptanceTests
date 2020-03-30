@@ -3,7 +3,7 @@
 	I want to add new Organisations or undertake other activities related to existing Organisations
 	So that I can manage Organisations and their Users
 
-Scenario: Tile on Public Browse Homepage
+Scenario: Organisations Dashboard - Tile on Public Browse Homepage
 	Given that an Authority User has logged in on Public Browse
 	Then there is an additional tile for the Authority User to access the dashboard
 
