@@ -18,6 +18,10 @@ namespace AdminAcceptanceTests.Actions.Pages
             name.Should().BeEquivalentTo(organisationName);
         }
 
+        public String GetODSCode()
+        {
+            return Driver.FindElement(Pages.UserAccountsDashboard.ODSCode).Text;
+        }
 
         public bool EditOrganisationButtonDisplayed()
         {
