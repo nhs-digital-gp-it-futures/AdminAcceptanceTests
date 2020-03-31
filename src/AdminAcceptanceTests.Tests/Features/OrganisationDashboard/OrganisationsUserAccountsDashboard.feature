@@ -1,4 +1,5 @@
-﻿Feature: Organisation's User Accounts Dashboard
+﻿@SmokeTest
+Feature: Organisation's User Accounts Dashboard
 	As an Authority User
 	I want to edit Organisation accounts, add new Users and manage existing User
 	So that I can manage access to the Buying Catalogue

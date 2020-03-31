@@ -1,4 +1,5 @@
-﻿Feature: Registration
+﻿@SmokeTest
+Feature: Registration
 	As a Public User
 	I want to register for an account
 	So that I can login to the Buying Catalogue

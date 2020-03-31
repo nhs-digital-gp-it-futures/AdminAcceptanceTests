@@ -1,4 +1,5 @@
-﻿Feature: Organisations Dashboard
+﻿@SmokeTest
+Feature: Organisations Dashboard
 	As an Authority User 
 	I want to add new Organisations or undertake other activities related to existing Organisations
 	So that I can manage Organisations and their Users

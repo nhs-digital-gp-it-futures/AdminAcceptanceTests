@@ -1,4 +1,5 @@
-﻿Feature: Login Local
+﻿@SmokeTest
+Feature: Login Local
 	As a Registered User
 	I want to login to the Buying Catalogue without using an external authentication tool
 	So that I can do Buying Catalogue Activities 
