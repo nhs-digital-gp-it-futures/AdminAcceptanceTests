@@ -68,9 +68,30 @@ namespace AdminAcceptanceTests.Actions.Pages
             return Driver.FindElements(Pages.CreateBuyerUser.LastNameRequired).Count > 0;
         }
 
-        public bool EmailAlreadyRequiredErrorDisplayed()
+        public bool EmailRequiredErrorDisplayed()
         {
             return Driver.FindElements(Pages.CreateBuyerUser.EmailRequired).Count > 0;
+        }
+        public bool PhoneNumberRequiredErrorDisplayed()
+        {
+            return Driver.FindElements(Pages.CreateBuyerUser.PhoneNumberRequired).Count > 0;
+        }
+        public bool EmailTooLongErrorDisplayed()
+        {
+            return Driver.FindElements(Pages.CreateBuyerUser.EmailITooLong).Count > 0;
+        }
+        public bool FirstNameTooLongErrorDisplayed()
+        {
+            return Driver.FindElements(Pages.CreateBuyerUser.FirstNameTooLong).Count > 0;
+        }
+        public bool LastNameTooLongErrorDisplayed()
+        {
+            return Driver.FindElements(Pages.CreateBuyerUser.LastNameTooLong).Count > 0;
+        }
+
+        public bool EmailInvalidFormatErrorDisplayed()
+        {
+            return Driver.FindElements(Pages.CreateBuyerUser.EmailInvalidFormat).Count > 0;
         }
     }
 }
