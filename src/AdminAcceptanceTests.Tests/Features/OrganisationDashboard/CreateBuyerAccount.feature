@@ -8,8 +8,6 @@ Scenario: Create Buyer User Account details
 	And account details have been provided
 	When I create the buying user account
 	Then the account will be associated with an organisation
-	And the display name will be the first name and last name 
-	And the permission set is inherited from the organisation type
 
 Scenario: E-mail not unique
 	Given I am on a random organisation user account dashboard
@@ -27,3 +25,9 @@ Scenario: Mandatory fields
 	   | First Name     |
 	   | Last Name      |
 	   | E-mail Address |
+
+@ignore
+Scenario: Display name
+	Given something
+	When something else
+	Then the display name will be the first name and last name 

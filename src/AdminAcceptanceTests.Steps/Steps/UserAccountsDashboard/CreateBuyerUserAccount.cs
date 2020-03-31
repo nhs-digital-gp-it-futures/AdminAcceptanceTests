@@ -33,8 +33,9 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         {
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
-            User user = new User().GenerateRandomUser(true, CurrentOrganisation.Id);
+            User user = new User().GenerateRandomUser(true, CurrentOrganisation.OrganisationId);
             Context.Add("BuyingUser", user);
+            Context.Add("OrganisationId", CurrentOrganisation.OrganisationId);
         }
 
         [Given(@"that mandatory data '(.*)' has not been added")]
@@ -42,7 +43,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         {
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
-            User user = new User().GenerateRandomUser(true, CurrentOrganisation.Id);
+            User user = new User().GenerateRandomUser(true, CurrentOrganisation.OrganisationId);
 
             switch (MissingField.ToLower())
             {
@@ -66,7 +67,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         {
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
-            User user = new User().GenerateRandomUser(true, CurrentOrganisation.Id);
+            User user = new User().GenerateRandomUser(true, CurrentOrganisation.OrganisationId);
             user.Email = "alicesmith@email.com";
             Context.Add("BuyingUser", user);
         }
@@ -74,7 +75,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         [When(@"I create the buying user account")]
         public void WhenICreateTheBuyingUserAccount()
         {
-            //CompleteAndSubmitForm();
+            CompleteAndSubmitForm();
             //wait for confirmation page => data-test-id="add-user-confirmation"
         }
 
@@ -82,7 +83,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void WhenIAttemptToCreateTheBuyingUserAccount()
         {
             CompleteAndSubmitForm();
-            //Test.Pages.CreateBuyerUser.ErrorSummaryDisplayed().Should().BeTrue();
+            Test.Pages.CreateBuyerUser.ErrorSummaryDisplayed().Should().BeTrue();
         }
 
         [Then(@"the user is informed that the e-mail address it not unique")]
@@ -115,6 +116,8 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             var enteredUser = (User)Context["BuyingUser"];
             enteredUser.Email = "BobSmith@email.com";
             var retrievedUser = enteredUser.Retrieve(Test.ConnectionString);
+            var expectedOrganisationId = (Guid)Context["OrganisationId"];
+            retrievedUser.PrimaryOrganisationId.Should().Be(expectedOrganisationId);
         }
 
         private void CompleteAndSubmitForm()

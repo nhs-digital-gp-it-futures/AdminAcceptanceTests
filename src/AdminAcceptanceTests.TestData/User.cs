@@ -7,7 +7,7 @@ namespace AdminAcceptanceTests.TestData
 {
     public sealed class User
     {
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = new Guid();
         public string UserName { get; set; }
         public string NormalizedUserName { get; set; }
         public string Email { get; set; }
@@ -15,14 +15,14 @@ namespace AdminAcceptanceTests.TestData
         public int EmailConfirmed { get; set; }
         public string PasswordHash { get; set; }
         public string SecurityStamp { get; set; }
-        public Guid ConcurrencyStamp { get; set; }
+        public Guid ConcurrencyStamp { get; set; } = new Guid();
         public string PhoneNumber { get; set; }
         public int PhoneNumberConfirmed { get; set; }
         public int TwoFactorEnabled { get; set; }
         public string LockoutEnd { get; set; }
         public int LockoutEnabled { get; set; }
         public int AccessFailedCount { get; set; }
-        public Guid PrimaryOrganisationId { get; set; }
+        public Guid PrimaryOrganisationId { get; set; } = new Guid();
         public string OrganisationFunction { get; set; }
         public int Disabled { get; set; }
         public int CatalogueAgreementSigned { get; set; }
@@ -61,7 +61,29 @@ namespace AdminAcceptanceTests.TestData
 
         public User Retrieve(string connectionString)
         {
-            var query = @"SELECT * FROM [dbo].[AspNetUsers] WHERE Email=@email";
+            var query = @"SELECT 
+                    Convert(UniqueIdentifier, Id) as Id
+                    ,[UserName]
+                      ,[NormalizedUserName]
+                      ,[Email]
+                      ,[NormalizedEmail]
+                      ,[EmailConfirmed]
+                      ,[PasswordHash]
+                      ,[SecurityStamp]
+                      ,Convert(UniqueIdentifier, ConcurrencyStamp) as ConcurrencyStamp
+                      ,[PhoneNumber]
+                      ,[PhoneNumberConfirmed]
+                      ,[TwoFactorEnabled]
+                      ,[LockoutEnd]
+                      ,[LockoutEnabled]
+                      ,[AccessFailedCount]
+                      ,Convert(UniqueIdentifier, PrimaryOrganisationId) as PrimaryOrganisationId
+                      ,[OrganisationFunction]
+                      ,[Disabled]
+                      ,[CatalogueAgreementSigned]
+                      ,[FirstName]
+                      ,[LastName]
+                    FROM [dbo].[AspNetUsers] WHERE Email=@email";
             return SqlExecutor.Execute<User>(connectionString, query, this).Single();
         }
     }

@@ -6,7 +6,7 @@ namespace AdminAcceptanceTests.TestData
 {
     public sealed class Organisation
     {
-        public Guid Id { get; set; }
+        public Guid OrganisationId { get; set; }
         public string Name { get; set; }
         public string Address { get; set; }
         public string OdsCode { get; set; }
