@@ -1,4 +1,5 @@
-﻿Feature: Create Buyer User Account
+﻿@ignore
+Feature: Create Buyer User Account
 	As an Authority User
 	I want to create a User Account
 	So Users can access the Buying Catalogue
