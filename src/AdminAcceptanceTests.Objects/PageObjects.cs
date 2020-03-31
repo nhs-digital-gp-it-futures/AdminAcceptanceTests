@@ -13,7 +13,8 @@ namespace AdminAcceptanceTests.Objects
                 Login = new Login(),
                 OrganisationDashboard = new OrganisationDashboard(),
                 UserAccountsDashboard = new UserAccountsDashboard(),
-                RequestAnAccount = new RequestAnAccount(),
+                CreateBuyerUser = new CreateBuyerUser(),
+                RequestAnAccount = new RequestAnAccount()
             };
         }
         public PageCollection Pages { get; set; }

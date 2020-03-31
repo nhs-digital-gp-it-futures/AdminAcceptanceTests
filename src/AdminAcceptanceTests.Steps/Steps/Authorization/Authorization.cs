@@ -25,7 +25,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             if (usernameCorrect)
             {
                 var user = EnvironmentVariables.AdminUser();
-                Test.Pages.Authorization.EnterUsername(user.Username);
+                Test.Pages.Authorization.EnterUsername(user.UserName);
             }
         }
 
@@ -35,7 +35,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             if (passwordCorrect)
             {
                 var user = EnvironmentVariables.AdminUser();
-                Test.Pages.Authorization.EnterPassword(user.Password);
+                Test.Pages.Authorization.EnterPassword(user.PasswordHash);
             }
         }
 
@@ -43,8 +43,8 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         public void WhenAUserProvidesRecognisedAuthenticationDetailsToLoginLocally()
         {
             var user = EnvironmentVariables.AdminUser();
-            Test.Pages.Authorization.EnterUsername(user.Username);
-            Test.Pages.Authorization.EnterPassword(user.Password);
+            Test.Pages.Authorization.EnterUsername(user.UserName);
+            Test.Pages.Authorization.EnterPassword(user.PasswordHash);
             Test.Pages.Authorization.Login();
         }
 

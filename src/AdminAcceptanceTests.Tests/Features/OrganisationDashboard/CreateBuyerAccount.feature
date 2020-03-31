@@ -21,7 +21,7 @@ Scenario: Mandatory fields
 	Given I am on a random organisation user account dashboard
 	And that mandatory data '<field>' has not been added
 	When the user attempts to add the buying user
-	Then the user is informed that mandatory data is missing
+	Then the user is informed that mandatory data '<field>' is missing
 	Examples: 
 	   | field          |
 	   | First Name     |

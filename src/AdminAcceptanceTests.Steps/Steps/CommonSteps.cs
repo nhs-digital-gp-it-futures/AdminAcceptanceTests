@@ -16,8 +16,8 @@ namespace AdminAcceptanceTests.Steps.Steps
         {
             Test.Pages.Homepage.ClickLoginButton();
             var user = EnvironmentVariables.AdminUser();
-            Test.Pages.Authorization.EnterUsername(user.Username);
-            Test.Pages.Authorization.EnterPassword(user.Password);
+            Test.Pages.Authorization.EnterUsername(user.UserName);
+            Test.Pages.Authorization.EnterPassword(user.PasswordHash);
             Test.Pages.Authorization.Login();
             Test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
         }
