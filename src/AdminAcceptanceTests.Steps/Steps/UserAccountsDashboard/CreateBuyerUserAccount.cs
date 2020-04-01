@@ -25,7 +25,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             OrganisationDashboardSteps.WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage();
             OrganisationDashboardSteps.WhenAnOrganisationIsSelected();
             OrganisationDashboardSteps.ThenTheUserAccountsDashboardForThatOrganisationIsDisplayed();
-            String ODSCode = Test.Pages.UserAccountsDashboard.GetODSCode();
+            string ODSCode = Test.Pages.UserAccountsDashboard.GetODSCode();
             Context.Add("ODSCode", ODSCode);
         }
 

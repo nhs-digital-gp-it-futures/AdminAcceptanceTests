@@ -78,7 +78,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         }
         public bool EmailTooLongErrorDisplayed()
         {
-            return Driver.FindElements(Pages.CreateBuyerUser.EmailITooLong).Count > 0;
+            return Driver.FindElements(Pages.CreateBuyerUser.EmailTooLong).Count > 0;
         }
         public bool FirstNameTooLongErrorDisplayed()
         {

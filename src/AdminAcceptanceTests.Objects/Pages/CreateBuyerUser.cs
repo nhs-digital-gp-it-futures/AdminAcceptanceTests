@@ -16,7 +16,7 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By CreateUser => CustomBy.DataTestId("add-user-button");
         public By ErrorSummary => CustomBy.DataTestId("error-summary");
         public By EmailRequired => By.Id("EmailRequired");
-        public By EmailITooLong => By.Id("EmailITooLong");
+        public By EmailTooLong => By.Id("EmailTooLong");
         public By EmailInvalidFormat => By.Id("EmailInvalidFormat");
         public By EmailAlreadyExists => By.Id("EmailAlreadyExists");
         public By PhoneNumberRequired => By.Id("PhoneNumberRequired");

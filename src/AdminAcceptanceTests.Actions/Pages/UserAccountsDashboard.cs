@@ -19,7 +19,7 @@ namespace AdminAcceptanceTests.Actions.Pages
             name.Should().BeEquivalentTo(organisationName);
         }
 
-        public String GetODSCode()
+        public string GetODSCode()
         {
             return Driver.FindElement(Pages.UserAccountsDashboard.ODSCode).Text;
         }
