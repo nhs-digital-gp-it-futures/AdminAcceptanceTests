@@ -38,8 +38,8 @@ namespace AdminAcceptanceTests.Steps.Utils
 
         internal static (string serverUrl, string databaseName, string dbUser, string dbPassword) DbConnectionDetails()
         {
-            var serverUrl = Environment.GetEnvironmentVariable("SERVERURL") ?? "127.0.0.1,1450";
-            var databaseName = Environment.GetEnvironmentVariable("DATABASENAME") ?? "buyingcatalogue";
+            var serverUrl = Environment.GetEnvironmentVariable("SERVERURL") ?? "127.0.0.1,1451";
+            var databaseName = Environment.GetEnvironmentVariable("DATABASENAME") ?? "CatalogueUsers";
             var dbUser = JsonConfigValues("user", "NHSD");
             var dbPassword = JsonConfigValues("password", "DisruptTheMarket1!");
 
@@ -80,9 +80,9 @@ namespace AdminAcceptanceTests.Steps.Utils
                 "tokens.json");
             var jsonSection = JObject.Parse(File.ReadAllText(path))["adminUser"];
             var user = jsonSection.ToObject<User>();
-            if (user.Username.Contains("#{") || user.Password.Contains("#{"))
+            if (user.UserName.Contains("#{") || user.PasswordHash.Contains("#{"))
             {
-                user = new User { Username = "BobSmith@email.com", Password = "Pass123$" };
+                user = new User { UserName = "BobSmith@email.com", PasswordHash = "Pass123$" };
             }
             return user;
         }

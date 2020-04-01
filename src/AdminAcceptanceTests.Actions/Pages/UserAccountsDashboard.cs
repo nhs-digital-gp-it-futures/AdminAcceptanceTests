@@ -13,11 +13,16 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void OrganisationNameMatches(string organisationName)
         {
+            Wait.Until(d => d.FindElement(Pages.UserAccountsDashboard.OrganisationName).Displayed);
             var name = Driver.FindElement(Pages.UserAccountsDashboard.OrganisationName).Text;
 
             name.Should().BeEquivalentTo(organisationName);
         }
 
+        public string GetODSCode()
+        {
+            return Driver.FindElement(Pages.UserAccountsDashboard.ODSCode).Text;
+        }
 
         public bool EditOrganisationButtonDisplayed()
         {
@@ -27,6 +32,11 @@ namespace AdminAcceptanceTests.Actions.Pages
         public bool AddUserButtonDisplayed()
         {
             return ElementDisplayed(Pages.UserAccountsDashboard.AddUser);
+        }
+
+        public void ClickAddUserButton()
+        {
+            Driver.FindElement(Pages.UserAccountsDashboard.AddUser).Click();
         }
 
         private bool ElementDisplayed(By by)
