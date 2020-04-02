@@ -9,7 +9,7 @@ Scenario: Login Local - Login
 	When a User provides recognised authentication details to login locally
 	Then the User will be logged in
 
-Scenario Outline: Login Local - Login with incorrect credentials
+Scenario Outline: Login Local - Login with missing credentials
 	Given that a User is not logged in
 	When a User provides a <Username> username
 	And a User provides a <Password> password
