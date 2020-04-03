@@ -17,18 +17,6 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 
         }
 
-        [Given(@"I am on a random organisation user account dashboard")]
-        public void GivenIAmOnARandomOrganisationUserAccountDashboard()
-        {
-            new CommonSteps(Test, Context).GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse();
-            var OrganisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
-            OrganisationDashboardSteps.WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage();
-            OrganisationDashboardSteps.WhenAnOrganisationIsSelected();
-            OrganisationDashboardSteps.ThenTheUserAccountsDashboardForThatOrganisationIsDisplayed();
-            string ODSCode = Test.Pages.UserAccountsDashboard.GetODSCode();
-            Context.Add("ODSCode", ODSCode);
-        }
-
         [Given(@"account details have been provided")]
         public void GivenAccountDetailsHaveBeenProvided()
         {
