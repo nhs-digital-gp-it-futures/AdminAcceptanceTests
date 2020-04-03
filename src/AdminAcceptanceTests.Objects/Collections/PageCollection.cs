@@ -10,5 +10,6 @@ namespace AdminAcceptanceTests.Objects.Collections
         public OrganisationDashboard OrganisationDashboard { get; set; }
         public UserAccountsDashboard UserAccountsDashboard { get; set; }
         public CreateBuyerUser CreateBuyerUser { get; set; }
+        public EditOrganisation EditOrganisation { get; set; }
     }
 }

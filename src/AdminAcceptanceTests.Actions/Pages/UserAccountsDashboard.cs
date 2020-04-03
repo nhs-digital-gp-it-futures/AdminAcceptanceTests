@@ -28,6 +28,10 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             return ElementDisplayed(Pages.UserAccountsDashboard.EditOrganisation);
         }
+        public void ClickEditOrganisationButton()
+        {
+            Driver.FindElement(Pages.UserAccountsDashboard.EditOrganisation).Click();
+        }
 
         public bool AddUserButtonDisplayed()
         {

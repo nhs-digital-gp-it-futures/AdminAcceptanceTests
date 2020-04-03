@@ -13,6 +13,7 @@ namespace AdminAcceptanceTests.Actions
                 Homepage = new Pages.Homepage(driver),
                 Authorization = new Pages.Authorization(driver),
                 UserAccountsDashboard = new UserAccountsDashboard(driver),
+                EditOrganisation = new EditOrganisation(driver),
                 CreateBuyerUser = new CreateBuyerUser(driver),
                 RequestAnAccount = new Pages.RequestAnAccount(driver),
                 OrganisationDashboard = new Pages.OrganisationDashboard(driver)
