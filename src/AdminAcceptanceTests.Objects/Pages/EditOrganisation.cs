@@ -11,6 +11,6 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By PageTitle => CustomBy.DataTestId("edit-org-page-title");
         public By CatalogueAgreement => By.Id("catalogue-agreement-checkbox");
         public By Save => CustomBy.DataTestId("save-button", "button");
-        public By Confirmation => CustomBy.DataTestId("edit-org-confirmation-page-title");
+        public By Confirmation => CustomBy.DataTestId("edit-organisation-confirmation-page-title");
     }
 }
