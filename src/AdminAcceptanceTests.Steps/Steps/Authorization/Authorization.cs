@@ -48,6 +48,13 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             Test.Pages.Authorization.Login();
         }
 
+        [Given(@"that a User enters an invalid e-mail address and password")]
+        public void GivenThatAUserEntersAnInvalidE_MailAddressAndPassword()
+        {
+            Test.Pages.Authorization.EnterUsername("Invalid@Email.test");
+            Test.Pages.Authorization.EnterPassword("Password123");
+        }
+
         [Then(@"the User will be logged in")]
         public void ThenTheUserWillBeLoggedIn()
         {
@@ -58,6 +65,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         public void ThenTheUserWillNotBeLoggedIn()
         {
             Test.Pages.Authorization.Login();
+            Test.Pages.Authorization.WaitForErrorSummaryToBeDisplayed();
         }
 
         [Then(@"the User will be informed the login attempt was unsuccessful Email (.*), password (.*)")]
@@ -72,6 +80,12 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             {
                 Test.Driver.FindElement(By.CssSelector("[data-valmsg-for=Password]")).Displayed.Should().BeTrue();
             }
+        }
+
+        [Then(@"the User is informed that they entered invalid credentials")]
+        public void ThenTheUserIsInformedThatTheyEnteredInvalidCredentials()
+        {
+            Test.Pages.Authorization.InvalidCredentialsErrorDisplayed().Should().BeTrue();
         }
 
         [Given(@"the User is logged in")]

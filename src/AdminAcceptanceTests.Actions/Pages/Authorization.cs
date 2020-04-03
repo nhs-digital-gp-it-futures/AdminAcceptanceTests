@@ -33,5 +33,15 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Driver.FindElement(Pages.Login.RequestAnAccountLink).Click();
         }
+
+        public bool InvalidCredentialsErrorDisplayed()
+        {
+            return Driver.FindElements(Pages.Login.LoginErrorMessage).Count > 0;
+        }
+
+        public void WaitForErrorSummaryToBeDisplayed()
+        {
+            Wait.Until(d => d.FindElements(Pages.Login.ErrorSummaryBox).Count > 0);
+        }
     }
 }
