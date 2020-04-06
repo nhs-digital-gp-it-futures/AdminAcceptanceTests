@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Actions
 {
-    public sealed class PageActions
+    public class PageActions
     {
         public PageActions(IWebDriver driver)
         {
@@ -15,6 +15,7 @@ namespace AdminAcceptanceTests.Actions
                 UserAccountsDashboard = new UserAccountsDashboard(driver),
                 EditOrganisation = new EditOrganisation(driver),
                 CreateBuyerUser = new CreateBuyerUser(driver),
+                ViewUserDetails = new ViewUserDetails(driver),
                 RequestAnAccount = new Pages.RequestAnAccount(driver),
                 OrganisationDashboard = new Pages.OrganisationDashboard(driver)
             };

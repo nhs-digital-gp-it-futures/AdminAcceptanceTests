@@ -1,4 +1,5 @@
 ﻿using AdminAcceptanceTests.Actions.Utils;
+using AdminAcceptanceTests.TestData.Information;
 using FluentAssertions;
 using OpenQA.Selenium;
 using System;
@@ -41,6 +42,36 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void ClickAddUserButton()
         {
             Driver.FindElement(Pages.UserAccountsDashboard.AddUser).Click();
+        }
+
+        public bool ViewUserLinksDisplayed()
+        {
+            return ElementDisplayed(Pages.UserAccountsDashboard.ViewUserLinks);
+        }
+
+        public string ClickUserLink(int? index = null)
+        {
+            var users = Driver.FindElements(Pages.UserAccountsDashboard.ViewUserLinks);
+
+            IWebElement user;
+
+            if (index is null)
+            {
+                user = RandomInformation.GetRandomItem(users);
+            }
+            else
+            {
+                user = users[index.Value];
+            }
+
+            string orgName = user.Text;
+            user.Click();
+            return orgName;
+        }
+
+        public void ClickUserLink(string name)
+        {
+            Driver.FindElement(By.LinkText(name)).Click();
         }
 
         private bool ElementDisplayed(By by)

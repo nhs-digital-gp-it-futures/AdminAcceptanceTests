@@ -45,5 +45,10 @@ namespace AdminAcceptanceTests.Actions.Pages
             org.Click();
             return orgName;
         }
+
+        public void SelectNamedOrganisation(string organisationName)
+        {
+            Driver.FindElement(By.LinkText(organisationName)).Click();
+        }
     }
 }

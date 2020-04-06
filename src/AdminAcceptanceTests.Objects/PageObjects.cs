@@ -15,6 +15,7 @@ namespace AdminAcceptanceTests.Objects
                 UserAccountsDashboard = new UserAccountsDashboard(),
                 EditOrganisation = new EditOrganisation(),
                 CreateBuyerUser = new CreateBuyerUser(),
+                ViewUserDetails = new ViewUserDetails(),
                 RequestAnAccount = new RequestAnAccount()
             };
         }

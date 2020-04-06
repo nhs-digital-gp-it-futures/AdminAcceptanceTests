@@ -86,5 +86,34 @@ namespace AdminAcceptanceTests.TestData
                     FROM [dbo].[AspNetUsers] WHERE Email=@email";
             return SqlExecutor.Execute<User>(connectionString, query, this).Single();
         }
+
+        public User RetrieveRandomBuyerUser(string connectionString)
+        {
+            var query = @"SELECT 
+                    Convert(UniqueIdentifier, Id) as Id
+                    ,[UserName]
+                      ,[NormalizedUserName]
+                      ,[Email]
+                      ,[NormalizedEmail]
+                      ,[EmailConfirmed]
+                      ,[PasswordHash]
+                      ,[SecurityStamp]
+                      ,Convert(UniqueIdentifier, ConcurrencyStamp) as ConcurrencyStamp
+                      ,[PhoneNumber]
+                      ,[PhoneNumberConfirmed]
+                      ,[TwoFactorEnabled]
+                      ,[LockoutEnd]
+                      ,[LockoutEnabled]
+                      ,[AccessFailedCount]
+                      ,Convert(UniqueIdentifier, PrimaryOrganisationId) as PrimaryOrganisationId
+                      ,[OrganisationFunction]
+                      ,[Disabled]
+                      ,[CatalogueAgreementSigned]
+                      ,[FirstName]
+                      ,[LastName]
+                    FROM [dbo].[AspNetUsers] WHERE OrganisationFunction='Buyer'";
+            var listOfItems = SqlExecutor.Execute<User>(connectionString, query, this);
+            return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() -1));
+        }
     }
 }

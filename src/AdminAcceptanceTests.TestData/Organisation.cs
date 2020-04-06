@@ -19,5 +19,11 @@ namespace AdminAcceptanceTests.TestData
             var query = @"SELECT * FROM [dbo].[Organisations] WHERE OdsCode=@ODSCode";
             return SqlExecutor.Execute<Organisation>(connectionString, query, new { ODSCode }).Single();
         }
+
+        public Organisation RetrieveById(string connectionString, Guid id)
+        {
+            var query = @"SELECT * FROM [dbo].[Organisations] WHERE OrganisationId=@id";
+            return SqlExecutor.Execute<Organisation>(connectionString, query, new { id }).Single();
+        }
     }
 }

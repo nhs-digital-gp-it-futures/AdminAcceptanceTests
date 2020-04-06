@@ -1,4 +1,5 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
+using AdminAcceptanceTests.TestData;
 using FluentAssertions;
 using TechTalk.SpecFlow;
 
@@ -46,6 +47,14 @@ namespace AdminAcceptanceTests.Steps.Steps.OrganisationDashboard
         public void WhenAnOrganisationIsSelected()
         {
             Context.Add("Organisation", Test.Pages.OrganisationDashboard.SelectOrganisation());
+        }
+
+        [When(@"a specific organisation is selected")]
+        public void WhenASpecificOrganisationIsSelected()
+        {
+            var organisation = (Organisation)Context["Organisation"];
+            Test.Pages.OrganisationDashboard.SelectNamedOrganisation(organisation.Name);
+            Test.Pages.UserAccountsDashboard.OrganisationNameMatches(organisation.Name);
         }
 
         [Then(@"the User Accounts Dashboard for that organisation is displayed")]
