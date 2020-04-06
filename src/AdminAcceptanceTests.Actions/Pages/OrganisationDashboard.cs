@@ -28,6 +28,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public string SelectOrganisation(int? index = null)
         {
+            Wait.Until(d => d.FindElements(Pages.OrganisationDashboard.OrganisationLinks).Count > 0);
             var organisations = Driver.FindElements(Pages.OrganisationDashboard.OrganisationLinks);
 
             IWebElement org;

@@ -112,7 +112,6 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void ThenTheAccountWillBeAssociatedWithAnOrganisation()
         {
             var enteredUser = (User)Context["BuyingUser"];
-            enteredUser.Email = "BobSmith@email.com";
             var retrievedUser = enteredUser.Retrieve(Test.ConnectionString);
             var expectedOrganisationId = (Guid)Context["OrganisationId"];
             retrievedUser.PrimaryOrganisationId.Should().Be(expectedOrganisationId);
@@ -124,7 +123,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
             User user = new User().GenerateRandomUser(PrimaryOrganisationId: CurrentOrganisation.OrganisationId);
-            var longname = new Faker().Random.AlphaNumeric(255);
+            var longname = new Faker().Random.AlphaNumeric(257);
             user.Email = new Faker().Internet.Email(firstName:longname);
             Context.Add("BuyingUser", user);
         }
@@ -135,7 +134,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
             User user = new User().GenerateRandomUser(PrimaryOrganisationId:CurrentOrganisation.OrganisationId);
-            user.FirstName = new Faker().Random.AlphaNumeric(36);
+            user.FirstName = new Faker().Random.AlphaNumeric(99);
             Context.Add("BuyingUser", user);
         }
 
@@ -145,7 +144,17 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
             User user = new User().GenerateRandomUser(PrimaryOrganisationId:CurrentOrganisation.OrganisationId);
-            user.LastName = new Faker().Random.AlphaNumeric(36);
+            user.LastName = new Faker().Random.AlphaNumeric(99);
+            Context.Add("BuyingUser", user);
+        }
+
+        [Given(@"I enter too long a phone number")]
+        public void GivenIEnterTooLongAPhoneNumber()
+        {
+            string ODSCode = (string)Context["ODSCode"];
+            var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
+            User user = new User().GenerateRandomUser(PrimaryOrganisationId: CurrentOrganisation.OrganisationId);
+            user.PhoneNumber = string.Join("", new Faker().Random.Digits(36));
             Context.Add("BuyingUser", user);
         }
 
@@ -175,6 +184,12 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void ThenTheUserIsInformedThatTheLastNameIsTooLong()
         {
             Test.Pages.CreateBuyerUser.LastNameTooLongErrorDisplayed().Should().BeTrue();
+        }
+
+        [Then(@"the user is informed that the phone number is too long")]
+        public void ThenTheUserIsInformedThatThePhoneNumberIsTooLong()
+        {
+            Test.Pages.CreateBuyerUser.PhoneNumberTooLongErrorDisplayed().Should().BeTrue();
         }
 
         [Then(@"the user is informed that the email address is in an invalid format")]
