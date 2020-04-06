@@ -25,18 +25,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             Context.Add("Organisation", taretOrganisation);
         }
 
-        [When(@"they select to view a user's details from the organisation's user accounts dashboard")]
-        public void WhenTheySelectToViewAUserSUserAccountsDashboard()
-        {
-            new CommonSteps(Test, Context).GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse();
-            var OrganisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
-            OrganisationDashboardSteps.WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage();
-            OrganisationDashboardSteps.ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
-            OrganisationDashboardSteps.WhenASpecificOrganisationIsSelected();
-            Test.Pages.UserAccountsDashboard.ViewUserLinksDisplayed().Should().BeTrue();
-            var targetUser = (User)Context["BuyingUser"];
-            Test.Pages.UserAccountsDashboard.ClickUserLink(string.Join(" ", targetUser.FirstName, targetUser.LastName));
-        }
+        
 
         [Then(@"the User can view the details")]
         public void ThenTheUserCanViewTheDetails()
@@ -55,7 +44,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         {
             var nameOnScreen = Test.Pages.ViewUserDetails.GetName();
             var expectedUser = (User)Context["BuyingUser"];
-            var expectedName = string.Join(" ", expectedUser.FirstName, expectedUser.LastName);
+            var expectedName = User.ConcatDisplayName(expectedUser);
             nameOnScreen.Should().BeEquivalentTo(expectedName);
         }
 

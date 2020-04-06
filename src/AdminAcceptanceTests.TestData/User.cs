@@ -29,6 +29,11 @@ namespace AdminAcceptanceTests.TestData
         public string FirstName { get; set; }
         public string LastName { get; set; }
 
+        public static string ConcatDisplayName(User user)
+        {
+            return string.Join(" ", user.FirstName, user.LastName);
+        }
+
         public User GenerateRandomUser(bool BuyingUser = true, Guid PrimaryOrganisationId = new Guid())
         {
             Faker faker = new Faker();
@@ -114,6 +119,35 @@ namespace AdminAcceptanceTests.TestData
                     FROM [dbo].[AspNetUsers] WHERE OrganisationFunction='Buyer'";
             var listOfItems = SqlExecutor.Execute<User>(connectionString, query, this);
             return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() -1));
+        }
+
+        public void Update(string connectionString)
+        {
+            var query = @"UPDATE AspNetUsers 
+                        SET 
+                            UserName=@userName,
+                            NormalizedUserName=@normalizedUserName,
+                            Email=@email,
+                            NormalizedEmail=@normalizedEmail,
+                            EmailConfirmed=@emailConfirmed,
+                            PasswordHash=@passwordHash,
+                            SecurityStamp=@securityStamp,
+                            ConcurrencyStamp=@concurrencyStamp,
+                            PhoneNumber=@phoneNumber,
+                            PhoneNumberConfirmed=@phoneNumberConfirmed,
+                            TwoFactorEnabled=@twoFactorEnabled,
+                            LockoutEnd=@lockoutEnd,
+                            LockoutEnabled=@lockoutEnabled,
+                            AccessFailedCount=@accessFailedCount,
+                            PrimaryOrganisationId=@primaryOrganisationId,
+                            OrganisationFunction=@organisationFunction,
+                            Disabled=@disabled,
+                            CatalogueAgreementSigned=@catalogueAgreementSigned,
+                            FirstName=@firstName,
+                            LastName=@lastName
+                        WHERE Id=@id";
+
+            SqlExecutor.Execute<User>(connectionString, query, this);
         }
     }
 }
