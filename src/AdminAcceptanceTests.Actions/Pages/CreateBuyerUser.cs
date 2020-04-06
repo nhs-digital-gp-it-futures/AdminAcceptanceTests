@@ -45,6 +45,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         }
         public void SubmitUserDetails()
         {
+            Wait.Until(d => d.FindElement(Pages.CreateBuyerUser.CreateUser).Enabled);
             Driver.FindElement(Pages.CreateBuyerUser.CreateUser).Click();
         }
 
@@ -87,6 +88,10 @@ namespace AdminAcceptanceTests.Actions.Pages
         public bool LastNameTooLongErrorDisplayed()
         {
             return Driver.FindElements(Pages.CreateBuyerUser.LastNameTooLong).Count > 0;
+        }
+        public bool PhoneNumberTooLongErrorDisplayed()
+        {
+            return Driver.FindElements(Pages.CreateBuyerUser.PhoneNumberTooLong).Count > 0;
         }
 
         public bool EmailInvalidFormatErrorDisplayed()
