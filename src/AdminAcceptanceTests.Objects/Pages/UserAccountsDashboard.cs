@@ -11,5 +11,6 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By EditOrganisation => CustomBy.DataTestId("edit-org-button", "a");
         public By AddUser => CustomBy.DataTestId("add-user-button", "a");
         public By ViewUserLinks => CustomBy.DataTestId("user-table", "a");
+        public By DisabledAccountFlag => By.CssSelector("[data-test-id^=account-disabled-tag]");
     }
 }

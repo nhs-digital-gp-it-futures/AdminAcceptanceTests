@@ -49,14 +49,6 @@ namespace AdminAcceptanceTests.Steps.Steps.OrganisationDashboard
             Context.Add("Organisation", Test.Pages.OrganisationDashboard.SelectOrganisation());
         }
 
-        [When(@"a specific organisation is selected")]
-        public void WhenASpecificOrganisationIsSelected()
-        {
-            var organisation = (Organisation)Context["Organisation"];
-            Test.Pages.OrganisationDashboard.SelectNamedOrganisation(organisation.Name);
-            Test.Pages.UserAccountsDashboard.OrganisationNameMatches(organisation.Name);
-        }
-
         [Then(@"the User Accounts Dashboard for that organisation is displayed")]
         public void ThenTheUserAccountsDashboardForThatOrganisationIsDisplayed()
         {

@@ -3,6 +3,7 @@ using AdminAcceptanceTests.TestData.Information;
 using FluentAssertions;
 using OpenQA.Selenium;
 using System;
+using System.Linq;
 
 namespace AdminAcceptanceTests.Actions.Pages
 {
@@ -72,6 +73,12 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void ClickUserLink(string name)
         {
             Driver.FindElement(By.LinkText(name)).Click();
+        }
+
+        public bool ExpectedUserHasDisabledFlag(string Username)
+        {
+            return Driver.FindElements(Pages.UserAccountsDashboard.DisabledAccountFlag)
+                .Where(e => e.FindElement(By.XPath("../a")).Text.Equals(Username, StringComparison.OrdinalIgnoreCase)).Count() == 1;
         }
 
         private bool ElementDisplayed(By by)

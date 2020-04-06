@@ -40,5 +40,10 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             return Driver.FindElement(Pages.ViewUserDetails.OrganisationName).Displayed;
         }
+
+        public void DisableAccount()
+        {
+            Driver.FindElement(Pages.ViewUserDetails.DisableUserButton).Click();
+        }
     }
 }
