@@ -29,7 +29,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         [Then(@"there is a link to edit the User's Account details")]
         public void ThenThereIsALinkToEditTheUsersAccountDetails()
         {
-            Context.Pending();
+            Test.Pages.UserAccountsDashboard.ViewUserLinksDisplayed().Should().BeTrue();
         }
 
     }

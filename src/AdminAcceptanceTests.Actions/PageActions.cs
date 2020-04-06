@@ -15,6 +15,7 @@ namespace AdminAcceptanceTests.Actions
                 UserAccountsDashboard = new UserAccountsDashboard(driver),
                 EditOrganisation = new EditOrganisation(driver),
                 CreateBuyerUser = new CreateBuyerUser(driver),
+                ViewUserDetails = new ViewUserDetails(driver),
                 RequestAnAccount = new Pages.RequestAnAccount(driver),
                 OrganisationDashboard = new Pages.OrganisationDashboard(driver)
             };
