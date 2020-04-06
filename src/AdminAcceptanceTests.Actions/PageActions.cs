@@ -4,7 +4,7 @@ using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Actions
 {
-    public class PageActions
+    public sealed class PageActions
     {
         public PageActions(IWebDriver driver)
         {
