@@ -1,5 +1,4 @@
-﻿@ignore
-Feature: Create Buyer User Account
+﻿Feature: Create Buyer User Account
 	As an Authority User
 	I want to create a User Account
 	So Users can access the Buying Catalogue
@@ -43,6 +42,12 @@ Scenario: Create Buyer User Account - First name too long
 Scenario: Create Buyer User Account - Last name too long
 	Given I am on a random organisation user account dashboard
 	And I enter too long a last name
+	When the user attempts to add the buying user
+	Then the user is informed that the last name is too long
+
+Scenario: Create Buyer User Account - Phone Number too long
+	Given I am on a random organisation user account dashboard
+	And I enter too long a phone number
 	When the user attempts to add the buying user
 	Then the user is informed that the last name is too long
 
