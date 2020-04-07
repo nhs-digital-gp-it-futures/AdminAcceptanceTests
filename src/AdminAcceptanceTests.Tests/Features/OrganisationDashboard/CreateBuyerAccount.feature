@@ -49,7 +49,7 @@ Scenario: Create Buyer User Account - Phone Number too long
 	Given I am on a random organisation user account dashboard
 	And I enter too long a phone number
 	When the user attempts to add the buying user
-	Then the user is informed that the last name is too long
+	Then the user is informed that the phone number is too long
 
 Scenario: Create Buyer User Account - Email invalid format
 	Given I am on a random organisation user account dashboard
