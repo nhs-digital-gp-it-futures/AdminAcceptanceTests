@@ -49,6 +49,12 @@ namespace AdminAcceptanceTests.Actions.Pages
             Driver.FindElement(Pages.CreateBuyerUser.CreateUser).Click();
         }
 
+        public string GetConfirmationTitle()
+        {
+            Wait.Until(d => d.FindElements(Pages.CreateBuyerUser.ConfirmationTitle).Count > 0);
+            return Driver.FindElement(Pages.CreateBuyerUser.ConfirmationTitle).Text;
+        }
+
         public bool ErrorSummaryDisplayed()
         {
             return Wait.Until(d => d.FindElement(Pages.CreateBuyerUser.ErrorSummary).Displayed);

@@ -68,7 +68,6 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void WhenICreateTheBuyingUserAccount()
         {
             CompleteAndSubmitForm();
-            //wait for confirmation page => data-test-id="add-user-confirmation"
         }
 
         [When(@"the user attempts to add the buying user")]
@@ -115,6 +114,15 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             var retrievedUser = enteredUser.Retrieve(Test.ConnectionString);
             var expectedOrganisationId = (Guid)Context["OrganisationId"];
             retrievedUser.PrimaryOrganisationId.Should().Be(expectedOrganisationId);
+        }
+
+        [Then(@"the display name will be the first name and last name on the account creation confirmation screen")]
+        public void ThenTheDisplayNameWillBeTheFirstNameAndLastNameOnTheAccountCreationConfirmationScreen()
+        {
+            var pageTitle = Test.Pages.CreateBuyerUser.GetConfirmationTitle();
+            var enteredUser = (User)Context["BuyingUser"];
+            var expectedDisplayName = User.ConcatDisplayName(enteredUser);
+            pageTitle.Should().Contain(expectedDisplayName);
         }
 
         [Given(@"I enter too long an email address")]
