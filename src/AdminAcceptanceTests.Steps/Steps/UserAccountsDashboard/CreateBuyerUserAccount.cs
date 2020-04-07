@@ -134,7 +134,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
             User user = new User().GenerateRandomUser(PrimaryOrganisationId:CurrentOrganisation.OrganisationId);
-            user.FirstName = new Faker().Random.AlphaNumeric(99);
+            user.FirstName = new Faker().Random.AlphaNumeric(101);
             Context.Add("BuyingUser", user);
         }
 
@@ -144,7 +144,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             string ODSCode = (string)Context["ODSCode"];
             var CurrentOrganisation = new Organisation().RetrieveByODSCode(Test.ConnectionString, ODSCode);
             User user = new User().GenerateRandomUser(PrimaryOrganisationId:CurrentOrganisation.OrganisationId);
-            user.LastName = new Faker().Random.AlphaNumeric(99);
+            user.LastName = new Faker().Random.AlphaNumeric(101);
             Context.Add("BuyingUser", user);
         }
 
