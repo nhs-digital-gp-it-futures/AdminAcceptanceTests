@@ -8,6 +8,7 @@ namespace AdminAcceptanceTests.Objects.Pages
 {
     public class SetNewPassword
     {
+        public By PageTitle => By.XPath("//h1[contains(.,'Choose your password')]");
         public By Password1 => CustomBy.DataTestId("");
         public By Password2 => CustomBy.DataTestId("");
         public By Submit => CustomBy.DataTestId("");

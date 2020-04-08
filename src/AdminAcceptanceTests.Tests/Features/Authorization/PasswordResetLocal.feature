@@ -1,5 +1,4 @@
-﻿#@ignore
-Feature: Password Reset Local
+﻿Feature: Password Reset Local
 	As a User with a local account
 	I want to reset my password
 	So that I can access the Buying Catalogue if I have forgotten my password

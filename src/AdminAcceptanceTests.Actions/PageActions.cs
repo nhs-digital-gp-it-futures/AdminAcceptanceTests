@@ -18,6 +18,7 @@ namespace AdminAcceptanceTests.Actions
                 ViewUserDetails = new ViewUserDetails(driver),
                 RequestAnAccount = new RequestAnAccount(driver),
                 RequestPasswordReset = new RequestPasswordReset(driver),
+                SetNewPassword = new SetNewPassword(driver),
                 OrganisationDashboard = new Pages.OrganisationDashboard(driver)
             };
         }

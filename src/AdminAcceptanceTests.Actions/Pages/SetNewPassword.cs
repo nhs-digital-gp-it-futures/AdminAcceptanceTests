@@ -13,6 +13,12 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         }
 
+        public bool PageDisplayed()
+        {
+            Wait.Until(d => d.FindElements(Pages.SetNewPassword.PageTitle).Count > 0);
+            return Driver.FindElement(Pages.SetNewPassword.PageTitle).Displayed;
+        }
+
         public void EnterFirstPassword(string value)
         {
             Wait.Until(d => d.FindElements(Pages.SetNewPassword.Password1).Count > 0);

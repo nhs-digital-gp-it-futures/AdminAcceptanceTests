@@ -2,10 +2,7 @@
 using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -56,6 +53,23 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             var email = (await EmailServerDriver.FindAllEmailsAsync(Test.Url)).Last();
             email.To.Should().BeEquivalentTo(((User)Context["CreatedUser"]).Email);
             Context.Add("Email", email);
+        }
+
+        [Then(@"the reset url is not sent to the e-mail address")]
+        public async Task ThenTheResetUrlIsNotSentToTheE_MailAddress()
+        {
+            var currentCount = await EmailServerDriver.GetEmailCountAsync(Test.Url);
+            var precount = (int)Context["EmailCount"];
+            currentCount.Should().Be(precount);
+        }
+
+        [Then(@"the reset url navigates to the password reset page")]
+        public void ThenTheResetUrlNavigatesToThePasswordResetPage()
+        {
+            Email email = (Email)Context["Email"];
+            var url = email.ExtractUrlFromHtmlBody();
+            Test.Driver.Navigate().GoToUrl(url);
+            Test.Pages.SetNewPassword.PageDisplayed().Should().BeTrue();
         }
 
     }
