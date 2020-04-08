@@ -72,5 +72,60 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             Test.Pages.SetNewPassword.PageDisplayed().Should().BeTrue();
         }
 
+        [Given(@"the User is resetting their password and has followed the reset url")]
+        public async Task GivenTheUserIsResettingTheirPasswordAndHasFollowedTheResetUrlAsync()
+        {
+            GivenThatAUserWantsToResetTheirPassword();
+            await WhenTheUserHasFollowedTheRequestAPasswordResetJourneyAndEnteredTheirE_MailAddress();
+            await ThenTheResetUrlIsSentToTheE_MailAddress();
+            ThenTheResetUrlNavigatesToThePasswordResetPage();
+        }
+
+        [When(@"the User has entered a password that meets the password policy")]
+        public void WhenTheUserHasEnteredAPasswordThatMeetsThePasswordPolicy()
+        {
+            var validPassword = "BuyingC@t4logue";
+            var currentUser = (User)Context["CreatedUser"];
+            currentUser.PasswordHash = validPassword;
+            EnterPasswordAndSubmit(validPassword);
+        }
+
+        [When(@"the User has entered a password that does not meets the password policy")]
+        public void WhenTheUserHasEnteredAPasswordThatDoesNotMeetsThePasswordPolicy()
+        {
+            var invalidPassword = "password";
+            EnterPasswordAndSubmit(invalidPassword);
+        }
+
+        public void EnterPasswordAndSubmit(string passwordValue)
+        {
+            Test.Pages.SetNewPassword.EnterFirstPassword(passwordValue);
+            Test.Pages.SetNewPassword.EnterSecondPassword(passwordValue);
+            Test.Pages.SetNewPassword.Submit();
+        }
+
+        [Then(@"the password is successfully set")]
+        public void ThenThePasswordIsSuccessfullySet()
+        {
+            Test.Pages.SetNewPassword.ConfirmationDisplayed().Should().BeTrue();
+        }
+
+        [Then(@"the User can login with those credentials")]
+        public void ThenTheUserCanLoginWithThoseCredentials()
+        {
+            var currentUser = (User)Context["CreatedUser"];
+            Test.Pages.SetNewPassword.GoToLoginPage();
+            Test.Pages.Authorization.EnterUsername(currentUser.UserName);
+            Test.Pages.Authorization.EnterPassword(currentUser.PasswordHash);
+            Test.Pages.Authorization.Login();
+            new Authorization(Test, Context).ThenTheUserWillBeLoggedIn();
+        }
+
+        [Then(@"the User is informed that the Password has not been set successfully")]
+        public void ThenTheUserIsInformedThatThePasswordHasNotBeenSetSuccessfully()
+        {
+            Test.Pages.SetNewPassword.ErrorDisplayed().Should().BeTrue();
+        }
+
     }
 }

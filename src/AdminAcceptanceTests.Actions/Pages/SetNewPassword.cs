@@ -45,5 +45,10 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             return Driver.FindElements(Pages.SetNewPassword.Error).Count > 0;
         }
+
+        public void GoToLoginPage()
+        {
+            Driver.FindElement(Pages.SetNewPassword.GoToLoginLink).Click();
+        }
     }
 }
