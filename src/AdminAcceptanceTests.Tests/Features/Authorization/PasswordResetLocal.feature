@@ -1,4 +1,4 @@
-﻿@ignore
+﻿#@ignore
 Feature: Password Reset Local
 	As a User with a local account
 	I want to reset my password

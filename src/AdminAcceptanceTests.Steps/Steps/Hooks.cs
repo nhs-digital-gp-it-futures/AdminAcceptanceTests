@@ -1,6 +1,8 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
+﻿using AdminAcceptanceTests.Actions.Utils;
+using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps
@@ -13,11 +15,15 @@ namespace AdminAcceptanceTests.Steps.Steps
         }
 
         [AfterScenario]
-        public void AfterScenario()
+        public async Task AfterScenario()
         {
             if (Context.ContainsKey("CreatedUser"))
             {
                 ((User)Context["CreatedUser"]).Delete(Test.ConnectionString);
+            }
+            if (Context.ContainsKey("Email"))
+            {
+                await EmailServerDriver.ClearEmailAsync(Test.Url, ((Email)Context["Email"]).Id);
             }
             Test.Driver.Quit();
         }

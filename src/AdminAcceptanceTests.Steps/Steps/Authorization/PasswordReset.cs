@@ -1,9 +1,12 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
+﻿using AdminAcceptanceTests.Actions.Utils;
+using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using FluentAssertions;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps.Authorization
@@ -33,13 +36,26 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         }
 
         [When(@"the User has followed the request a password reset journey and entered their e-mail address")]
-        public void WhenTheUserHasFollowedTheRequestAPasswordResetJourneyAndEnteredTheirE_MailAddress()
+        public async Task WhenTheUserHasFollowedTheRequestAPasswordResetJourneyAndEnteredTheirE_MailAddress()
         {
             Test.Pages.Homepage.ClickLoginButton();
             Test.Pages.Authorization.ClickForgotPassword();
             Test.Pages.RequestPasswordReset.EnterEmail(((User)Context["CreatedUser"]).Email);
+            var precount = await EmailServerDriver.GetEmailCountAsync(Test.Url);
+            Context.Add("EmailCount", precount);
             Test.Pages.RequestPasswordReset.Submit();
             Test.Pages.RequestPasswordReset.ConfirmationDisplayed().Should().BeTrue();
+        }
+
+        [Then(@"the reset url is sent to the e-mail address")]
+        public async Task ThenTheResetUrlIsSentToTheE_MailAddress()
+        {
+            var currentCount = await EmailServerDriver.GetEmailCountAsync(Test.Url);
+            var precount = (int)Context["EmailCount"];
+            currentCount.Should().BeGreaterThan(precount);
+            var email = (await EmailServerDriver.FindAllEmailsAsync(Test.Url)).Last();
+            email.To.Should().BeEquivalentTo(((User)Context["CreatedUser"]).Email);
+            Context.Add("Email", email);
         }
 
     }
