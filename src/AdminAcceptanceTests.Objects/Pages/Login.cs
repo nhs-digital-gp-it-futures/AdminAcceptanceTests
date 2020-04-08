@@ -11,5 +11,6 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By RequestAnAccountLink => CustomBy.DataTestId("request-account-link");
         public By ErrorSummaryBox => CustomBy.DataTestId("error-summary");
         public By LoginErrorMessage => CustomBy.DataTestId("login-error-message");
+        public By ForgotPassword => CustomBy.DataTestId("forgot-password-link");
     }
 }

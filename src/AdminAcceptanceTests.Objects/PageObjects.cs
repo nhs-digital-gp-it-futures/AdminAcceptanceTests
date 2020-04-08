@@ -16,7 +16,9 @@ namespace AdminAcceptanceTests.Objects
                 EditOrganisation = new EditOrganisation(),
                 CreateBuyerUser = new CreateBuyerUser(),
                 ViewUserDetails = new ViewUserDetails(),
-                RequestAnAccount = new RequestAnAccount()
+                RequestAnAccount = new RequestAnAccount(),
+                RequestPasswordReset = new RequestPasswordReset(),
+                SetNewPassword = new SetNewPassword()
             };
         }
         public PageCollection Pages { get; set; }
