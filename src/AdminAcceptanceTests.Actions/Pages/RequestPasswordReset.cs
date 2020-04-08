@@ -15,6 +15,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void EnterEmail(string value)
         {
+            Wait.Until(d => d.FindElements(Pages.Login.ForgotPassword).Count == 0);
             Wait.Until(d => d.FindElements(Pages.RequestPasswordReset.Email).Count > 0);
             Driver.FindElement(Pages.RequestPasswordReset.Email).SendKeys(value);
         }

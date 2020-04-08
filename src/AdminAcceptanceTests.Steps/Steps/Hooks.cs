@@ -1,4 +1,6 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
+using AdminAcceptanceTests.TestData;
+using System.Collections.Generic;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps
@@ -13,6 +15,10 @@ namespace AdminAcceptanceTests.Steps.Steps
         [AfterScenario]
         public void AfterScenario()
         {
+            if (Context.ContainsKey("CreatedUser"))
+            {
+                ((User)Context["CreatedUser"]).Delete(Test.ConnectionString);
+            }
             Test.Driver.Quit();
         }
     }

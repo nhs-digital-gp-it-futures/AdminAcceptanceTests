@@ -46,7 +46,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void ClickForgotPassword()
         {
-            Driver.FindElement(Pages.Login.ForgotPassword).Submit();        
+            Driver.FindElement(Pages.Login.ForgotPassword).Click();        
         }
     }
 }

@@ -1,6 +1,8 @@
 ﻿using AdminAcceptanceTests.Actions;
 using AdminAcceptanceTests.Actions.Collections;
 using OpenQA.Selenium;
+using System;
+using System.Collections.Generic;
 
 namespace AdminAcceptanceTests.Steps.Utils
 {
@@ -8,7 +10,6 @@ namespace AdminAcceptanceTests.Steps.Utils
     {
         internal string ConnectionString;
         internal IWebDriver Driver;
-        internal string ExpectedSectionLinkInErrorMessage;
         internal PageActionCollection Pages;
         internal readonly string Url;
 
