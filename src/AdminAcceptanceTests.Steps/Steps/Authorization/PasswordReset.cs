@@ -38,7 +38,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             Test.Pages.Homepage.ClickLoginButton();
             Test.Pages.Authorization.ClickForgotPassword();
             Test.Pages.RequestPasswordReset.EnterEmail(((User)Context["CreatedUser"]).Email);
-            var precount = await EmailServerDriver.GetEmailCountAsync(Test.Url);
+            var precount = await EmailServerDriver.GetEmailCountAsync(Test.Url, ((User)Context["CreatedUser"]).Email);
             Context.Add("EmailCount", precount);
             Test.Pages.RequestPasswordReset.Submit();
             Test.Pages.RequestPasswordReset.ConfirmationDisplayed().Should().BeTrue();
@@ -47,18 +47,19 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the reset url is sent to the e-mail address")]
         public async Task ThenTheResetUrlIsSentToTheE_MailAddress()
         {
-            var currentCount = await EmailServerDriver.GetEmailCountAsync(Test.Url);
+            var user = (User)Context["CreatedUser"];
+            var currentCount = await EmailServerDriver.GetEmailCountAsync(Test.Url, user.Email);
             var precount = (int)Context["EmailCount"];
             currentCount.Should().BeGreaterThan(precount);
-            var email = (await EmailServerDriver.FindAllEmailsAsync(Test.Url)).Last();
-            email.To.Should().BeEquivalentTo(((User)Context["CreatedUser"]).Email);
+            var email = (await EmailServerDriver.FindAllEmailsAsync(Test.Url, user.Email)).Last();
+            email.To.Should().BeEquivalentTo(user.Email);
             Context.Add("Email", email);
         }
 
         [Then(@"the reset url is not sent to the e-mail address")]
         public async Task ThenTheResetUrlIsNotSentToTheE_MailAddress()
         {
-            var currentCount = await EmailServerDriver.GetEmailCountAsync(Test.Url);
+            var currentCount = await EmailServerDriver.GetEmailCountAsync(Test.Url, ((User)Context["CreatedUser"]).Email);
             var precount = (int)Context["EmailCount"];
             currentCount.Should().Be(precount);
         }
@@ -84,7 +85,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [When(@"the User has entered a password that meets the password policy")]
         public void WhenTheUserHasEnteredAPasswordThatMeetsThePasswordPolicy()
         {
-            var validPassword = "BuyingC@t4logue";
+            var validPassword = "BuyingC@t4logue123";
             var currentUser = (User)Context["CreatedUser"];
             currentUser.PasswordHash = validPassword;
             EnterPasswordAndSubmit(validPassword);
