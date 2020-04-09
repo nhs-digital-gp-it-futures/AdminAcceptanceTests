@@ -10,13 +10,15 @@ namespace AdminAcceptanceTests.Actions
         {
             PageActionCollection = new PageActionCollection
             {
-                Homepage = new Pages.Homepage(driver),
-                Authorization = new Pages.Authorization(driver),
+                Homepage = new Homepage(driver),
+                Authorization = new Authorization(driver),
                 UserAccountsDashboard = new UserAccountsDashboard(driver),
                 EditOrganisation = new EditOrganisation(driver),
                 CreateBuyerUser = new CreateBuyerUser(driver),
                 ViewUserDetails = new ViewUserDetails(driver),
-                RequestAnAccount = new Pages.RequestAnAccount(driver),
+                RequestAnAccount = new RequestAnAccount(driver),
+                RequestPasswordReset = new RequestPasswordReset(driver),
+                SetNewPassword = new SetNewPassword(driver),
                 OrganisationDashboard = new Pages.OrganisationDashboard(driver)
             };
         }

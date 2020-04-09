@@ -1,4 +1,5 @@
 ﻿using AdminAcceptanceTests.TestData.Utils;
+using Bogus;
 using System;
 using System.Linq;
 
@@ -24,6 +25,13 @@ namespace AdminAcceptanceTests.TestData
         {
             var query = @"SELECT * FROM [dbo].[Organisations] WHERE OrganisationId=@id";
             return SqlExecutor.Execute<Organisation>(connectionString, query, new { id }).Single();
+        }
+
+        public Organisation RetrieveRandomOrganisation(string connectionString)
+        {
+            var query = @"SELECT * FROM [dbo].[Organisations]";
+            var listOfItems = SqlExecutor.Execute<Organisation>(connectionString, query, this);
+            return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
         }
     }
 }

@@ -43,5 +43,10 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Wait.Until(d => d.FindElements(Pages.Login.ErrorSummaryBox).Count > 0);
         }
+
+        public void ClickForgotPassword()
+        {
+            Driver.FindElement(Pages.Login.ForgotPassword).Click();        
+        }
     }
 }
