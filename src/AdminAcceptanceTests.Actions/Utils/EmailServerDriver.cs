@@ -18,10 +18,8 @@ namespace AdminAcceptanceTests.Actions.Utils
 
         public static async Task<IEnumerable<Email>> FindAllEmailsAsync(string hostUrl)
         {
-            HttpResponseMessage response = new HttpResponseMessage();
             using var client = NewHttpClient();
-            response = await client.GetAsync(GetAllEmailsUrl(hostUrl));
-
+            var response = await client.GetAsync(GetAllEmailsUrl(hostUrl));
             var responseContent = JToken.Parse(await response.Content.ReadAsStringAsync());
 
             return responseContent.Select(x => new Email
