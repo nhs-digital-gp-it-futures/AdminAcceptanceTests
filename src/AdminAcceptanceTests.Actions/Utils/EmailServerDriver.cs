@@ -10,19 +10,24 @@ namespace AdminAcceptanceTests.Actions.Utils
 {
     public sealed class EmailServerDriver
     {
-        public static async Task<int> GetEmailCountAsync(string hostUrl)
+        public static async Task<int> GetEmailCountAsync(string hostUrl, string emailToCheck = null)
         {
             var emailList = await FindAllEmailsAsync(hostUrl);
+            if(emailToCheck != null)
+            {
+                emailList = emailList.Where(e => e.To.Equals(emailToCheck, StringComparison.OrdinalIgnoreCase));
+            }
+
             return emailList.Count();
         }
 
-        public static async Task<IEnumerable<Email>> FindAllEmailsAsync(string hostUrl)
+        public static async Task<IEnumerable<Email>> FindAllEmailsAsync(string hostUrl, string emailToCheck = null)
         {
             using var client = NewHttpClient();
             var response = await client.GetAsync(GetAllEmailsUrl(hostUrl));
             var responseContent = JToken.Parse(await response.Content.ReadAsStringAsync());
 
-            return responseContent.Select(x => new Email
+            var emailList = responseContent.Select(x => new Email
             {
                 Id = x.SelectToken("id").ToString().Trim(),
                 PlainTextBody = x.SelectToken("text").ToString().Trim(),
@@ -31,6 +36,12 @@ namespace AdminAcceptanceTests.Actions.Utils
                 From = x.SelectToken("from").First().SelectToken("address").ToString(),
                 To = x.SelectToken("to").First().SelectToken("address").ToString(),
             });
+
+            if (emailToCheck != null)
+            {
+                emailList = emailList.Where(e => e.To.Equals(emailToCheck, StringComparison.OrdinalIgnoreCase));
+            }
+            return emailList;
         }
 
         public static async Task ClearAllEmailsAsync(string hostUrl)
