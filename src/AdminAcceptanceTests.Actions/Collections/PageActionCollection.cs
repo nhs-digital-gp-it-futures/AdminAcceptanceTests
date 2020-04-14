@@ -13,6 +13,7 @@ namespace AdminAcceptanceTests.Actions.Collections
         public UserAccountsDashboard UserAccountsDashboard { get; set; }
         public CreateBuyerUser CreateBuyerUser { get; set; }
         public ViewUserDetails ViewUserDetails { get; set; }
+        public CreateBuyingOrganisation CreateBuyingOrganisation { get; set; }
         public EditOrganisation EditOrganisation { get; set; }
     }
 }

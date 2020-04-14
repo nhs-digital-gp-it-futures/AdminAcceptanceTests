@@ -13,6 +13,7 @@ namespace AdminAcceptanceTests.Objects
                 Login = new Login(),
                 OrganisationDashboard = new OrganisationDashboard(),
                 UserAccountsDashboard = new UserAccountsDashboard(),
+                CreateBuyingOrganisation = new CreateBuyingOrganisation(),
                 EditOrganisation = new EditOrganisation(),
                 CreateBuyerUser = new CreateBuyerUser(),
                 ViewUserDetails = new ViewUserDetails(),

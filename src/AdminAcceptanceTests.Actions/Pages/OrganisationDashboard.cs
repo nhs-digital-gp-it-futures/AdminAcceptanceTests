@@ -26,6 +26,11 @@ namespace AdminAcceptanceTests.Actions.Pages
             return Driver.FindElements(Pages.OrganisationDashboard.OrganisationLinks).Count > 0;
         }
 
+        public void ClickAddOrganisationsButton()
+        {
+            Driver.FindElement(Pages.OrganisationDashboard.AddOrgButton).Click();
+        }
+
         public string SelectOrganisation(int? index = null)
         {
             Wait.Until(d => d.FindElements(Pages.OrganisationDashboard.OrganisationLinks).Count > 0);

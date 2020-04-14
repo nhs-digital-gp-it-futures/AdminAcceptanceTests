@@ -60,7 +60,7 @@ namespace AdminAcceptanceTests.TestData
 
         public void Delete(string connectionString)
         {
-            var query = @"DELETE FROM  [dbo].[Organisations] WHERE OrganisationId=@organisationId";
+            var query = @"DELETE FROM  [dbo].[Organisations] WHERE OrganisationId=@organisationId OR OdsCode=@odsCode";
             SqlExecutor.Execute<Organisation>(connectionString, query, this);
         }
     }
