@@ -15,6 +15,30 @@ namespace AdminAcceptanceTests.TestData
         public int CatalogueAgreementSigned { get; set; }
         public DateTime LastUpdated { get; set; }
 
+        public void Create(string connectionString)
+        {
+            var query = @"INSERT INTO [dbo].[Organisations] (
+                            OrganisationId
+                            ,Name
+                            ,Address
+                            ,OdsCode
+                            ,PrimaryRoleId
+                            ,CatalogueAgreementSigned
+                            ,LastUpdated
+                        )
+                        VALUES (
+                            @organisationId
+                            ,@name
+                            ,@address
+                            ,@odsCode
+                            ,@primaryRoleId
+                            ,@catalogueAgreementSigned
+                            ,@lastUpdated
+                        )";
+
+            SqlExecutor.Execute<User>(connectionString, query, this);
+        }
+
         public Organisation RetrieveByODSCode(string connectionString, string ODSCode)
         {
             var query = @"SELECT * FROM [dbo].[Organisations] WHERE OdsCode=@ODSCode";
@@ -32,6 +56,12 @@ namespace AdminAcceptanceTests.TestData
             var query = @"SELECT * FROM [dbo].[Organisations]";
             var listOfItems = SqlExecutor.Execute<Organisation>(connectionString, query, this);
             return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
+        }
+
+        public void Delete(string connectionString)
+        {
+            var query = @"DELETE FROM  [dbo].[Organisations] WHERE OrganisationId=@organisationId OR OdsCode=@odsCode";
+            SqlExecutor.Execute<Organisation>(connectionString, query, this);
         }
     }
 }

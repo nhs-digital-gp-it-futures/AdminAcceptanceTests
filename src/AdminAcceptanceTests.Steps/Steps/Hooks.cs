@@ -25,6 +25,14 @@ namespace AdminAcceptanceTests.Steps.Steps
             {
                 await EmailServerDriver.ClearEmailAsync(Test.Url, ((Email)Context["Email"]).Id);
             }
+            if (Context.ContainsKey("CreatedOrganisation"))
+            {
+                ((Organisation)Context["CreatedOrganisation"]).Delete(Test.ConnectionString);
+            }
+            if (Context.ContainsKey("DeletedOrganisation"))
+            {
+                ((Organisation)Context["DeletedOrganisation"]).Create(Test.ConnectionString);
+            }            
             Test.Driver.Quit();
         }
     }

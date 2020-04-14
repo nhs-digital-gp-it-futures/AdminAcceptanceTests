@@ -13,6 +13,7 @@ namespace AdminAcceptanceTests.Actions
                 Homepage = new Homepage(driver),
                 Authorization = new Authorization(driver),
                 UserAccountsDashboard = new UserAccountsDashboard(driver),
+                CreateBuyingOrganisation = new CreateBuyingOrganisation(driver),
                 EditOrganisation = new EditOrganisation(driver),
                 CreateBuyerUser = new CreateBuyerUser(driver),
                 ViewUserDetails = new ViewUserDetails(driver),
