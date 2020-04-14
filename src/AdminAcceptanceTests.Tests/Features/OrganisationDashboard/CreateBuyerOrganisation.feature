@@ -1,4 +1,5 @@
-﻿Feature: Buyer Organisation Creation
+﻿@ignore
+Feature: Buyer Organisation Creation
 	As an Authority User
 	I want to create a Buyer Organisation in the Buying Catalogue
 	So that the Organisation exists on the Buying Catalogue
