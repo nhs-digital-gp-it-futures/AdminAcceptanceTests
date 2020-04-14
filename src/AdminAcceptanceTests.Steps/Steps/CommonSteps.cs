@@ -23,12 +23,20 @@ namespace AdminAcceptanceTests.Steps.Steps
             Test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
         }
 
-        [Given(@"I am on a random organisation user account dashboard")]
-        public void GivenIAmOnARandomOrganisationUserAccountDashboard()
+        [Given(@"the Authority User is managing organisations and users")]
+        public void GivenTheAuthorityUserIsManagingOrganisationsAndUsers()
         {
             GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse();
             var OrganisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
             OrganisationDashboardSteps.WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage();
+            OrganisationDashboardSteps.ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
+        }
+
+        [Given(@"I am on a random organisation user account dashboard")]
+        public void GivenIAmOnARandomOrganisationUserAccountDashboard()
+        {
+            GivenTheAuthorityUserIsManagingOrganisationsAndUsers();
+            var OrganisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
             OrganisationDashboardSteps.WhenAnOrganisationIsSelected();
             OrganisationDashboardSteps.ThenTheUserAccountsDashboardForThatOrganisationIsDisplayed();
             string ODSCode = Test.Pages.UserAccountsDashboard.GetODSCode();
@@ -46,10 +54,9 @@ namespace AdminAcceptanceTests.Steps.Steps
         [When(@"they select to view a user's details from the organisation's user accounts dashboard")]
         public void WhenTheySelectToViewAUserSUserAccountsDashboard()
         {
-            new CommonSteps(Test, Context).GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse();
-            var OrganisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
-            OrganisationDashboardSteps.WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage();
-            OrganisationDashboardSteps.ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
+            
+            GivenTheAuthorityUserIsManagingOrganisationsAndUsers();
+            new OrganisationDashboard.OrganisationsDashboard(Test, Context).ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
             WhenASpecificOrganisationIsSelected();
             Test.Pages.UserAccountsDashboard.ViewUserLinksDisplayed().Should().BeTrue();
             var targetUser = (User)Context["BuyingUser"];

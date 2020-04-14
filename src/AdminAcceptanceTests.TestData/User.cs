@@ -66,7 +66,59 @@ namespace AdminAcceptanceTests.TestData
                 FirstName = faker.Name.FirstName(),
                 LastName = faker.Name.LastName()               
             };
-        }    
+        }
+
+        public void Create(string connectionString)
+        {
+            var query = @"INSERT INTO AspNetUsers (
+                            Id,
+                            UserName,
+                            NormalizedUserName,
+                            Email,
+                            NormalizedEmail,
+                            EmailConfirmed,
+                            PasswordHash,
+                            SecurityStamp,
+                            ConcurrencyStamp,
+                            PhoneNumber,
+                            PhoneNumberConfirmed,
+                            TwoFactorEnabled,
+                            LockoutEnd,
+                            LockoutEnabled,
+                            AccessFailedCount,
+                            PrimaryOrganisationId,
+                            OrganisationFunction,
+                            Disabled,
+                            CatalogueAgreementSigned,
+                            FirstName,
+                            LastName
+                        )
+                        VALUES (
+                            @id,
+                            @userName,
+                            @normalizedUserName,
+                            @email,
+                            @normalizedEmail,
+                            @emailConfirmed,
+                            @passwordHash,
+                            @securityStamp,
+                            @concurrencyStamp,
+                            @phoneNumber,
+                            @phoneNumberConfirmed,
+                            @twoFactorEnabled,
+                            @lockoutEnd,
+                            @lockoutEnabled,
+                            @accessFailedCount,
+                            @primaryOrganisationId,
+                            @organisationFunction,
+                            @disabled,
+                            @catalogueAgreementSigned,
+                            @firstName,
+                            @lastName
+                        )";
+
+            SqlExecutor.Execute<User>(connectionString, query, this);
+        }
 
         public User Retrieve(string connectionString)
         {
@@ -125,58 +177,7 @@ namespace AdminAcceptanceTests.TestData
             return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() -1));
         }
 
-        public void Create(string connectionString)
-        {
-            var query = @"INSERT INTO AspNetUsers (
-                            Id,
-                            UserName,
-                            NormalizedUserName,
-                            Email,
-                            NormalizedEmail,
-                            EmailConfirmed,
-                            PasswordHash,
-                            SecurityStamp,
-                            ConcurrencyStamp,
-                            PhoneNumber,
-                            PhoneNumberConfirmed,
-                            TwoFactorEnabled,
-                            LockoutEnd,
-                            LockoutEnabled,
-                            AccessFailedCount,
-                            PrimaryOrganisationId,
-                            OrganisationFunction,
-                            Disabled,
-                            CatalogueAgreementSigned,
-                            FirstName,
-                            LastName
-                        )
-                        VALUES (
-                            @id,
-                            @userName,
-                            @normalizedUserName,
-                            @email,
-                            @normalizedEmail,
-                            @emailConfirmed,
-                            @passwordHash,
-                            @securityStamp,
-                            @concurrencyStamp,
-                            @phoneNumber,
-                            @phoneNumberConfirmed,
-                            @twoFactorEnabled,
-                            @lockoutEnd,
-                            @lockoutEnabled,
-                            @accessFailedCount,
-                            @primaryOrganisationId,
-                            @organisationFunction,
-                            @disabled,
-                            @catalogueAgreementSigned,
-                            @firstName,
-                            @lastName
-                        )";
-
-            SqlExecutor.Execute<User>(connectionString, query, this);
-        }
-
+        
         public void Update(string connectionString)
         {
             var query = @"UPDATE AspNetUsers 
