@@ -15,12 +15,12 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
 
         [Given(@"a Buyer Organisation does not already exist in the Buying Catalogue")]
         public void GivenABuyerOrganisationDoesNotAlreadyExistInTheBuyingCatalogue()
-        {
-            var KnownBuyerOrganisationODSCode = "N82667";
-            var Organisation = new Organisation();
-            Organisation.OdsCode = KnownBuyerOrganisationODSCode;
+        {            
+            var Organisation = new Organisation().RetrieveRandomOrganisationWithNoUsers(Test.ConnectionString);
+            Organisation.Delete(Test.ConnectionString);
             Context.Add("Organisation", Organisation);
             Context.Add("CreatedOrganisation", Organisation);
+            Context.Add("DeletedOrganisation", Organisation);
         }
         
         [Given(@"that a User enters an ODS code for a non-Buyer Organisation")]
