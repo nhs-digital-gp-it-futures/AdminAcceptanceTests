@@ -58,6 +58,15 @@ namespace AdminAcceptanceTests.TestData
             return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
         }
 
+        public Organisation RetrieveRandomOrganisationWithNoUsers(string connectionString)
+        {
+            var query = @"SELECT [dbo].[Organisations].* FROM [dbo].[Organisations]
+                          LEFT JOIN AspNetUsers on AspNetUsers.PrimaryOrganisationId=[Organisations].OrganisationId
+                          WHERE AspNetUsers.Id IS NULL;";
+            var listOfItems = SqlExecutor.Execute<Organisation>(connectionString, query, this);
+            return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
+        }
+
         public void Delete(string connectionString)
         {
             var query = @"DELETE FROM  [dbo].[Organisations] WHERE OrganisationId=@organisationId OR OdsCode=@odsCode";
