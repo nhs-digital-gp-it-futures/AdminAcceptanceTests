@@ -28,7 +28,7 @@ namespace AdminAcceptanceTests.Actions.Pages
             Driver.FindElement(Pages.CreateBuyingOrganisation.SearchODSButton).Click();
         }
 
-        public void SelectOrganisationPageDisaplyed()
+        public void SelectOrganisationPageDisplayed()
         {
             Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.SelectOrganisationPageTitle).Count > 0);
         }

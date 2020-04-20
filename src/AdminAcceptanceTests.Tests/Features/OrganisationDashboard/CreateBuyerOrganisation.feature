@@ -25,5 +25,5 @@ Scenario: Buyer Organisation Creation - unrecognised code
 @ignore
 Scenario: Buyer Organisation Creation - Organisation already exists
 	Given a Buyer Organisation already exists in the Buying Catalogue
-	When the user attempts to crate the Organisation
+	When the user attempts to create the Organisation
 	Then a validation error message will be returned
