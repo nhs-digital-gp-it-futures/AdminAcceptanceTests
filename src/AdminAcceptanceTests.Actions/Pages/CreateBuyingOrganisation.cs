@@ -28,7 +28,7 @@ namespace AdminAcceptanceTests.Actions.Pages
             Driver.FindElement(Pages.CreateBuyingOrganisation.SearchODSButton).Click();
         }
 
-        public void SelectOrganisationPageDisaplyed()
+        public void SelectOrganisationPageDisplayed()
         {
             Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.SelectOrganisationPageTitle).Count > 0);
         }
@@ -56,6 +56,11 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void ConfirmationPageDisplayed()
         {
             Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.ConfirmationPage).Count > 0);
+        }
+
+        public void OrganisationAlreadyExistsPageDisplayed()
+        {
+            Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPage).Count > 0);
         }
 
         public bool ErrorSummaryDisplayed()

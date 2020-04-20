@@ -17,6 +17,7 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By AgreementSignedCheckbox => By.Id("catalogue-agreement-checkbox");
         public By CreateOrganisationButton => CustomBy.DataTestId("save-button", "button");
         public By ConfirmationPage => CustomBy.DataTestId("create-org-confirmation");
+        public By OrganisationAlreadyExistsPage => CustomBy.DataTestId("create-org-error-page");
         public By ErrorSummary => CustomBy.DataTestId("error-summary");
     }
 }
