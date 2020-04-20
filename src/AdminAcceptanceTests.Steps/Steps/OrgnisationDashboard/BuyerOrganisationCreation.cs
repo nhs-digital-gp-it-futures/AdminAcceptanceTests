@@ -70,7 +70,18 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
             Test.Pages.CreateBuyingOrganisation.EnterODSCode(Organisation.OdsCode);
             Test.Pages.CreateBuyingOrganisation.SearchOrganisation();
         }
-        
+
+        [When(@"the user attempts to crate the Organisation")]
+        public void WhenTheUserAttemptsToCrateTheOrganisation()
+        {
+            WhenTheOrganisationIsSearchedFor();
+            Test.Pages.CreateBuyingOrganisation.SelectOrganisationPageDisaplyed();
+            Test.Pages.CreateBuyingOrganisation.SelectOrganisation();
+            Test.Pages.CreateBuyingOrganisation.CreateOrganisationPageDisplayed();
+            Test.Pages.CreateBuyingOrganisation.CreateOrganisation();
+            Test.Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPageDisplayed();
+        }
+
         [Then(@"the Organisation exists in the Buying Catalogue")]
         public void ThenTheOrganisationExistsInTheBuyingCatalogue()
         {

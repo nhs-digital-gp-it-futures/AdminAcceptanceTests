@@ -58,6 +58,11 @@ namespace AdminAcceptanceTests.Actions.Pages
             Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.ConfirmationPage).Count > 0);
         }
 
+        public void OrganisationAlreadyExistsPageDisplayed()
+        {
+            Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPage).Count > 0);
+        }
+
         public bool ErrorSummaryDisplayed()
         {
             return Driver.FindElements(Pages.CreateBuyingOrganisation.ErrorSummary).Count > 0;
