@@ -57,8 +57,9 @@ namespace AdminAcceptanceTests.Actions.Utils
 
         private static HttpClient NewHttpClient()
         {
-            ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-            return new HttpClient();
+            HttpClientHandler handler = new HttpClientHandler();
+            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            return new HttpClient(handler);
         }
 
         private static string DowngradeHttps(string value)
@@ -66,18 +67,35 @@ namespace AdminAcceptanceTests.Actions.Utils
             return value.Replace("https","http");
         }
 
+        private static bool IsRunningLocal(string hostUrl)
+        {
+            return hostUrl.Contains("host", StringComparison.OrdinalIgnoreCase);
+        }
+
         private static Uri GetAllEmailsUrl(string hostUrl)
         {
-            return new Uri(DowngradeHttps($"{hostUrl}:1080/email"));
+            if(IsRunningLocal(hostUrl))
+            {
+                return new Uri(DowngradeHttps($"{hostUrl}:1080/email/email"));
+            }
+            return new Uri($"{hostUrl}/email/email");
         }
 
         private static Uri DeleteAllEmailsUrl(string hostUrl)
         {
-            return new Uri(DowngradeHttps($"{hostUrl}:1080/email/all"));
+            if (IsRunningLocal(hostUrl))
+            {
+                return new Uri(DowngradeHttps($"{hostUrl}:1080/email/email/all"));
+            }
+            return new Uri($"{hostUrl}/email/email/all");
         }
         private static Uri DeleteEmailUrl(string hostUrl, string id)
         {
-            return new Uri(DowngradeHttps($"{hostUrl}:1080/email/{id}"));
+            if (IsRunningLocal(hostUrl))
+            {
+                return new Uri(DowngradeHttps($"{hostUrl}:1080/email/email/{id}"));
+            }
+            return new Uri($"{hostUrl}/email/email/{id}");
         }
     }
 }
