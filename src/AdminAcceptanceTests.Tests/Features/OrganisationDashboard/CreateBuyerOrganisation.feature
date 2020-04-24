@@ -5,7 +5,7 @@
 
 Background: 
 Given the Authority User is managing organisations and users
-@ignore
+
 Scenario: Buyer Organisation Creation - Buyer Organisation created
 	Given a Buyer Organisation does not already exist in the Buying Catalogue
 	When the Organisation is being created
@@ -22,8 +22,7 @@ Scenario: Buyer Organisation Creation - unrecognised code
 	When the Organisation is searched for
 	Then a validation error message will be returned
 
-@ignore
 Scenario: Buyer Organisation Creation - Organisation already exists
 	Given a Buyer Organisation already exists in the Buying Catalogue
 	When the user attempts to create the Organisation
-	Then a validation error message will be returned
+	Then the user is informed the organisation already exists

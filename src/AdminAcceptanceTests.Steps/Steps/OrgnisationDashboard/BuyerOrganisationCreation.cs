@@ -53,11 +53,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         [When(@"the Organisation is being created")]
         public void WhenTheOrganisationIsBeingCreated()
         {
-            WhenTheOrganisationIsSearchedFor();
-            Test.Pages.CreateBuyingOrganisation.SelectOrganisationPageDisplayed();
-            Test.Pages.CreateBuyingOrganisation.SelectOrganisation();
-            Test.Pages.CreateBuyingOrganisation.CreateOrganisationPageDisplayed();
-            Test.Pages.CreateBuyingOrganisation.CreateOrganisation();
+            WhenTheUserAttemptsToCrateTheOrganisation();
             Test.Pages.CreateBuyingOrganisation.ConfirmationPageDisplayed();
         }
         
@@ -78,8 +74,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
             Test.Pages.CreateBuyingOrganisation.SelectOrganisationPageDisplayed();
             Test.Pages.CreateBuyingOrganisation.SelectOrganisation();
             Test.Pages.CreateBuyingOrganisation.CreateOrganisationPageDisplayed();
-            Test.Pages.CreateBuyingOrganisation.CreateOrganisation();
-            Test.Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPageDisplayed();
+            Test.Pages.CreateBuyingOrganisation.CreateOrganisation();            
         }
 
         [Then(@"the Organisation exists in the Buying Catalogue")]
@@ -104,5 +99,12 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         {
             Test.Pages.CreateBuyingOrganisation.ErrorSummaryDisplayed().Should().BeTrue();
         }
+
+        [Then(@"the user is informed the organisation already exists")]
+        public void ThenTheUserIsInformedTheOrganisationAlreadyExists()
+        {
+            Test.Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPageDisplayed();
+        }
+
     }
 }
