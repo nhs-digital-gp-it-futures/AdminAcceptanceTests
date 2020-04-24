@@ -57,8 +57,10 @@ namespace AdminAcceptanceTests.Actions.Utils
 
         private static HttpClient NewHttpClient()
         {
-            HttpClientHandler handler = new HttpClientHandler();
-            handler.ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator;
+            var handler = new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            };
             return new HttpClient(handler);
         }
 
