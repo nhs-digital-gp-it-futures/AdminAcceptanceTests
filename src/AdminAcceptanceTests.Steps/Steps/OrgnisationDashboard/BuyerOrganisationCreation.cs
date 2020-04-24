@@ -53,7 +53,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         [When(@"the Organisation is being created")]
         public void WhenTheOrganisationIsBeingCreated()
         {
-            WhenTheUserAttemptsToCrateTheOrganisation();
+            WhenTheUserAttemptsToCreateTheOrganisation();
             Test.Pages.CreateBuyingOrganisation.ConfirmationPageDisplayed();
         }
         
@@ -68,7 +68,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         }
 
         [When(@"the user attempts to create the Organisation")]
-        public void WhenTheUserAttemptsToCrateTheOrganisation()
+        public void WhenTheUserAttemptsToCreateTheOrganisation()
         {
             WhenTheOrganisationIsSearchedFor();
             Test.Pages.CreateBuyingOrganisation.SelectOrganisationPageDisplayed();
