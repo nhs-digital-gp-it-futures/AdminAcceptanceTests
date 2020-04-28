@@ -1,10 +1,8 @@
 ﻿using AdminAcceptanceTests.TestData.Utils;
 using Bogus;
-using Microsoft.AspNetCore.Cryptography.KeyDerivation;
+using Microsoft.AspNetCore.Identity;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Security.Cryptography;
 
 namespace AdminAcceptanceTests.TestData
 {
@@ -50,7 +48,7 @@ namespace AdminAcceptanceTests.TestData
                 NormalizedUserName = generatedEmail.ToUpper(),
                 NormalizedEmail = generatedEmail.ToUpper(),
                 EmailConfirmed = 1,
-                PasswordHash = GenerateHash(genericTestPassword),
+                PasswordHash = new PasswordHasher<User>().HashPassword(this, genericTestPassword),
                 SecurityStamp = faker.Random.Hash(),
                 ConcurrencyStamp = faker.Random.Guid(),
                 PhoneNumber = faker.Phone.PhoneNumber(),
@@ -212,56 +210,5 @@ namespace AdminAcceptanceTests.TestData
             SqlExecutor.Execute<User>(connectionString, query, this);
         }
 
-        private static string GenerateHash(string password)
-        {
-            if (string.IsNullOrWhiteSpace(password))
-            {
-                return password;
-            }
-
-            const int identityVersion = 1; // 1 = Identity V3
-            const int iterationCount = 10000;
-            const int passwordHashLength = 32;
-            const KeyDerivationPrf hashAlgorithm = KeyDerivationPrf.HMACSHA256;
-            const int saltLength = 16;
-
-            using var rng = RandomNumberGenerator.Create();
-            var salt = new byte[saltLength];
-            rng.GetBytes(salt);
-
-            var pbkdf2Hash = KeyDerivation.Pbkdf2(
-                password,
-                salt,
-                hashAlgorithm,
-                iterationCount,
-                passwordHashLength);
-
-            var identityVersionData = new byte[] { identityVersion };
-            var prfData = BitConverter.GetBytes((uint)hashAlgorithm).Reverse().ToArray();
-            var iterationCountData = BitConverter.GetBytes((uint)iterationCount).Reverse().ToArray();
-            var saltSizeData = BitConverter.GetBytes((uint)saltLength).Reverse().ToArray();
-
-            var hashElements = new[]
-            {
-                identityVersionData,
-                prfData,
-                iterationCountData,
-                saltSizeData,
-                salt,
-                pbkdf2Hash
-            };
-
-            var identityV3Hash = new List<byte>();
-            foreach (var data in hashElements)
-            {
-                identityV3Hash.AddRange(data);
-            }
-
-            if (!identityV3Hash.Count.Equals(61))
-            {
-                throw new ArithmeticException();
-            }
-            return Convert.ToBase64String(identityV3Hash.ToArray());
-        }
     }
 }
