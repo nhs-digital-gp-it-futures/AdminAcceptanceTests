@@ -36,7 +36,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool InvalidCredentialsErrorDisplayed()
         {
-            return Driver.FindElements(Pages.Login.LoginErrorMessage).Count > 0;
+            return Driver.FindElements(Pages.Login.ErrorSummaryBox).Count > 0;
         }
 
         public void WaitForErrorSummaryToBeDisplayed()
