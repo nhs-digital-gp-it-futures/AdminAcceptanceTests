@@ -85,6 +85,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void ThenTheBuyerUserCanLogin()
         {
             Test.Pages.Homepage.LogOut();
+            Test.Pages.Homepage.LoginLogoutLinkText("Log In");
             Test.Pages.Homepage.ClickLoginButton();
             var user = (User)Context["BuyingUser"];
             Test.Pages.Authorization.EnterUsername(user.UserName);
