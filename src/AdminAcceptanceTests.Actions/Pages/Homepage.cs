@@ -18,6 +18,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count > 0);
             Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 0);
         }
 
         public bool LoginLogoutLinkText(string expectedValue)

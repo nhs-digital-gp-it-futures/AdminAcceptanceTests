@@ -15,6 +15,7 @@ namespace AdminAcceptanceTests.Steps.Steps
         [Given(@"that an Authority User has logged in on Public Browse")]
         public void GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse()
         {
+            Test.Pages.Homepage.LoginLogoutLinkText("Log in");
             Test.Pages.Homepage.ClickLoginButton();
             var user = EnvironmentVariables.AdminUser();
             Test.Pages.Authorization.EnterUsername(user.UserName);
