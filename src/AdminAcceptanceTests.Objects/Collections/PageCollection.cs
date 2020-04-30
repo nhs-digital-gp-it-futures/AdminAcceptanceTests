@@ -9,6 +9,7 @@ namespace AdminAcceptanceTests.Objects.Collections
         public RequestAnAccount RequestAnAccount { get; set; }
         public RequestPasswordReset RequestPasswordReset { get; set; }
         public SetNewPassword SetNewPassword { get; set; }
+        public AcceptAgreement AcceptAgreement { get; set; }
         public OrganisationDashboard OrganisationDashboard { get; set; }
         public UserAccountsDashboard UserAccountsDashboard { get; set; }
         public CreateBuyerUser CreateBuyerUser { get; set; }

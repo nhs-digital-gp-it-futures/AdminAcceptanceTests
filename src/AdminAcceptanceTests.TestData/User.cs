@@ -35,9 +35,13 @@ namespace AdminAcceptanceTests.TestData
             return string.Join(" ", user.FirstName, user.LastName);
         }
 
+        public static string GenericTestPassword()
+        {
+            return "BuyingC@t4logue";
+        }
+
         public User GenerateRandomUser(bool BuyingUser = true, Guid PrimaryOrganisationId = new Guid())
         {
-            var genericTestPassword = "BuyingC@t4logue";
             Faker faker = new Faker();
             var generatedEmail = faker.Internet.Email();
             return new User
@@ -48,7 +52,7 @@ namespace AdminAcceptanceTests.TestData
                 NormalizedUserName = generatedEmail.ToUpper(),
                 NormalizedEmail = generatedEmail.ToUpper(),
                 EmailConfirmed = 1,
-                PasswordHash = new PasswordHasher<User>().HashPassword(this, genericTestPassword),
+                PasswordHash = new PasswordHasher<User>().HashPassword(this, GenericTestPassword()),
                 SecurityStamp = faker.Random.Hash(),
                 ConcurrencyStamp = faker.Random.Guid(),
                 PhoneNumber = faker.Phone.PhoneNumber(),

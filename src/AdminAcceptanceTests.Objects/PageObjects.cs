@@ -19,7 +19,8 @@ namespace AdminAcceptanceTests.Objects
                 ViewUserDetails = new ViewUserDetails(),
                 RequestAnAccount = new RequestAnAccount(),
                 RequestPasswordReset = new RequestPasswordReset(),
-                SetNewPassword = new SetNewPassword()
+                SetNewPassword = new SetNewPassword(),
+                AcceptAgreement = new AcceptAgreement()
             };
         }
         public PageCollection Pages { get; set; }

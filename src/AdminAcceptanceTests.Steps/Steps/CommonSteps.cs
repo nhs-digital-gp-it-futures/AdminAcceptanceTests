@@ -62,5 +62,14 @@ namespace AdminAcceptanceTests.Steps.Steps
             var targetUser = (User)Context["BuyingUser"];
             Test.Pages.UserAccountsDashboard.ClickUserLink(User.ConcatDisplayName(targetUser));
         }
+
+        public void CreatedUserLogsInWithGenericTestPassword()
+        {
+            Test.Pages.Homepage.ClickLoginButton();
+            var user = (User)Context["CreatedUser"];
+            Test.Pages.Authorization.EnterUsername(user.UserName);
+            Test.Pages.Authorization.EnterPassword(User.GenericTestPassword());
+            Test.Pages.Authorization.Login();
+        }
     }
 }
