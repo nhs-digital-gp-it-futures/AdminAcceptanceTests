@@ -16,18 +16,20 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void ClickLoginButton()
         {
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count > 0);
             Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
         }
 
-        public string LoginLogoutLinkText()
+        public bool LoginLogoutLinkText(string expectedValue)
         {
-            Wait.Until(s => s.FindElement(Pages.Homepage.LoginLogoutLink).Displayed);
-            return Driver.FindElement(Pages.Homepage.LoginLogoutLink).Text;
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count > 0);
+            Wait.Until(s => s.FindElement(Pages.Homepage.LoginLogoutLink).Text.Contains(expectedValue, StringComparison.OrdinalIgnoreCase));
+            return true;
         }
 
         public void LogOut()
         {
-            if (LoginLogoutLinkText().Equals("Log out", StringComparison.OrdinalIgnoreCase))
+            if (LoginLogoutLinkText("Log out"))
             {
                 Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
             }
