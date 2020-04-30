@@ -94,13 +94,13 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Given(@"that a User has accepted the agreement")]
         public void GivenThatAUserHasAcceptedTheAgreement()
         {
-            //Jon do you think it's right that I'm accepting the agreement via UI or should it be at DB level?
             GivenThatAUserIsPresentedWithTheAgreement();
             WhenTheUserIndicatesTheyWillAcceptTheAgreement();
             WhenTheUserChoosesToContinuePastTheAgreement();
             ThenTheUserCanContinueTheirJourneyPastTheAgreement();
-            new Authorization(Test, Context).WhenTheUserLogsOut();
-            new Authorization(Test, Context).ThenTheUserIsLoggedOut();
+            var authSteps = new Authorization(Test, Context);
+            authSteps.WhenTheUserLogsOut();
+            authSteps.ThenTheUserIsLoggedOut();
         }
 
         [Then(@"the User is not presented with the agreement")]
