@@ -72,6 +72,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void ThenTheBuyerUserCannotLogin()
         {
             Test.Pages.Homepage.LogOut();
+            Test.Pages.Homepage.LoginLogoutLinkText("Log In");
             Test.Pages.Homepage.ClickLoginButton();
             var user = (User)Context["BuyingUser"];
             Test.Pages.Authorization.EnterUsername(user.UserName);
@@ -84,12 +85,13 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void ThenTheBuyerUserCanLogin()
         {
             Test.Pages.Homepage.LogOut();
+            Test.Pages.Homepage.LoginLogoutLinkText("Log In");
             Test.Pages.Homepage.ClickLoginButton();
             var user = (User)Context["BuyingUser"];
             Test.Pages.Authorization.EnterUsername(user.UserName);
             Test.Pages.Authorization.EnterPassword(EnvironmentVariables.AdminUser().PasswordHash);
             Test.Pages.Authorization.Login();
-            Test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
+            Test.Pages.Homepage.LoginLogoutLinkText("Log out");
         }
     }
 }

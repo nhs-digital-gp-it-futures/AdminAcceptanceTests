@@ -58,7 +58,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the User will be logged in")]
         public void ThenTheUserWillBeLoggedIn()
         {
-            Test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
+            Test.Pages.Homepage.LoginLogoutLinkText("Log out");
         }
 
         [Then(@"the User will not be logged in")]
@@ -104,7 +104,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the User is logged out")]
         public void ThenTheUserIsLoggedOut()
         {
-            Test.Pages.Homepage.LoginLogoutLinkText().Should().BeEquivalentTo("Log in");
+            Test.Pages.Homepage.LoginLogoutLinkText("Log in");
         }
 
     }

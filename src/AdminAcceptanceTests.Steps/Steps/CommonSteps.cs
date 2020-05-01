@@ -15,12 +15,13 @@ namespace AdminAcceptanceTests.Steps.Steps
         [Given(@"that an Authority User has logged in on Public Browse")]
         public void GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse()
         {
+            Test.Pages.Homepage.LoginLogoutLinkText("Log in");
             Test.Pages.Homepage.ClickLoginButton();
             var user = EnvironmentVariables.AdminUser();
             Test.Pages.Authorization.EnterUsername(user.UserName);
             Test.Pages.Authorization.EnterPassword(user.PasswordHash);
             Test.Pages.Authorization.Login();
-            Test.Pages.Homepage.LoginLogoutLinkText().Should().Be("Log out");
+            Test.Pages.Homepage.LoginLogoutLinkText("Log out");
         }
 
         [Given(@"the Authority User is managing organisations and users")]
@@ -61,6 +62,15 @@ namespace AdminAcceptanceTests.Steps.Steps
             Test.Pages.UserAccountsDashboard.ViewUserLinksDisplayed().Should().BeTrue();
             var targetUser = (User)Context["BuyingUser"];
             Test.Pages.UserAccountsDashboard.ClickUserLink(User.ConcatDisplayName(targetUser));
+        }
+
+        public void CreatedUserLogsInWithGenericTestPassword()
+        {
+            Test.Pages.Homepage.ClickLoginButton();
+            var user = (User)Context["CreatedUser"];
+            Test.Pages.Authorization.EnterUsername(user.UserName);
+            Test.Pages.Authorization.EnterPassword(User.GenericTestPassword());
+            Test.Pages.Authorization.Login();
         }
     }
 }
