@@ -11,18 +11,20 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void EnterPassword(string password)
         {
+            Driver.FindElement(Pages.Login.Password).Click();
             Driver.FindElement(Pages.Login.Password).SendKeys(password);
         }
 
         public void EnterUsername(string username)
         {
             Wait.Until(d => d.FindElements(Pages.Login.Username).Count > 0);
+            Driver.FindElement(Pages.Login.Username).Click();
             Driver.FindElement(Pages.Login.Username).SendKeys(username);
         }
 
         public void Login()
         {
-            Driver.FindElement(Pages.Login.LoginButton).Submit();
+            Driver.FindElement(Pages.Login.LoginButton).Click();
         }
 
         public bool RequestAnAccountLinkIsDisplayed()

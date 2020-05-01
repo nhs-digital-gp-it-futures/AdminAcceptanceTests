@@ -49,6 +49,7 @@ namespace AdminAcceptanceTests.Actions.Pages
             }
 
             string orgName = org.Text;
+            Wait.Until(d => d.FindElement(By.LinkText(org.Text)).Displayed);
             org.Click();
             return orgName;
         }
