@@ -1,4 +1,5 @@
 ﻿using AdminAcceptanceTests.Actions.Utils;
+using FluentAssertions;
 using OpenQA.Selenium;
 using System;
 
@@ -47,7 +48,9 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void ClickAdminTile()
         {
+            Wait.Until(d => d.FindElements(Pages.Homepage.AdminTile).Count == 1);
             Driver.FindElement(Pages.Homepage.AdminTile).Click();
+            Wait.Until(d => d.FindElements(Pages.Homepage.AdminTile).Count == 0);
         }
     }
 }
