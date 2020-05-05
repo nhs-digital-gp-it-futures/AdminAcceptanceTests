@@ -12,19 +12,23 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void EnterPassword(string password)
         {
             Driver.FindElement(Pages.Login.Password).Click();
-            Driver.FindElement(Pages.Login.Password).SendKeys(password);
+            Driver.EnterTextViaJs(Wait, Pages.Login.Password, password);
+            Wait.Until(d => d.FindElement(Pages.Login.Password).GetAttribute("value") != "");
         }
 
         public void EnterUsername(string username)
         {
             Wait.Until(d => d.FindElements(Pages.Login.Username).Count == 1);
+            Wait.Until(d => d.FindElement(Pages.Login.Username).GetAttribute("value") == "");
             Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.Username));
             Driver.FindElement(Pages.Login.Username).Click();
-            Driver.FindElement(Pages.Login.Username).SendKeys(username);
+            Driver.EnterTextViaJs(Wait, Pages.Login.Username, username);
+            Wait.Until(d => d.FindElement(Pages.Login.Username).GetAttribute("value") != "");
         }
 
         public void Login()
         {
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.LoginButton));
             Driver.FindElement(Pages.Login.LoginButton).Click();
         }
 
