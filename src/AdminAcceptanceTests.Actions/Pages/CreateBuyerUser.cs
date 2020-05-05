@@ -16,7 +16,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool PageDisplayed()
         {
-            return Wait.Until(d => d.FindElement(Pages.CreateBuyerUser.Title).Displayed);
+            return Wait.Until(d => d.FindElements(Pages.CreateBuyerUser.Title).Count == 1);
         }
 
         public void CompleteForm(User user)
@@ -29,10 +29,12 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void EnterFirstName(string value)
         {
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.CreateBuyerUser.FirstName));
             Driver.FindElement(Pages.CreateBuyerUser.FirstName).SendKeys(value);
         }
         public void EnterLastName(string value)
         {
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.CreateBuyerUser.LastName));
             Driver.FindElement(Pages.CreateBuyerUser.LastName).SendKeys(value);
         }
         public void EnterPhoneNumber(string value)

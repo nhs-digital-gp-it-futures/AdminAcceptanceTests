@@ -17,7 +17,8 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void EnterUsername(string username)
         {
-            Wait.Until(d => d.FindElements(Pages.Login.Username).Count > 0);
+            Wait.Until(d => d.FindElements(Pages.Login.Username).Count == 1);
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.Username));
             Driver.FindElement(Pages.Login.Username).Click();
             Driver.FindElement(Pages.Login.Username).SendKeys(username);
         }
