@@ -57,6 +57,8 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void SelectNamedOrganisation(string organisationName)
         {
+            Wait.Until(d => d.FindElements(By.LinkText(organisationName)).Count == 1);
+            Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(organisationName)));
             Driver.FindElement(By.LinkText(organisationName)).Click();
         }
     }

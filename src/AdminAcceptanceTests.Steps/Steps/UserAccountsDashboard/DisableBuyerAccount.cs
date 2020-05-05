@@ -18,26 +18,30 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 
         [Given(@"a buyer account is currently enabled")]
         public void GivenABuyerAccountIsCurrentlyEnabled()
-        {
-            User buyerUser = new User { Email = "AliceSmith@email.com" }.Retrieve(Test.ConnectionString);
+        {;
+            var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            User buyerUser = new User().GenerateRandomUser(PrimaryOrganisationId: taretOrganisation.OrganisationId);
             buyerUser.Disabled = 0;
-            buyerUser.Update(Test.ConnectionString);
+            buyerUser.CatalogueAgreementSigned = 1;
+            buyerUser.Create(Test.ConnectionString);
 
-            var taretOrganisation = new Organisation().RetrieveById(Test.ConnectionString, buyerUser.PrimaryOrganisationId);
             Context.Add("Organisation", taretOrganisation);
             Context.Add("BuyingUser", buyerUser);
+            Context.Add("CreatedUser", buyerUser);
         }
 
         [Given(@"a buyer account is currently disabled")]
         public void GivenABuyerAccountIsCurrentlyDisabled()
         {
-            User buyerUser = new User { Email = "AliceSmith@email.com" }.Retrieve(Test.ConnectionString);
+            var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            User buyerUser = new User().GenerateRandomUser(PrimaryOrganisationId: taretOrganisation.OrganisationId);
             buyerUser.Disabled = 1;
-            buyerUser.Update(Test.ConnectionString);
+            buyerUser.CatalogueAgreementSigned = 1;
+            buyerUser.Create(Test.ConnectionString);
 
-            var taretOrganisation = new Organisation().RetrieveById(Test.ConnectionString, buyerUser.PrimaryOrganisationId);
             Context.Add("Organisation", taretOrganisation);
             Context.Add("BuyingUser", buyerUser);
+            Context.Add("CreatedUser", buyerUser);
         }
 
         [When(@"the authority user disables the buyer account")]
@@ -76,7 +80,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             Test.Pages.Homepage.ClickLoginButton();
             var user = (User)Context["BuyingUser"];
             Test.Pages.Authorization.EnterUsername(user.UserName);
-            Test.Pages.Authorization.EnterPassword(EnvironmentVariables.AdminUser().PasswordHash);
+            Test.Pages.Authorization.EnterPassword(User.GenericTestPassword());
             Test.Pages.Authorization.Login();
             Test.Pages.Authorization.WaitForErrorSummaryToBeDisplayed();
         }
@@ -89,7 +93,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             Test.Pages.Homepage.ClickLoginButton();
             var user = (User)Context["BuyingUser"];
             Test.Pages.Authorization.EnterUsername(user.UserName);
-            Test.Pages.Authorization.EnterPassword(EnvironmentVariables.AdminUser().PasswordHash);
+            Test.Pages.Authorization.EnterPassword(User.GenericTestPassword());
             Test.Pages.Authorization.Login();
             Test.Pages.Homepage.LoginLogoutLinkText("Log out");
         }
