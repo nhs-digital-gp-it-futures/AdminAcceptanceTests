@@ -33,7 +33,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             if (LoginLogoutLinkText("Log out"))
             {
-                Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
+                ClickLoginButton();
             }
             else
             {

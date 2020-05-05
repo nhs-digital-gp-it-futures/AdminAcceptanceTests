@@ -13,7 +13,7 @@ Scenario: Password Reset Local - Link not sent
 	Given that an unknown user wants to reset their password
 	When the User has followed the request a password reset journey and entered their e-mail address
 	Then the reset url is not sent to the e-mail address
-@ignore
+
 Scenario: Password Reset Local - Password Reset
 	Given the User is resetting their password and has followed the reset url
 	When the User has entered a password that meets the password policy
