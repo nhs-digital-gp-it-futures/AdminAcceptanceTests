@@ -23,7 +23,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool LoginLogoutLinkText(string expectedValue)
         {
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count > 0);
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
             Wait.Until(s => s.FindElement(Pages.Homepage.LoginLogoutLink).Text.Contains(expectedValue, StringComparison.OrdinalIgnoreCase));
             return true;
         }

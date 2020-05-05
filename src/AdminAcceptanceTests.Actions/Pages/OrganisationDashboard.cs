@@ -13,7 +13,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-            Wait.Until(s => s.FindElement(Pages.OrganisationDashboard.OrgDashboardTitle).Displayed);
+            Wait.Until(s => s.FindElements(Pages.OrganisationDashboard.OrgDashboardTitle).Count == 1);
         }
 
         public bool AddOrganisationsButtonIsDisplayed()
