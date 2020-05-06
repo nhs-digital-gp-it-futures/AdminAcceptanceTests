@@ -29,6 +29,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void Login()
         {
+            Driver.WaitForJsToComplete(Wait);
             Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.LoginButton));
             Driver.FindElement(Pages.Login.LoginButton).Click();
         }

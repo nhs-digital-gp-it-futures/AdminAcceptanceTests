@@ -22,7 +22,7 @@ Scenario: Agreement not signed
 	Then the User can not continue their Journey past the Agreement
 	And the User is informed why they cannot continue
 	And there is no record that the Agreement was signed
-
+@ignore
 Scenario: Accept Agreement - Returning User Already Agreed
 	Given that a User has accepted the agreement
 	When the User has logged in
