@@ -27,8 +27,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Driver.WaitForJsToComplete(Wait);
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
-            Wait.Until(s => s.FindElement(Pages.Homepage.LoginLogoutLink).Text.Contains(expectedValue, StringComparison.OrdinalIgnoreCase));
-            return true;
+            return Driver.FindElement(Pages.Homepage.LoginLogoutLink).Text.Contains(expectedValue, StringComparison.OrdinalIgnoreCase);
         }
 
         public void WaitUntilLoggedInFully()

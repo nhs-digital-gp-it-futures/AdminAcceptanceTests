@@ -59,7 +59,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         public void ThenTheUserWillBeLoggedIn()
         {
             Test.Pages.Authorization.WaitForLoginPageToNotBeDisplayed();
-            Test.Pages.Homepage.LoginLogoutLinkText("Log out");
+            Test.Pages.Homepage.WaitUntilLoggedInFully();
         }
 
         [Then(@"the User will not be logged in")]
