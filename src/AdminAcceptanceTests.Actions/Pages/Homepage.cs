@@ -12,7 +12,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         }
         public void PageDisplayed()
         {
-            Wait.Until(s => s.FindElements(Pages.Homepage.Title).Count == 1));
+            Wait.Until(s => s.FindElements(Pages.Homepage.Title).Count == 1);
         }
 
         public void ClickLoginButton()
