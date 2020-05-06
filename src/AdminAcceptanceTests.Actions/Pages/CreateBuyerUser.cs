@@ -37,7 +37,9 @@ namespace AdminAcceptanceTests.Actions.Pages
             Driver.FindElement(Pages.CreateBuyerUser.FirstName).Click();
             Driver.FindElement(Pages.CreateBuyerUser.FirstName).Clear();
             Driver.FindElement(Pages.CreateBuyerUser.FirstName).SendKeys(value);
-            Wait.Until(d => d.FindElement(Pages.CreateBuyerUser.FirstName).GetAttribute("value") != "");
+            if (value != "") {
+                Wait.Until(d => d.FindElement(Pages.CreateBuyerUser.FirstName).GetAttribute("value") == value);
+            }
         }
         public void EnterLastName(string value)
         {
