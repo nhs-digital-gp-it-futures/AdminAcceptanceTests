@@ -36,6 +36,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void WaitForLoginPageToNotBeDisplayed()
         {
+            Driver.WaitForJsToComplete(Wait);
             Wait.Until(ElementExtensions.InvisibilityOfElement(Pages.Login.LoginButton));
         }
 

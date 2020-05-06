@@ -12,6 +12,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         }
         public void PageDisplayed()
         {
+            Driver.WaitForJsToComplete(Wait);
             Wait.Until(s => s.FindElements(Pages.Homepage.Title).Count == 1);
         }
 

@@ -13,7 +13,8 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.AcceptAgreement.SubmitButton).Count > 0);
+            Driver.WaitForJsToComplete(Wait);
+            Wait.Until(d => d.FindElements(Pages.AcceptAgreement.SubmitButton).Count == 1);
         }
 
         public void PageNotDisplayed()
