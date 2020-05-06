@@ -8,7 +8,7 @@ Scenario: Disable Buyer Account
 	When the authority user disables the buyer account
 	Then the account listed on the user accounts dashboard shows as disabled
 	And the buyer user cannot login
-@ignore
+
 Scenario: Enable Buyer Account
 	Given a buyer account is currently disabled
 	When the authority user enables the buyer account

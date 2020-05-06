@@ -1,6 +1,7 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using FluentAssertions;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps.Authorization
@@ -99,6 +100,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
             WhenTheUserIndicatesTheyWillAcceptTheAgreement();
             WhenTheUserChoosesToContinuePastTheAgreement();
             ThenTheUserCanContinueTheirJourneyPastTheAgreement();
+            Thread.Sleep(500);
             var authSteps = new Authorization(Test, Context);
             authSteps.WhenTheUserLogsOut();
             authSteps.ThenTheUserIsLoggedOut();

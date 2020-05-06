@@ -81,5 +81,23 @@ namespace AdminAcceptanceTests.Actions.Utils
                 }
             };
         }
+
+        internal static Func<IWebDriver, IWebElement> ElementToBeVisible(By locator)
+        {
+            return driver =>
+            {
+                var element = driver.FindElement(locator).Displayed ? driver.FindElement(locator) : null;
+                try
+                {
+                    if (element != null && element.Size.Width > 0 && element.Size.Height > 0)
+                        return element;
+                    return null;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            };
+        }
     }
 }

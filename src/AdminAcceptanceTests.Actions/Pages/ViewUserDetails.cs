@@ -13,7 +13,8 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-           Wait.Until(d => d.FindElement(Pages.ViewUserDetails.PageTitle).Displayed);
+           Driver.WaitForJsToComplete(Wait);
+           Wait.Until(d => d.FindElements(Pages.ViewUserDetails.PageTitle).Count == 1);
         }
 
         public bool NameDisplayed()
@@ -43,7 +44,9 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void DisableAccount()
         {
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.ViewUserDetails.DisableUserButton));
             Driver.FindElement(Pages.ViewUserDetails.DisableUserButton).Click();
+            Wait.Until(d => d.FindElements(Pages.ViewUserDetails.DisabledReenableUserConfirmationPageTitle).Count == 1);
         }
     }
 }

@@ -15,6 +15,7 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By EmailAddress => CustomBy.DataTestId("user-email");
         public By EditUserButton => CustomBy.DataTestId("edit-user-button", "a");
         public By DisableUserButton => CustomBy.DataTestId("change-account-status-button", "button");
+        public By DisabledReenableUserConfirmationPageTitle => By.CssSelector("[data-test-id$=-user-confirmation-page-title]");
 
     }
 }

@@ -3,6 +3,7 @@ using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using FluentAssertions;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -117,6 +118,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         {
             var currentUser = (User)Context["CreatedUser"];
             Test.Pages.SetNewPassword.GoToLoginPage();
+            Thread.Sleep(500);
             Test.Pages.Authorization.EnterUsername(currentUser.UserName);
             Test.Pages.Authorization.EnterPassword(currentUser.PasswordHash);
             Test.Pages.Authorization.Login();

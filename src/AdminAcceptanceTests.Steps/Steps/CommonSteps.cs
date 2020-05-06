@@ -1,6 +1,7 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using FluentAssertions;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps
@@ -47,6 +48,7 @@ namespace AdminAcceptanceTests.Steps.Steps
         [When(@"a specific organisation is selected")]
         public void WhenASpecificOrganisationIsSelected()
         {
+            Thread.Sleep(500);
             var organisation = (Organisation)Context["Organisation"];
             Test.Pages.OrganisationDashboard.SelectNamedOrganisation(organisation.Name);
             Test.Pages.UserAccountsDashboard.OrganisationNameMatches(organisation.Name);
@@ -59,6 +61,7 @@ namespace AdminAcceptanceTests.Steps.Steps
             GivenTheAuthorityUserIsManagingOrganisationsAndUsers();
             new OrganisationDashboard.OrganisationsDashboard(Test, Context).ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
             WhenASpecificOrganisationIsSelected();
+            Thread.Sleep(500);
             Test.Pages.UserAccountsDashboard.ViewUserLinksDisplayed().Should().BeTrue();
             var targetUser = (User)Context["BuyingUser"];
             Test.Pages.UserAccountsDashboard.ClickUserLink(User.ConcatDisplayName(targetUser));

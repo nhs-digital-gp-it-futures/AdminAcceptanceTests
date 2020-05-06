@@ -1,7 +1,9 @@
 ﻿using AdminAcceptanceTests.Actions.Utils;
 using FluentAssertions;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
 using System;
+using System.Threading;
 
 namespace AdminAcceptanceTests.Actions.Pages
 {
@@ -32,7 +34,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void WaitUntilLoggedInFully()
         {
-            Driver.WaitForJsToComplete(Wait);
+            PageDisplayed();
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
             Wait.Until(s => s.FindElements(Pages.Homepage.LoggedInDisplayName).Count == 1);
             LoginLogoutLinkText("Log Out");
@@ -40,6 +42,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void WaitUntilLoggedOutFully()
         {
+            PageDisplayed();
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
             Wait.Until(s => s.FindElements(Pages.Homepage.LoggedInDisplayName).Count == 0);
             LoginLogoutLinkText("Log in");
@@ -59,12 +62,16 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool AdminTileIsDisplayed()
         {
-            return Driver.FindElements(Pages.Homepage.AdminTile).Count > 0;
+            return Driver.FindElements(Pages.Homepage.AdminTile).Count == 1;
         }
 
         public void ClickAdminTile()
         {
+            Thread.Sleep(500);
+            Driver.WaitForJsToComplete(Wait);
             Wait.Until(d => d.FindElements(Pages.Homepage.AdminTile).Count == 1);
+            Wait.Until(ElementExtensions.ElementToBeVisible(Pages.Homepage.AdminTile));
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Homepage.AdminTile));
             Driver.FindElement(Pages.Homepage.AdminTile).Click();
             Wait.Until(d => d.FindElements(Pages.Homepage.AdminTile).Count == 0);
         }

@@ -4,6 +4,7 @@ using FluentAssertions;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
@@ -49,10 +50,12 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void WhenTheAuthorityUserDisablesTheBuyerAccount()
         {
             new CommonSteps(Test, Context).WhenTheySelectToViewAUserSUserAccountsDashboard();
+            Thread.Sleep(500);
             Test.Pages.ViewUserDetails.PageDisplayed();
             Test.Pages.ViewUserDetails.DisableAccount();
             //go back to the user account dashboard
-            Test.Driver.Navigate().Back();
+            Test.Driver.Navigate().Back(); 
+            Test.Pages.ViewUserDetails.PageDisplayed();
             Test.Driver.Navigate().Back();
             Test.Pages.UserAccountsDashboard.OrganisationNameMatches(((Organisation)Context["Organisation"]).Name);
         }

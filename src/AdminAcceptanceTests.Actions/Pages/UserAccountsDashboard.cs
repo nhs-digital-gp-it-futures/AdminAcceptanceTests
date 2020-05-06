@@ -4,6 +4,7 @@ using FluentAssertions;
 using OpenQA.Selenium;
 using System;
 using System.Linq;
+using System.Threading;
 
 namespace AdminAcceptanceTests.Actions.Pages
 {
@@ -43,15 +44,18 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void ClickAddUserButton()
         {
             Driver.FindElement(Pages.UserAccountsDashboard.AddUser).Click();
+            Wait.Until(d => d.FindElements(Pages.UserAccountsDashboard.AddUser).Count == 0);
         }
 
         public bool ViewUserLinksDisplayed()
         {
+            Driver.WaitForJsToComplete(Wait);
             return ElementDisplayed(Pages.UserAccountsDashboard.ViewUserLinks);
         }
 
         public string ClickUserLink(int? index = null)
         {
+            Wait.Until(d => d.FindElements(Pages.UserAccountsDashboard.ViewUserLinks).Count > 0);
             var users = Driver.FindElements(Pages.UserAccountsDashboard.ViewUserLinks);
 
             IWebElement user;
@@ -65,14 +69,18 @@ namespace AdminAcceptanceTests.Actions.Pages
                 user = users[index.Value];
             }
 
-            string orgName = user.Text;
+            string userName = user.Text;
             user.Click();
-            return orgName;
+            return userName;
         }
 
         public void ClickUserLink(string name)
         {
+            Thread.Sleep(500);
+            Driver.WaitForJsToComplete(Wait);
+            Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(name)));
             Driver.FindElement(By.LinkText(name)).Click();
+            Wait.Until(ElementExtensions.InvisibilityOfElement(By.LinkText(name)));
         }
 
         public bool ExpectedUserHasDisabledFlag(string Username)
