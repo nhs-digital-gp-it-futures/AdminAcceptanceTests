@@ -8,7 +8,7 @@ Scenario: Create Buyer User Account details
 	And account details have been provided
 	When I create the buying user account
 	Then the account will be associated with an organisation
-@ignore
+
 Scenario: Create Buyer User Account - Display name
 	Given I am on a random organisation user account dashboard
 	And account details have been provided

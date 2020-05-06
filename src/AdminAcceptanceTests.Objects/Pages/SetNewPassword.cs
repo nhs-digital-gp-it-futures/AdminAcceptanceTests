@@ -14,6 +14,6 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By Submit => CustomBy.DataTestId("reset-password-button");
         public By Confirmation => By.XPath("//h1[contains(.,'Password set')]");
         public By Error => CustomBy.DataTestId("error-summary");
-        public By GoToLoginLink => CustomBy.DataTestId("go-back-link", "a");
+        public By GoToLoginLink => CustomBy.DataTestId("go-back-link");
     }
 }

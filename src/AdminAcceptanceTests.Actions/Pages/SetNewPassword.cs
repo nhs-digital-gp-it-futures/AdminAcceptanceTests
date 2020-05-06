@@ -38,6 +38,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool ConfirmationDisplayed()
         {
+            Driver.WaitForJsToComplete(Wait);
             return Driver.FindElements(Pages.SetNewPassword.Confirmation).Count > 0;
         }
 
@@ -48,7 +49,9 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void GoToLoginPage()
         {
+            Wait.Until(d => d.FindElements(Pages.SetNewPassword.GoToLoginLink).Count == 1);
             Driver.FindElement(Pages.SetNewPassword.GoToLoginLink).Click();
+            Wait.Until(d => d.FindElements(Pages.SetNewPassword.Confirmation).Count == 0);
         }
     }
 }

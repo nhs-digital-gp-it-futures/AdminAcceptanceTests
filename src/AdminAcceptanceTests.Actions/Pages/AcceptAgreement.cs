@@ -13,7 +13,8 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.AcceptAgreement.SubmitButton).Count > 0);
+            Driver.WaitForJsToComplete(Wait);
+            Wait.Until(d => d.FindElements(Pages.AcceptAgreement.SubmitButton).Count == 1);
         }
 
         public void PageNotDisplayed()
@@ -23,11 +24,13 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void ClickCheckbox()
         {
+            Wait.Until(d => d.FindElements(Pages.AcceptAgreement.Checkbox).Count == 1);
             Driver.FindElement(Pages.AcceptAgreement.Checkbox).Click();
         }
 
         public void Submit()
         {
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.AcceptAgreement.SubmitButton));
             Driver.FindElement(Pages.AcceptAgreement.SubmitButton).Click();
         }
 

@@ -36,6 +36,11 @@ namespace AdminAcceptanceTests.Actions.Utils
                 driver.FindElements(elementBy)[index], value);
         }
 
+        public static void WaitForJsToComplete(this IWebDriver driver, WebDriverWait wait)
+        {
+            wait.Until(driver => ((IJavaScriptExecutor)driver).ExecuteScript("return document.readyState").Equals("complete"));
+        }        
+
         internal static Func<IWebDriver, bool> InvisibilityOfElement(By locator)
         {
             return driver =>
@@ -67,6 +72,24 @@ namespace AdminAcceptanceTests.Actions.Utils
                 try
                 {
                     if (element != null && element.Enabled)
+                        return element;
+                    return null;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            };
+        }
+
+        internal static Func<IWebDriver, IWebElement> ElementToBeVisible(By locator)
+        {
+            return driver =>
+            {
+                var element = driver.FindElement(locator).Displayed ? driver.FindElement(locator) : null;
+                try
+                {
+                    if (element != null && element.Size.Width > 0 && element.Size.Height > 0)
                         return element;
                     return null;
                 }

@@ -13,7 +13,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-            Wait.Until(s => s.FindElement(Pages.OrganisationDashboard.OrgDashboardTitle).Displayed);
+            Wait.Until(s => s.FindElements(Pages.OrganisationDashboard.OrgDashboardTitle).Count == 1);
         }
 
         public bool AddOrganisationsButtonIsDisplayed()
@@ -50,12 +50,16 @@ namespace AdminAcceptanceTests.Actions.Pages
 
             string orgName = org.Text;
             Wait.Until(d => d.FindElement(By.LinkText(org.Text)).Displayed);
+            Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(org.Text)));
             org.Click();
             return orgName;
         }
 
         public void SelectNamedOrganisation(string organisationName)
         {
+            Driver.WaitForJsToComplete(Wait);
+            Wait.Until(d => d.FindElements(By.LinkText(organisationName)).Count == 1);
+            Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(organisationName)));
             Driver.FindElement(By.LinkText(organisationName)).Click();
         }
     }

@@ -58,7 +58,8 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the User will be logged in")]
         public void ThenTheUserWillBeLoggedIn()
         {
-            Test.Pages.Homepage.LoginLogoutLinkText("Log out");
+            Test.Pages.Authorization.WaitForLoginPageToNotBeDisplayed();
+            Test.Pages.Homepage.WaitUntilLoggedInFully();
         }
 
         [Then(@"the User will not be logged in")]
@@ -93,6 +94,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         {
             GivenThatAUserIsNotLoggedIn();
             WhenAUserProvidesRecognisedAuthenticationDetailsToLoginLocally();
+            Test.Pages.Authorization.WaitForLoginPageToNotBeDisplayed();
         }
 
         [When(@"the User logs out")]
@@ -104,7 +106,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the User is logged out")]
         public void ThenTheUserIsLoggedOut()
         {
-            Test.Pages.Homepage.LoginLogoutLinkText("Log in");
+            Test.Pages.Homepage.WaitUntilLoggedOutFully();
         }
 
     }
