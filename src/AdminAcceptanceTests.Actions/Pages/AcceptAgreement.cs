@@ -28,6 +28,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void Submit()
         {
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.AcceptAgreement.SubmitButton));
             Driver.FindElement(Pages.AcceptAgreement.SubmitButton).Click();
         }
 

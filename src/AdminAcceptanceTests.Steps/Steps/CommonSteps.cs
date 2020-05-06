@@ -71,6 +71,7 @@ namespace AdminAcceptanceTests.Steps.Steps
             Test.Pages.Authorization.EnterUsername(user.UserName);
             Test.Pages.Authorization.EnterPassword(User.GenericTestPassword());
             Test.Pages.Authorization.Login();
+            Test.Pages.Authorization.WaitForLoginPageToNotBeDisplayed();
         }
     }
 }

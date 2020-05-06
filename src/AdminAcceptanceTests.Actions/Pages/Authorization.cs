@@ -32,6 +32,11 @@ namespace AdminAcceptanceTests.Actions.Pages
             Driver.FindElement(Pages.Login.LoginButton).Click();
         }
 
+        public void WaitForLoginPageToNotBeDisplayed()
+        {
+            Wait.Until(ElementExtensions.InvisibilityOfElement(Pages.Login.LoginButton));
+        }
+
         public bool RequestAnAccountLinkIsDisplayed()
         {
             return Driver.FindElements(Pages.Login.RequestAnAccountLink).Count > 0;

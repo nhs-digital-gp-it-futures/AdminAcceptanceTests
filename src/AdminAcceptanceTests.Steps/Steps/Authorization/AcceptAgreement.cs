@@ -62,6 +62,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the User can continue their Journey past the Agreement")]
         public void ThenTheUserCanContinueTheirJourneyPastTheAgreement()
         {
+            Test.Pages.AcceptAgreement.PageNotDisplayed();
             Test.Pages.Homepage.PageDisplayed();
         }
 

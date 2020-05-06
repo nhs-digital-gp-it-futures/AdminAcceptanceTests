@@ -12,12 +12,13 @@ namespace AdminAcceptanceTests.Actions.Pages
         }
         public void PageDisplayed()
         {
-            Wait.Until(s => s.FindElement(Pages.Homepage.Title).Displayed);
+            Wait.Until(s => s.FindElements(Pages.Homepage.Title).Count == 1));
         }
 
         public void ClickLoginButton()
         {
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count > 0);
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Homepage.LoginLogoutLink));
             Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 0);
         }
