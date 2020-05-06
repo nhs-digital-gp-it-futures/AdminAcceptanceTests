@@ -21,7 +21,7 @@ namespace AdminAcceptanceTests.Steps.Steps
             Test.Pages.Authorization.EnterUsername(user.UserName);
             Test.Pages.Authorization.EnterPassword(user.PasswordHash);
             Test.Pages.Authorization.Login();
-            Test.Pages.Homepage.LoginLogoutLinkText("Log out");
+            Test.Pages.Homepage.WaitUntilLoggedInFully();
         }
 
         [Given(@"the Authority User is managing organisations and users")]
