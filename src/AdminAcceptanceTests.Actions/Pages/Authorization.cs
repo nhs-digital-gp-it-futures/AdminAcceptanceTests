@@ -62,7 +62,9 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void ClickForgotPassword()
         {
+            Driver.WaitForJsToComplete(Wait);
             Wait.Until(d => d.FindElements(Pages.Login.ForgotPassword).Count > 0);
+            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.ForgotPassword));
             Driver.FindElement(Pages.Login.ForgotPassword).Click();        
         }
     }
