@@ -15,7 +15,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void OrganisationNameMatches(string organisationName)
         {
-            Wait.Until(d => d.FindElement(Pages.UserAccountsDashboard.OrganisationName).Displayed);
+            Wait.Until(d => d.FindElements(Pages.UserAccountsDashboard.OrganisationName).Count == 1);
             var name = Driver.FindElement(Pages.UserAccountsDashboard.OrganisationName).Text;
 
             name.Should().BeEquivalentTo(organisationName);
@@ -78,7 +78,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         public bool ExpectedUserHasDisabledFlag(string Username)
         {
             return Driver.FindElements(Pages.UserAccountsDashboard.DisabledAccountFlag)
-                .Where(e => e.FindElement(By.XPath("../a")).Text.Equals(Username, StringComparison.OrdinalIgnoreCase)).Count() == 1;
+                .Where(e => e.FindElement(By.XPath("../../a")).Text.Equals(Username, StringComparison.OrdinalIgnoreCase)).Count() == 1;
         }
 
         private bool ElementDisplayed(By by)

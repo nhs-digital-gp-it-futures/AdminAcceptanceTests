@@ -54,6 +54,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             //go back to the user account dashboard
             Test.Driver.Navigate().Back();
             Test.Driver.Navigate().Back();
+            Test.Pages.UserAccountsDashboard.OrganisationNameMatches(((Organisation)Context["Organisation"]).Name);
         }
 
         [Then(@"the account listed on the user accounts dashboard shows as disabled")]
@@ -76,6 +77,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void ThenTheBuyerUserCannotLogin()
         {
             Test.Pages.Homepage.LogOut();
+            Test.Pages.Homepage.WaitUntilLoggedOutFully();
             Test.Pages.Homepage.LoginLogoutLinkText("Log In");
             Test.Pages.Homepage.ClickLoginButton();
             var user = (User)Context["BuyingUser"];
@@ -89,6 +91,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void ThenTheBuyerUserCanLogin()
         {
             Test.Pages.Homepage.LogOut();
+            Test.Pages.Homepage.WaitUntilLoggedOutFully();
             Test.Pages.Homepage.LoginLogoutLinkText("Log In");
             Test.Pages.Homepage.ClickLoginButton();
             var user = (User)Context["BuyingUser"];

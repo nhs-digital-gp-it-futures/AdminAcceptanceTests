@@ -17,10 +17,9 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void ClickLoginButton()
         {
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count > 0);
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
             Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Homepage.LoginLogoutLink));
             Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 0);
         }
 
         public bool LoginLogoutLinkText(string expectedValue)
@@ -28,6 +27,13 @@ namespace AdminAcceptanceTests.Actions.Pages
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
             Wait.Until(s => s.FindElement(Pages.Homepage.LoginLogoutLink).Text.Contains(expectedValue, StringComparison.OrdinalIgnoreCase));
             return true;
+        }
+
+        public void WaitUntilLoggedOutFully()
+        {
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoggedInDisplayName).Count == 0);
+            LoginLogoutLinkText("Log in");
         }
 
         public void LogOut()

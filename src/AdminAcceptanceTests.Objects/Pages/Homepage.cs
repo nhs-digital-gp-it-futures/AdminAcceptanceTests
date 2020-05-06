@@ -7,6 +7,7 @@ namespace AdminAcceptanceTests.Objects.Pages
     {
         public By Title => By.CssSelector(".nhsuk-hero__wrapper h1");
         public By LoginLogoutLink => CustomBy.DataTestId("login-logout-component", "a");
+        public By LoggedInDisplayName => CustomBy.DataTestId("login-logout-component", "span");
         public By AdminTile => CustomBy.DataTestId("admin-promo", "a");
     }
 }
