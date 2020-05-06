@@ -23,6 +23,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void ClickCheckbox()
         {
+            Wait.Until(d => d.FindElements(Pages.AcceptAgreement.Checkbox).Count == 1);
             Driver.FindElement(Pages.AcceptAgreement.Checkbox).Click();
         }
 

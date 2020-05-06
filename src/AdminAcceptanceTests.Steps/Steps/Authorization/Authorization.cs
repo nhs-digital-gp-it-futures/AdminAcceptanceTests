@@ -58,6 +58,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the User will be logged in")]
         public void ThenTheUserWillBeLoggedIn()
         {
+            Test.Pages.Authorization.WaitForLoginPageToNotBeDisplayed();
             Test.Pages.Homepage.LoginLogoutLinkText("Log out");
         }
 
