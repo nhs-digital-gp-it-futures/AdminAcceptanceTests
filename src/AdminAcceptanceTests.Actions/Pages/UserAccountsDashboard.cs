@@ -44,7 +44,6 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void ClickAddUserButton()
         {
             Driver.FindElement(Pages.UserAccountsDashboard.AddUser).Click();
-            Wait.Until(d => d.FindElements(Pages.UserAccountsDashboard.AddUser).Count == 0);
         }
 
         public bool ViewUserLinksDisplayed()
