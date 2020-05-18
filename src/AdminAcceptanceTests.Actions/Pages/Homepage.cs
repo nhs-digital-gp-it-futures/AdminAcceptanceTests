@@ -35,17 +35,15 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void WaitUntilLoggedInFully()
         {
             PageDisplayed();
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoggedInDisplayName).Count == 1);
-            LoginLogoutLinkText("Log Out");
+            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);            
+            Wait.Until(s => LoginLogoutLinkText("Log Out"));
         }
 
         public void WaitUntilLoggedOutFully()
         {
             PageDisplayed();
             Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoggedInDisplayName).Count == 0);
-            LoginLogoutLinkText("Log in");
+            Wait.Until(s => LoginLogoutLinkText("Log in"));
         }
 
         public void LogOut()
