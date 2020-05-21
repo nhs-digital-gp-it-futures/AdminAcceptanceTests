@@ -91,7 +91,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
             var Organisation = (Organisation)Context["Organisation"];
             var OrgInDb = Organisation.RetrieveByODSCode(Test.ConnectionString, Organisation.OdsCode);
             OrgInDb.PrimaryRoleId.Should().NotBeNull();
-            OrgInDb.PrimaryRoleId.Should().BeOneOf("RO98", "RO177", "RO213");
+            OrgInDb.PrimaryRoleId.Should().BeOneOf("RO98", "RO177", "RO213", "RO272");
         }
         
         [Then(@"a validation error message will be returned")]
