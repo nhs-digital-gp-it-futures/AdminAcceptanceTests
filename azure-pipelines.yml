@@ -94,7 +94,7 @@ jobs:
         script: |
           docker-compose stop &&
           docker-compose rm -f &&
-          docker-compose up -f docker-compose.yml -f domain.yml --scale chrome=4 --scale firefox=4  -d
+          docker-compose -f docker-compose.yml -f domain.yml up --scale chrome=4 --scale firefox=4  -d
     - task: DotNetCoreCLI@2
       displayName: "Run Admin Acceptance Tests"
       inputs:
