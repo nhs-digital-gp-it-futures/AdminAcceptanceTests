@@ -22,7 +22,6 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         {
             var CurrentOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
             User user = new User().GenerateRandomUser(PrimaryOrganisationId: CurrentOrganisation.OrganisationId);
-            user.CatalogueAgreementSigned = 1;
             user.Create(Test.ConnectionString);
             Context.Add("CreatedUser", user);
         }

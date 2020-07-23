@@ -12,7 +12,7 @@ namespace AdminAcceptanceTests.TestData
         public string Address { get; set; }
         public string OdsCode { get; set; }
         public string PrimaryRoleId { get; set; }
-        public int CatalogueAgreementSigned { get; set; }
+        public int CatalogueAgreementSigned { get; set; } = 0;
         public DateTime LastUpdated { get; set; }
 
         public void Create(string connectionString)

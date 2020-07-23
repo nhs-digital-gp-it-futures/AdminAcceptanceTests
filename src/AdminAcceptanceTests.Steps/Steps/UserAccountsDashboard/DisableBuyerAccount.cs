@@ -1,9 +1,6 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading;
 using TechTalk.SpecFlow;
 
@@ -23,7 +20,6 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
             User buyerUser = new User().GenerateRandomUser(PrimaryOrganisationId: taretOrganisation.OrganisationId);
             buyerUser.Disabled = 0;
-            buyerUser.CatalogueAgreementSigned = 1;
             buyerUser.Create(Test.ConnectionString);
 
             Context.Add("Organisation", taretOrganisation);
@@ -37,7 +33,6 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
             User buyerUser = new User().GenerateRandomUser(PrimaryOrganisationId: taretOrganisation.OrganisationId);
             buyerUser.Disabled = 1;
-            buyerUser.CatalogueAgreementSigned = 1;
             buyerUser.Create(Test.ConnectionString);
 
             Context.Add("Organisation", taretOrganisation);

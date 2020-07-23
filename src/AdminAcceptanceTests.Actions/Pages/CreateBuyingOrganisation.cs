@@ -43,11 +43,6 @@ namespace AdminAcceptanceTests.Actions.Pages
             Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.CreateOrganisationPageTitle).Count > 0);
         }
 
-        public void ClickOrganisationAgreementSignedCheckbox()
-        {
-            Driver.FindElement(Pages.CreateBuyingOrganisation.AgreementSignedCheckbox).Click();
-        }
-
         public void CreateOrganisation()
         {
             Driver.FindElement(Pages.CreateBuyingOrganisation.CreateOrganisationButton).Click();

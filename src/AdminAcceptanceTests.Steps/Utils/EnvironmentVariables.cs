@@ -38,9 +38,9 @@ namespace AdminAcceptanceTests.Steps.Utils
 
         internal static (string serverUrl, string databaseName, string dbUser, string dbPassword) DbConnectionDetails()
         {
-            var serverUrl = Environment.GetEnvironmentVariable("SERVERURL") ?? "127.0.0.1,1451";
+            var serverUrl = Environment.GetEnvironmentVariable("SERVERURL") ?? "127.0.0.1,1450";
             var databaseName = Environment.GetEnvironmentVariable("DATABASENAME") ?? "CatalogueUsers";
-            var dbUser = JsonConfigValues("user", "NHSD");
+            var dbUser = JsonConfigValues("user", "NHSD-ISAPI");
             var dbPassword = JsonConfigValues("password", "DisruptTheMarket1!");
 
             return (serverUrl, databaseName, dbUser, dbPassword);
