@@ -1,8 +1,5 @@
 ﻿using AdminAcceptanceTests.Objects.Utils;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AdminAcceptanceTests.Objects.Pages
 {
@@ -14,7 +11,6 @@ namespace AdminAcceptanceTests.Objects.Pages
         public By SelectOrganisationPageTitle => CustomBy.DataTestId("select-org-page-title");
         public By SelectOrganisationButton => CustomBy.DataTestId("select-org-button", "button");
         public By CreateOrganisationPageTitle => CustomBy.DataTestId("create-org-page-title");
-        public By AgreementSignedCheckbox => By.Id("catalogue-agreement-checkbox");
         public By CreateOrganisationButton => CustomBy.DataTestId("save-button", "button");
         public By ConfirmationPage => CustomBy.DataTestId("create-org-confirmation-page");
         public By OrganisationAlreadyExistsPage => CustomBy.DataTestId("create-org-error-page");

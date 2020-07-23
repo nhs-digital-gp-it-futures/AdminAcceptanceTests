@@ -1,8 +1,5 @@
 ﻿using AdminAcceptanceTests.Actions.Utils;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AdminAcceptanceTests.Actions.Pages
 {
@@ -17,11 +14,6 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Wait.Until(d => d.FindElements(Pages.EditOrganisation.PageTitle).Count > 0);
             Wait.Until(d => d.FindElement(Pages.EditOrganisation.PageTitle).Displayed);
-        }
-
-        public void ClickCatalogueAgreementCheckbox()
-        {
-            Driver.FindElement(Pages.EditOrganisation.CatalogueAgreement).Click();
         }
 
         public void Save()
