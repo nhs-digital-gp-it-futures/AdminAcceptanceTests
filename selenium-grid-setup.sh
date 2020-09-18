@@ -1,6 +1,7 @@
 #/bin/bash
 
 export PBHOSTURL
+echo "PBHOSTURL - $PBHOSTURL"
 docker-compose stop &&
 docker-compose rm -f &&
 docker-compose -f "docker-compose.yml" -f "docker-compose-pipeline.yml" up --scale chrome=4 -d
