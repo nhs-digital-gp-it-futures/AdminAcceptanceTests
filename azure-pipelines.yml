@@ -19,7 +19,7 @@ variables:
   - name: DB__SERVERURL
     value: gpitfutures-dev-sql-pri.database.windows.net
   - name: DB__DATABASENAME
-    value: bc-buyingcatalogue-development-helm-bapi
+    value: bc-buyingcatalogue-development-helm-isapi
   - group: dev-secrets
 
 steps:
@@ -51,8 +51,7 @@ steps:
   displayName: Selenium Grid Setup
 
 - bash: |
-    export DB__PASSWORD="$(gpitfuturesdevdbpassword)" 
-    export AZUREBLOBSTORAGE__CONNECTIONSTRING="$(gpitdevstorageaccountconnectionstring)"
+    export DB__PASSWORD="$(gpitfuturesdevdbpassword)"
 
     dotnet test src/ -v n
   displayName: Run Acceptance Tests
