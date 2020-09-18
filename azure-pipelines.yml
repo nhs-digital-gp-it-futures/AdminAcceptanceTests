@@ -54,7 +54,7 @@ steps:
     export DB__PASSWORD="$(gpitfuturesdevdbpassword)" 
     export AZUREBLOBSTORAGE__CONNECTIONSTRING="$(gpitdevstorageaccountconnectionstring)"
 
-    dotnet test src/NHSDPublicBrowseAcceptanceTests.Tests/*.csproj -v n
+    dotnet test src/ -v n
   displayName: Run Acceptance Tests
   
 - task: Docker@2
