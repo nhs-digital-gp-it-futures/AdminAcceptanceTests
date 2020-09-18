@@ -1,8 +1,7 @@
 ﻿using AdminAcceptanceTests.Actions;
 using AdminAcceptanceTests.Actions.Collections;
+using AdminAcceptanceTests.TestData;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
 
 namespace AdminAcceptanceTests.Steps.Utils
 {
@@ -12,16 +11,18 @@ namespace AdminAcceptanceTests.Steps.Utils
         internal IWebDriver Driver;
         internal PageActionCollection Pages;
         internal readonly string Url;
+        private readonly Settings _settings;
+        internal readonly User AdminUser;
 
-        public UITest()
+        public UITest(Settings settings, BrowserFactory browserFactory)
         {
-            ConnectionString = EnvironmentVariables.DbConnectionString();
+            _settings = settings;
 
-            Driver = new BrowserFactory().Driver;
+            ConnectionString = _settings.DatabaseSettings.ConnectionString;
+            Driver = browserFactory.Driver;
             Pages = new PageActions(Driver).PageActionCollection;
-            Url = EnvironmentVariables.Url();
-
-            GoToUrl();
+            AdminUser = _settings.AdminUser;
+            Url = _settings.PBUrl;
         }
 
         public void GoToUrl()

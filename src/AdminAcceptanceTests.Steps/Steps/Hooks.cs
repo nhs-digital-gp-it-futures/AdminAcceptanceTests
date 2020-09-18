@@ -1,7 +1,6 @@
 ﻿using AdminAcceptanceTests.Actions.Utils;
 using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using TechTalk.SpecFlow;
 
@@ -12,6 +11,12 @@ namespace AdminAcceptanceTests.Steps.Steps
     {
         public Hooks(UITest test, ScenarioContext context) : base(test, context)
         {
+        }
+
+        [BeforeScenario(Order = 1)]
+        public void BeforeScenario()
+        {
+            Test.GoToUrl();
         }
 
         [AfterScenario]
