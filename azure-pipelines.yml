@@ -36,9 +36,7 @@ steps:
     includePreviewVersions: false
 
 - bash: |
-    echo "##vso[task.setvariable variable=PBHOSTURL]$(echo "${PBURL#'https://'}")"
-    echo "PBHOSTURL - ${PBHOSTURL}"
-    echo "PBHOSTURL Method - ${PBURL#'https://'}"
+    echo "##vso[task.setvariable variable=PBHOSTURL]$(echo "${PBURL#"https://"}")"    
   displayName: Set up PB Host URL
 
 - bash: |
