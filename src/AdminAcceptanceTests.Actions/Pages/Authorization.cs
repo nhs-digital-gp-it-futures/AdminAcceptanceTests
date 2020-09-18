@@ -12,7 +12,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void EnterPassword(string password)
         {
             Driver.FindElement(Pages.Login.Password).Click();
-            Driver.EnterTextViaJs(Wait, Pages.Login.Password, password);
+            Driver.FindElement(Pages.Login.Password).SendKeys(password);
             Wait.Until(d => d.FindElement(Pages.Login.Password).GetAttribute("value") != "");
         }
 
@@ -23,7 +23,7 @@ namespace AdminAcceptanceTests.Actions.Pages
             Wait.Until(d => d.FindElement(Pages.Login.Username).GetAttribute("value") == "");
             Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.Username));
             Driver.FindElement(Pages.Login.Username).Click();
-            Driver.EnterTextViaJs(Wait, Pages.Login.Username, username);
+            Driver.FindElement(Pages.Login.Username).SendKeys(username);
             Wait.Until(d => d.FindElement(Pages.Login.Username).GetAttribute("value") != "");
         }
 
