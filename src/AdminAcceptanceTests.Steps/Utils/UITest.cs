@@ -10,8 +10,8 @@ namespace AdminAcceptanceTests.Steps.Utils
         internal string ConnectionString { get; set; }
         internal IWebDriver Driver { get; set; }
         internal PageActionCollection Pages { get; set; }
-        internal readonly string Url { get; set; }        
-        internal readonly User AdminUser { get; set; }
+        internal string Url { get; }
+        internal User AdminUser { get; }
 
         private readonly Settings _settings;
 
