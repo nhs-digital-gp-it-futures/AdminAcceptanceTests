@@ -1,6 +1,7 @@
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine3.11
-ENV MSBUILDSINGLELOADCONTEXT=1 BROWSER=chrome
+ENV MSBUILDSINGLELOADCONTEXT=1
 WORKDIR /app
-COPY ./src ./
+COPY ./src ./entrypoint.sh ./
+RUN apk add --no-cache bash && apk add curl
 RUN dotnet publish -c Release -o out
-ENTRYPOINT ["dotnet", "test", "out/AdminAcceptanceTests.Tests.dll"]
+ENTRYPOINT ["/bin/bash", "entrypoint.sh"]
