@@ -14,7 +14,6 @@ namespace AdminAcceptanceTests.Steps.Utils
         public DatabaseSettings DatabaseSettings { get; set; }
         public User AdminUser { get; set; }
 
-
         public Settings(IConfiguration config)
         {
             HubUrl = config.GetValue<string>("hubUrl");

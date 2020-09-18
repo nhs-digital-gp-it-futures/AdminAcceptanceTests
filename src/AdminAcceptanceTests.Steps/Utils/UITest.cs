@@ -7,12 +7,13 @@ namespace AdminAcceptanceTests.Steps.Utils
 {
     public sealed class UITest
     {
-        internal string ConnectionString;
-        internal IWebDriver Driver;
-        internal PageActionCollection Pages;
-        internal readonly string Url;
+        internal string ConnectionString { get; set; }
+        internal IWebDriver Driver { get; set; }
+        internal PageActionCollection Pages { get; set; }
+        internal readonly string Url { get; set; }        
+        internal readonly User AdminUser { get; set; }
+
         private readonly Settings _settings;
-        internal readonly User AdminUser;
 
         public UITest(Settings settings, BrowserFactory browserFactory)
         {
