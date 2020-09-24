@@ -19,9 +19,3 @@ Scenario: User Accounts Dashboard - Edit organisation Account Detail
 Scenario: User Accounts Dashboard - Add new User
 	When an organisation is selected
 	Then there is a button to start off the Create User Account journey
-
-@ignore 
-#Need to be able to add users to be able to test this
-Scenario: User Accounts Dashboard - Manage User Account
-	When an organisation is selected
-	Then there is a link to edit the User's Account details
