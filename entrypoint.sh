@@ -20,7 +20,7 @@ if [ "$n" -eq "$timeout" ]; then echo "$PBURL is not ready after $n seconds" && 
 
 if [ -n "${TEST_RESULT_DIR}" ]; then
   echo "Directing test results to '$TEST_RESULT_DIR'"
-  additionalDotnetArgs+="--logger \"trx;LogFileName=pb-$runId-$timestamp.trx\" --results-directory $TEST_RESULT_DIR "
+  additionalDotnetArgs+="--logger \"trx;LogFileName=admin-$runId-$timestamp.trx\" --results-directory $TEST_RESULT_DIR "
 fi
 
 if [ -n "${TEST_FILTER}" ]; then
