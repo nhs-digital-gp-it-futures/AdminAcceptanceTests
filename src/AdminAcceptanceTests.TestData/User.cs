@@ -211,6 +211,7 @@ namespace AdminAcceptanceTests.TestData
         public void Delete(string connectionString)
         {
             var query = @"DELETE FROM AspNetUsers WHERE UserName=@userName";
+
             SqlExecutor.Execute<User>(connectionString, query, this);
         }
 

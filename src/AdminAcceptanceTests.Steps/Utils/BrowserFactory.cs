@@ -10,6 +10,7 @@ namespace AdminAcceptanceTests.Steps.Utils
 {
     public sealed class BrowserFactory
     {
+
         private readonly Settings _settings;
 
         public BrowserFactory(Settings settings)
@@ -51,6 +52,7 @@ namespace AdminAcceptanceTests.Steps.Utils
         }
 
         private static IWebDriver GetLocalChromeDriver()
+
         {
             var options = DefaultChromeOptions(false);
 
@@ -65,11 +67,13 @@ namespace AdminAcceptanceTests.Steps.Utils
         }
 
         private static IWebDriver GetFirefoxDriver(string hubUrl)
+
         {
             var options = new FirefoxOptions();
             options.AddArguments("headless", "window-size=1920,1080", "no-sandbox", "acceptInsecureCerts");
 
             return new RemoteWebDriver(new Uri(hubUrl), options);
+
         }
 
         private static ChromeOptions DefaultChromeOptions(bool headless)
@@ -84,4 +88,3 @@ namespace AdminAcceptanceTests.Steps.Utils
             return options;
         }
     }
-}

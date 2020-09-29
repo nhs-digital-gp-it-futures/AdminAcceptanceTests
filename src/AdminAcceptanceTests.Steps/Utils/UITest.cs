@@ -7,6 +7,7 @@ namespace AdminAcceptanceTests.Steps.Utils
 {
     public sealed class UITest
     {
+
         internal string ConnectionString { get; set; }
         internal IWebDriver Driver { get; set; }
         internal PageActionCollection Pages { get; set; }
