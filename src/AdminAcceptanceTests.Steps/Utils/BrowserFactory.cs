@@ -10,60 +10,70 @@ namespace AdminAcceptanceTests.Steps.Utils
 {
     public sealed class BrowserFactory
     {
-        public BrowserFactory()
+
+        private readonly Settings _settings;
+
+        public BrowserFactory(Settings settings)
         {
-            var browser = EnvironmentVariables.Browser();
-            var hubUrl = EnvironmentVariables.HubUrl();
-            Driver = Browser(browser, hubUrl);
+            _settings = settings;
+            Driver = GetBrowser();
         }
 
         public IWebDriver Driver { get; }
 
-        private IWebDriver Browser(string browser, string hubUrl)
+        private IWebDriver GetBrowser()
         {
-            Enum.TryParse(browser, out BrowserTypes browserType);
+            IWebDriver driver;
+            var browser = _settings.Browser;
+            var huburl = _settings.HubUrl;
 
             if (Debugger.IsAttached)
-                browserType = BrowserTypes.ChromeLocal;
+                driver = GetLocalChromeDriver();
+            else
+                switch (browser.ToLower())
+                {
+                    case "chrome":
+                    case "googlechrome":
+                        driver = GetChromeDriver(huburl);
+                        break;
+                    case "firefox":
+                    case "ff":
+                    case "mozilla":
+                        driver = GetFirefoxDriver(huburl);
+                        break;
+                    case "chrome-local":
+                        driver = GetLocalChromeDriver();
+                        break;
+                    default:
+                        throw new WebDriverException($"Browser {browser} not supported");
+                }
 
-            return browserType switch
-            {
-                BrowserTypes.Chrome => ChromeDriver(hubUrl),
-                BrowserTypes.Firefox => FirefoxDriver(hubUrl),
-                BrowserTypes.ChromeLocal => LocalChromeDriver(),
-                _ => LocalChromeDriver()
-            };
+            return driver;
         }
 
-        private static IWebDriver LocalChromeDriver()
+        private static IWebDriver GetLocalChromeDriver()
+
         {
             var options = DefaultChromeOptions(false);
 
             return new ChromeDriver(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), options);
         }
 
-        private static IWebDriver ChromeDriver(string hubUrl)
+        private static IWebDriver GetChromeDriver(string hubUrl)
         {
             var options = DefaultChromeOptions(true);
 
-            return RemoteDriver(new Uri(hubUrl), options);
+            return new RemoteWebDriver(new Uri(hubUrl), options);
         }
 
-        private static IWebDriver FirefoxDriver(string hubUrl)
+        private static IWebDriver GetFirefoxDriver(string hubUrl)
+
         {
             var options = new FirefoxOptions();
             options.AddArguments("headless", "window-size=1920,1080", "no-sandbox", "acceptInsecureCerts");
 
-            return RemoteDriver(new Uri(hubUrl), options);
-        }
+            return new RemoteWebDriver(new Uri(hubUrl), options);
 
-        private static IWebDriver RemoteDriver(Uri uri, DriverOptions options)
-        {
-            IWebDriver driver = null;
-
-            Policies.GetPolicy().Execute(() => { driver = new RemoteWebDriver(uri, options); });
-
-            return driver;
         }
 
         private static ChromeOptions DefaultChromeOptions(bool headless)
@@ -77,12 +87,5 @@ namespace AdminAcceptanceTests.Steps.Utils
 
             return options;
         }
-    }
-
-    internal enum BrowserTypes
-    {
-        Chrome,
-        Firefox,
-        ChromeLocal
     }
 }

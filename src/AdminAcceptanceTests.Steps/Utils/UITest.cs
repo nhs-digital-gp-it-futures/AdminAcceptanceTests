@@ -1,27 +1,30 @@
 ﻿using AdminAcceptanceTests.Actions;
 using AdminAcceptanceTests.Actions.Collections;
+using AdminAcceptanceTests.TestData;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
 
 namespace AdminAcceptanceTests.Steps.Utils
 {
     public sealed class UITest
     {
-        internal string ConnectionString;
-        internal IWebDriver Driver;
-        internal PageActionCollection Pages;
-        internal readonly string Url;
 
-        public UITest()
+        internal string ConnectionString { get; set; }
+        internal IWebDriver Driver { get; set; }
+        internal PageActionCollection Pages { get; set; }
+        internal string Url { get; }
+        internal User AdminUser { get; }
+
+        private readonly Settings _settings;
+
+        public UITest(Settings settings, BrowserFactory browserFactory)
         {
-            ConnectionString = EnvironmentVariables.DbConnectionString();
+            _settings = settings;
 
-            Driver = new BrowserFactory().Driver;
+            ConnectionString = _settings.DatabaseSettings.ConnectionString;
+            Driver = browserFactory.Driver;
             Pages = new PageActions(Driver).PageActionCollection;
-            Url = EnvironmentVariables.Url();
-
-            GoToUrl();
+            AdminUser = _settings.AdminUser;
+            Url = _settings.PBUrl;
         }
 
         public void GoToUrl()

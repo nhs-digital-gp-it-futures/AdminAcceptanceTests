@@ -49,9 +49,10 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             Test.Pages.ViewUserDetails.PageDisplayed();
             Test.Pages.ViewUserDetails.DisableAccount();
             //go back to the user account dashboard
-            Test.Driver.Navigate().Back(); 
+            Test.Driver.Navigate().Back();            
             Test.Pages.ViewUserDetails.PageDisplayed();
-            Test.Driver.Navigate().Back();
+            Test.Driver.Navigate().Back();            
+            Test.Driver.Navigate().Refresh();
             Test.Pages.UserAccountsDashboard.OrganisationNameMatches(((Organisation)Context["Organisation"]).Name);
         }
 
