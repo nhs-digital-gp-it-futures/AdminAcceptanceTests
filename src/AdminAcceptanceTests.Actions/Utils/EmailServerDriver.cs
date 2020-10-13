@@ -50,7 +50,7 @@ namespace AdminAcceptanceTests.Actions.Utils
                 return emailList;
             }
 
-            throw new Exception();
+            throw new InvalidOperationException();
         }
 
         public static async Task ClearAllEmailsAsync(string hostUrl)
