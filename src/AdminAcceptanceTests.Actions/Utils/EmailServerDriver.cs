@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace AdminAcceptanceTests.Actions.Utils
 {
-    public sealed class EmailServerDriver
+    public static class EmailServerDriver
     {
         public static async Task<int> GetEmailCountAsync(string hostUrl, string emailToCheck = null)
         {
@@ -28,26 +28,31 @@ namespace AdminAcceptanceTests.Actions.Utils
             {
                 var content = await response.Content.ReadAsStringAsync();
 
-                // Filters out the emails that are not relevant for the admin tests
-                var responseContent = JToken.Parse(content)
-                    .Where(s => s.SelectToken("subject").ToString().Contains("password", StringComparison.OrdinalIgnoreCase));
-
-                var emailList = responseContent
-                    .Select(x => new Email
-                    {
-                        Id = x.SelectToken("id").ToString().Trim(),
-                        PlainTextBody = x.SelectToken("text").ToString().Trim(),
-                        HtmlBody = x.SelectToken("html").ToString().Trim(),
-                        Subject = x.SelectToken("subject").ToString(),
-                        From = x.SelectToken("from").First().SelectToken("address").ToString(),
-                        To = x.SelectToken("to").First().SelectToken("address").ToString(),
-                    });
-
-                if (emailToCheck != null)
+                if (content != null)
                 {
-                    emailList = emailList.Where(e => e.To.Equals(emailToCheck, StringComparison.OrdinalIgnoreCase));
+                    // Filters out the emails that are not relevant for the admin tests
+                    var responseContent = JToken.Parse(content)
+                        .Where(s => s.SelectToken("subject").ToString().Contains("password", StringComparison.OrdinalIgnoreCase));
+
+                    var emailList = responseContent
+                        .Select(x => new Email
+                        {
+                            Id = x.SelectToken("id").ToString().Trim(),
+                            PlainTextBody = x.SelectToken("text").ToString().Trim(),
+                            HtmlBody = x.SelectToken("html").ToString().Trim(),
+                            Subject = x.SelectToken("subject").ToString(),
+                            From = x.SelectToken("from").First().SelectToken("address").ToString(),
+                            To = x.SelectToken("to").First().SelectToken("address").ToString(),
+                        });
+
+                    if (emailToCheck != null)
+                    {
+                        emailList = emailList.Where(e => e.To.Equals(emailToCheck, StringComparison.OrdinalIgnoreCase));
+                    }
+                    return emailList;
                 }
-                return emailList;
+
+                throw new NullReferenceException(nameof(content));
             }
 
             throw new InvalidOperationException();
