@@ -51,8 +51,6 @@ namespace AdminAcceptanceTests.Actions.Utils
                     }
                     return emailList;
                 }
-
-                throw new NullReferenceException(nameof(content));
             }
 
             throw new InvalidOperationException();
