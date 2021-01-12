@@ -78,7 +78,7 @@ namespace AdminAcceptanceTests.Steps.Utils
 
         private static ChromeOptions DefaultChromeOptions(bool headless)
         {
-            var options = new ChromeOptions();
+            ChromeOptions options = new();
             options.AddArguments("no-sandbox", "disable-dev-shm-usage", "ignore-certificate-errors");
             if (headless)
                 options.AddArguments("headless", "window-size=1920,1080");

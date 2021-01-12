@@ -23,7 +23,7 @@ namespace AdminAcceptanceTests.Steps.Utils
             AdminUser = GetAdminUser(config);
         }
 
-        private DatabaseSettings SetUpDatabaseSettings(IConfiguration config)
+        private static DatabaseSettings SetUpDatabaseSettings(IConfiguration config)
         {
             var databaseSettings = config.GetSection("db").Get<DatabaseSettings>();
             databaseSettings.ConnectionString = ConstructDatabaseConnectionString(
@@ -34,7 +34,7 @@ namespace AdminAcceptanceTests.Steps.Utils
             return databaseSettings;
         }
 
-        private User GetAdminUser(IConfiguration config)
+        private static User GetAdminUser(IConfiguration config)
         {
             return config.GetSection("adminUser").Get<User>();
         }

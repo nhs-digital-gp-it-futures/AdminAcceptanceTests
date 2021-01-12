@@ -11,13 +11,13 @@ variables:
   - name: buildConfiguration
     value: 'Release'
   - name: dotnetVersion
-    value: '3.1.x'
+    value: '5.0.x'
   - name: MSBUILDSINGLELOADCONTEXT
     value: '1'
   - name: BROWSER
     value: chrome
   - name: DB__SERVERURL
-    value: gpitfutures-dev-sql-pri.database.windows.net
+    value: $(SERVERURL)
   - name: DB__DATABASENAME
     value: bc-buyingcatalogue-development-helm-isapi
   - group: dev-secrets
@@ -30,19 +30,27 @@ steps:
     versionSpec: '5.x'
 
 - task: UseDotNet@2
-  displayName: 'Use DotNet Core $(dotnetVersion)'
+  displayName: 'Use DotNet s$(dotnetVersion)'
   inputs:
     version: $(dotnetVersion)
     includePreviewVersions: false
 
 - bash: |
-    echo "##vso[task.setvariable variable=PBHOSTURL]$(echo "${PBURL##*://}")"    
-  displayName: Set up PB Host URL
+    echo "##vso[task.setvariable variable=PBHOSTURL]$(echo "${PBURL##*://}")"  
+  displayName: Set up Host URL
 
-- bash: |
-    echo "51.11.46.27    $PBHOSTURL" | sudo tee -a /etc/hosts
-    curl -k -i $(PBURL) --fail --connect-timeout 30
-  displayName: 'Check URL is reachable'
+- task: AzureCLI@2
+  name: checkURL
+  displayName: Check URL is reachable
+  inputs:
+    azureSubscription: 'NHSAPP-BuyingCatalogue (Non-Prod)'
+    scriptType: 'bash'
+    scriptLocation: 'inlineScript'
+    inlineScript: |
+        appgwPip=$(az network public-ip show --name gpitfutures-development-pip --resource-group gpitfutures-development-rg-appgw --query ipAddress -o tsv)
+        echo "DEBUG: $appgwPip    $PBHOSTURL"
+        echo "$appgwPip    $PBHOSTURL" | sudo tee -a /etc/hosts
+        curl -k -i $(PBURL) --fail --connect-timeout 30
 
 - bash: |
     chmod +x ./selenium-grid-setup.sh
