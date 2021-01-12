@@ -19,7 +19,7 @@ variables:
   - name: DB__SERVERURL
     value: $(SERVERURL)
   - name: DB__DATABASENAME
-    value: bc-buyingcatalogue-development-helm-isapi
+    value: bc-development-isapi
   - group: dev-secrets
 
 steps:
