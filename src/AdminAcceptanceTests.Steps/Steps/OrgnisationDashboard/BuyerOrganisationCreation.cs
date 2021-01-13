@@ -27,8 +27,10 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         public void GivenThatAUserEntersAnODSCodeForANon_BuyerOrganisation()
         {
             var KnownNonBuyerOrganisationODSCode = "RAE01";
-            var Organisation = new Organisation();
-            Organisation.OdsCode = KnownNonBuyerOrganisationODSCode;
+            Organisation Organisation = new()
+            {
+                OdsCode = KnownNonBuyerOrganisationODSCode
+            };
             Context.Add("Organisation", Organisation);
             Context.Add("CreatedOrganisation", Organisation);
         }
@@ -37,8 +39,10 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         public void GivenThatTheUserEntersACodeUnrecognisedByODS()
         {
             var UnkownOrganisationODSCode = "TEST";
-            Organisation Organisation = new Organisation();
-            Organisation.OdsCode = UnkownOrganisationODSCode;
+            Organisation Organisation = new()
+            {
+                OdsCode = UnkownOrganisationODSCode
+            };
             Context.Add("Organisation", Organisation);
             Context.Add("CreatedOrganisation", Organisation);
         }
@@ -81,7 +85,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         public void ThenTheOrganisationExistsInTheBuyingCatalogue()
         {
             var Organisation = (Organisation)Context["Organisation"];
-            var OrgInDb = Organisation.RetrieveByODSCode(Test.ConnectionString, Organisation.OdsCode);
+            var OrgInDb = TestData.Organisation.RetrieveByODSCode(Test.ConnectionString, Organisation.OdsCode);
             OrgInDb.Should().NotBeNull();
         }
         
@@ -89,7 +93,7 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         public void ThenThePrimaryRoleIDFromODSIdentifiesTheOrganisationAsABuyerOrganisation()
         {
             var Organisation = (Organisation)Context["Organisation"];
-            var OrgInDb = Organisation.RetrieveByODSCode(Test.ConnectionString, Organisation.OdsCode);
+            var OrgInDb = TestData.Organisation.RetrieveByODSCode(Test.ConnectionString, Organisation.OdsCode);
             OrgInDb.PrimaryRoleId.Should().NotBeNull();
             OrgInDb.PrimaryRoleId.Should().BeOneOf("RO98", "RO177", "RO213", "RO272");
         }

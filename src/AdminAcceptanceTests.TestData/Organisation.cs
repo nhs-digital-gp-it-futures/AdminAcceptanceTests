@@ -39,13 +39,13 @@ namespace AdminAcceptanceTests.TestData
             SqlExecutor.Execute<User>(connectionString, query, this);
         }
 
-        public Organisation RetrieveByODSCode(string connectionString, string ODSCode)
+        public static Organisation RetrieveByODSCode(string connectionString, string ODSCode)
         {
             var query = @"SELECT * FROM [dbo].[Organisations] WHERE OdsCode=@ODSCode";
             return SqlExecutor.Execute<Organisation>(connectionString, query, new { ODSCode }).Single();
         }
 
-        public Organisation RetrieveById(string connectionString, Guid id)
+        public static Organisation RetrieveById(string connectionString, Guid id)
         {
             var query = @"SELECT * FROM [dbo].[Organisations] WHERE OrganisationId=@id";
             return SqlExecutor.Execute<Organisation>(connectionString, query, new { id }).Single();

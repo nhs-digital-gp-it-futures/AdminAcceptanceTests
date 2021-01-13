@@ -1,9 +1,6 @@
 ﻿using AdminAcceptanceTests.Steps.Utils;
 using AdminAcceptanceTests.TestData;
 using FluentAssertions;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using TechTalk.SpecFlow;
 
 namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
@@ -20,12 +17,10 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void GivenThatAUserElectsToViewABuyingUserSDetails()
         {
             var targetUser = new User().RetrieveRandomBuyerUser(Test.ConnectionString);
-            var taretOrganisation = new Organisation().RetrieveById(Test.ConnectionString, targetUser.PrimaryOrganisationId);
+            var taretOrganisation = Organisation.RetrieveById(Test.ConnectionString, targetUser.PrimaryOrganisationId);
             Context.Add("BuyingUser", targetUser);
             Context.Add("Organisation", taretOrganisation);
         }
-
-        
 
         [Then(@"the User can view the details")]
         public void ThenTheUserCanViewTheDetails()
