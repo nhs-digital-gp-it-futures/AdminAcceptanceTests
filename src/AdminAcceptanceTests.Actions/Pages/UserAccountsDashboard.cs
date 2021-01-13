@@ -84,8 +84,11 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool ExpectedUserHasDisabledFlag(string Username)
         {
-            return Driver.FindElements(Pages.UserAccountsDashboard.DisabledAccountFlag)
-                .Where(e => e.FindElement(By.XPath("../../a")).Text.Equals(Username, StringComparison.OrdinalIgnoreCase)).Count() == 1;
+            var rows = Driver.FindElement(Pages.UserAccountsDashboard.UserTable).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"));
+
+            var row = rows.Single(s => s.FindElement(By.TagName("a")).Text.Equals(Username, StringComparison.OrdinalIgnoreCase));
+
+            return row.FindElements(Pages.UserAccountsDashboard.DisabledAccountFlag).Count == 1;
         }
 
         private bool ElementDisplayed(By by)
