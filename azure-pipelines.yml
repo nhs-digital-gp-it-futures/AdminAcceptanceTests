@@ -1,6 +1,5 @@
 trigger:
 - master
-- feature/11259-fix-admin-pipeline
 
 pr:
 - master
@@ -61,7 +60,7 @@ steps:
 
 - bash: |
     export DB__PASSWORD="$(gpitfuturesdevdbpassword)"
-
+ 
     dotnet test src/ -v n
   displayName: Run Acceptance Tests
   
