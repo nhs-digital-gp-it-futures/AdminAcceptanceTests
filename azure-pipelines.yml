@@ -1,5 +1,6 @@
 trigger:
 - master
+- feature/11259-fix-admin-pipeline
 
 pr:
 - master
