@@ -3,17 +3,17 @@ using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Objects.Pages
 {
-    public class CreateBuyingOrganisation
+    public static class CreateBuyingOrganisation
     {
-        public By SearchODSPageTitle => CustomBy.DataTestId("find-org-page-title");
-        public By ODSCodeField => By.Id("odsCode");
-        public By SearchODSButton => CustomBy.DataTestId("continue-button", "button");
-        public By SelectOrganisationPageTitle => CustomBy.DataTestId("select-org-page-title");
-        public By SelectOrganisationButton => CustomBy.DataTestId("select-org-button", "button");
-        public By CreateOrganisationPageTitle => CustomBy.DataTestId("create-org-page-title");
-        public By CreateOrganisationButton => CustomBy.DataTestId("save-button", "button");
-        public By ConfirmationPage => CustomBy.DataTestId("create-org-confirmation-page");
-        public By OrganisationAlreadyExistsPage => CustomBy.DataTestId("create-org-error-page");
-        public By ErrorSummary => CustomBy.DataTestId("error-summary");
+        public static By SearchODSPageTitle => CustomBy.DataTestId("find-org-page-title");
+        public static By ODSCodeField => By.Id("odsCode");
+        public static By SearchODSButton => CustomBy.DataTestId("continue-button", "button");
+        public static By SelectOrganisationPageTitle => CustomBy.DataTestId("select-org-page-title");
+        public static By SelectOrganisationButton => CustomBy.DataTestId("select-org-button", "button");
+        public static By CreateOrganisationPageTitle => CustomBy.DataTestId("create-org-page-title");
+        public static By CreateOrganisationButton => CustomBy.DataTestId("save-button", "button");
+        public static By ConfirmationPage => CustomBy.DataTestId("create-org-confirmation-page");
+        public static By OrganisationAlreadyExistsPage => CustomBy.DataTestId("create-org-error-page");
+        public static By ErrorSummary => CustomBy.DataTestId("error-summary");
     }
 }

@@ -3,8 +3,8 @@ using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Objects.Pages
 {
-    public class RequestAnAccount
+    public static class RequestAnAccount
     {
-        public By RequestAnAccountButton => CustomBy.DataTestId("request-account-button");
+        public static By RequestAnAccountButton => CustomBy.DataTestId("request-account-button");
     }
 }

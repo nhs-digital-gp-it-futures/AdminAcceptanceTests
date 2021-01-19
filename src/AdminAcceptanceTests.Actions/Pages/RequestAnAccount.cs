@@ -15,12 +15,12 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool PageDisplayed()
         {
-            return Driver.FindElements(Pages.RequestAnAccount.RequestAnAccountButton).Count > 0;
+            return Driver.FindElements(Objects.Pages.RequestAnAccount.RequestAnAccountButton).Count > 0;
         }
 
         public string GetRequestAnAccountButtonMailToValue()
         {
-            return Driver.FindElement(Pages.RequestAnAccount.RequestAnAccountButton).GetAttribute("href");
+            return Driver.FindElement(Objects.Pages.RequestAnAccount.RequestAnAccountButton).GetAttribute("href");
         }
 
     }

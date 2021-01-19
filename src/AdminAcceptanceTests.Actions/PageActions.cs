@@ -20,7 +20,7 @@ namespace AdminAcceptanceTests.Actions
                 RequestAnAccount = new RequestAnAccount(driver),
                 RequestPasswordReset = new RequestPasswordReset(driver),
                 SetNewPassword = new SetNewPassword(driver),
-                OrganisationDashboard = new Pages.OrganisationDashboard(driver)
+                OrganisationDashboard = new OrganisationDashboard(driver)
             };
         }
 

@@ -12,18 +12,18 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.EditOrganisation.PageTitle).Count > 0);
-            Wait.Until(d => d.FindElement(Pages.EditOrganisation.PageTitle).Displayed);
+            Wait.Until(d => d.FindElements(Objects.Pages.EditOrganisation.PageTitle).Count > 0);
+            Wait.Until(d => d.FindElement(Objects.Pages.EditOrganisation.PageTitle).Displayed);
         }
 
         public void Save()
         {
-            Driver.FindElement(Pages.EditOrganisation.Save).Click();
+            Driver.FindElement(Objects.Pages.EditOrganisation.Save).Click();
         }
 
         public bool ConfirmationPageDisplayed()
         {
-            return Driver.FindElements(Pages.EditOrganisation.Confirmation).Count > 0;
+            return Driver.FindElements(Objects.Pages.EditOrganisation.Confirmation).Count > 0;
         }
     }
 }

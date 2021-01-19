@@ -49,7 +49,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
                     user.PhoneNumber = "";
                     break;
                 default:
-                    throw new NotImplementedException(string.Format("The parameter '%s' is not recognised", MissingField));
+                    throw new NotSupportedException($"The parameter '{MissingField}' is not recognised");
             }
             Context.Add("BuyingUser", user);
         }
