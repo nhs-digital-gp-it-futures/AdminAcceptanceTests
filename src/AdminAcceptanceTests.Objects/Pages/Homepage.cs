@@ -3,11 +3,11 @@ using OpenQA.Selenium;
 
 namespace AdminAcceptanceTests.Objects.Pages
 {
-    public class Homepage
+    public static class Homepage
     {
-        public By Title => By.CssSelector(".nhsuk-hero__wrapper h1");
-        public By LoginLogoutLink => CustomBy.DataTestId("login-logout-component", "a");
-        public By LoggedInDisplayName => CustomBy.DataTestId("login-logout-component", "span");
-        public By AdminTile => CustomBy.DataTestId("admin-promo", "a");
+        public static By Title => By.CssSelector(".nhsuk-hero__wrapper h1");
+        public static By LoginLogoutLink => CustomBy.DataTestId("login-logout-component", "a");
+        public static By LoggedInDisplayName => CustomBy.DataTestId("login-logout-component", "span");
+        public static By AdminTile => CustomBy.DataTestId("admin-promo", "a");
     }
 }

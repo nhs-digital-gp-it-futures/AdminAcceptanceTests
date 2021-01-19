@@ -15,52 +15,52 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void SearchPageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.SearchODSPageTitle).Count > 0);
+            Wait.Until(d => d.FindElements(Objects.Pages.CreateBuyingOrganisation.SearchODSPageTitle).Count > 0);
         }
 
         public void EnterODSCode(string value)
         {
-            Driver.FindElement(Pages.CreateBuyingOrganisation.ODSCodeField).SendKeys(value);
+            Driver.FindElement(Objects.Pages.CreateBuyingOrganisation.ODSCodeField).SendKeys(value);
         }
 
         public void SearchOrganisation()
         {
-            Driver.FindElement(Pages.CreateBuyingOrganisation.SearchODSButton).Click();
+            Driver.FindElement(Objects.Pages.CreateBuyingOrganisation.SearchODSButton).Click();
         }
 
         public void SelectOrganisationPageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.SelectOrganisationPageTitle).Count > 0);
+            Wait.Until(d => d.FindElements(Objects.Pages.CreateBuyingOrganisation.SelectOrganisationPageTitle).Count > 0);
         }
 
         public void SelectOrganisation()
         {
-            Driver.FindElement(Pages.CreateBuyingOrganisation.SelectOrganisationButton).Click();
+            Driver.FindElement(Objects.Pages.CreateBuyingOrganisation.SelectOrganisationButton).Click();
         }
 
         public void CreateOrganisationPageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.CreateOrganisationPageTitle).Count > 0);
+            Wait.Until(d => d.FindElements(Objects.Pages.CreateBuyingOrganisation.CreateOrganisationPageTitle).Count > 0);
         }
 
         public void CreateOrganisation()
         {
-            Driver.FindElement(Pages.CreateBuyingOrganisation.CreateOrganisationButton).Click();
+            Driver.FindElement(Objects.Pages.CreateBuyingOrganisation.CreateOrganisationButton).Click();
         }
 
         public void ConfirmationPageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.ConfirmationPage).Count > 0);
+            Wait.Until(d => d.FindElements(Objects.Pages.CreateBuyingOrganisation.ConfirmationPage).Count > 0);
         }
 
         public void OrganisationAlreadyExistsPageDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPage).Count > 0);
+            Wait.Until(d => d.FindElements(Objects.Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPage).Count > 0);
         }
 
         public bool ErrorSummaryDisplayed()
         {
-            return Driver.FindElements(Pages.CreateBuyingOrganisation.ErrorSummary).Count > 0;
+            return Driver.FindElements(Objects.Pages.CreateBuyingOrganisation.ErrorSummary).Count > 0;
         }
     }
 }

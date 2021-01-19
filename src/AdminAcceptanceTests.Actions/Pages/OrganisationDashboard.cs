@@ -13,29 +13,29 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void PageDisplayed()
         {
-            Wait.Until(s => s.FindElements(Pages.OrganisationDashboard.OrgDashboardTitle).Count == 1);
+            Wait.Until(s => s.FindElements(Objects.Pages.OrganisationDashboard.OrgDashboardTitle).Count == 1);
         }
 
         public bool AddOrganisationsButtonIsDisplayed()
         {
-            return Driver.FindElements(Pages.OrganisationDashboard.AddOrgButton).Count > 0;
+            return Driver.FindElements(Objects.Pages.OrganisationDashboard.AddOrgButton).Count > 0;
         }
 
         public bool LinksToManageOrganisationsAreDisplayed()
         {
-            return Driver.FindElements(Pages.OrganisationDashboard.OrganisationLinks).Count > 0;
+            return Driver.FindElements(Objects.Pages.OrganisationDashboard.OrganisationLinks).Count > 0;
         }
 
         public void ClickAddOrganisationsButton()
         {
-            Wait.Until(d => d.FindElements(Pages.OrganisationDashboard.AddOrgButton).Count > 0);
-            Driver.FindElement(Pages.OrganisationDashboard.AddOrgButton).Click();
+            Wait.Until(d => d.FindElements(Objects.Pages.OrganisationDashboard.AddOrgButton).Count > 0);
+            Driver.FindElement(Objects.Pages.OrganisationDashboard.AddOrgButton).Click();
         }
 
         public string SelectOrganisation(int? index = null)
         {
-            Wait.Until(d => d.FindElements(Pages.OrganisationDashboard.OrganisationLinks).Count > 0);
-            var organisations = Driver.FindElements(Pages.OrganisationDashboard.OrganisationLinks);
+            Wait.Until(d => d.FindElements(Objects.Pages.OrganisationDashboard.OrganisationLinks).Count > 0);
+            var organisations = Driver.FindElements(Objects.Pages.OrganisationDashboard.OrganisationLinks);
 
             IWebElement org;
 
@@ -57,7 +57,7 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void SelectNamedOrganisation(string organisationName)
         {
-            Driver.WaitForJsToComplete(Wait);
+            Wait.WaitForJsToComplete();
             Wait.Until(d => d.FindElements(By.LinkText(organisationName)).Count == 1);
             Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(organisationName)));
             Driver.FindElement(By.LinkText(organisationName)).Click();

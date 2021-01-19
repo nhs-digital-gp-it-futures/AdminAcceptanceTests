@@ -15,20 +15,20 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void EnterEmail(string value)
         {
-            Wait.Until(d => d.FindElements(Pages.Login.ForgotPassword).Count == 0);
-            Wait.Until(d => d.FindElements(Pages.RequestPasswordReset.Email).Count > 0);
-            Driver.FindElement(Pages.RequestPasswordReset.Email).SendKeys(value);
+            Wait.Until(d => d.FindElements(Objects.Pages.Login.ForgotPassword).Count == 0);
+            Wait.Until(d => d.FindElements(Objects.Pages.RequestPasswordReset.Email).Count > 0);
+            Driver.FindElement(Objects.Pages.RequestPasswordReset.Email).SendKeys(value);
         }
 
         public void Submit()
         {
-            Driver.FindElement(Pages.RequestPasswordReset.Submit).Click();
+            Driver.FindElement(Objects.Pages.RequestPasswordReset.Submit).Click();
         }
 
         public bool ConfirmationDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.RequestPasswordReset.ConfirmationPage).Count > 0);
-            return Driver.FindElement(Pages.RequestPasswordReset.ConfirmationPage).Displayed;
+            Wait.Until(d => d.FindElements(Objects.Pages.RequestPasswordReset.ConfirmationPage).Count > 0);
+            return Driver.FindElement(Objects.Pages.RequestPasswordReset.ConfirmationPage).Displayed;
         }
     }
 }

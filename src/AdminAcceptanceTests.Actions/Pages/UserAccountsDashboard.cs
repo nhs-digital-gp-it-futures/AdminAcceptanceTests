@@ -16,46 +16,46 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void OrganisationNameMatches(string organisationName)
         {
-            Wait.Until(d => d.FindElements(Pages.UserAccountsDashboard.OrganisationName).Count == 1);
-            var name = Driver.FindElement(Pages.UserAccountsDashboard.OrganisationName).Text;
+            Wait.Until(d => d.FindElements(Objects.Pages.UserAccountsDashboard.OrganisationName).Count == 1);
+            var name = Driver.FindElement(Objects.Pages.UserAccountsDashboard.OrganisationName).Text;
 
             name.Should().BeEquivalentTo(organisationName);
         }
 
         public string GetODSCode()
         {
-            return Driver.FindElement(Pages.UserAccountsDashboard.ODSCode).Text;
+            return Driver.FindElement(Objects.Pages.UserAccountsDashboard.ODSCode).Text;
         }
 
         public bool EditOrganisationButtonDisplayed()
         {
-            return ElementDisplayed(Pages.UserAccountsDashboard.EditOrganisation);
+            return ElementDisplayed(Objects.Pages.UserAccountsDashboard.EditOrganisation);
         }
         public void ClickEditOrganisationButton()
         {
-            Driver.FindElement(Pages.UserAccountsDashboard.EditOrganisation).Click();
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.EditOrganisation).Click();
         }
 
         public bool AddUserButtonDisplayed()
         {
-            return ElementDisplayed(Pages.UserAccountsDashboard.AddUser);
+            return ElementDisplayed(Objects.Pages.UserAccountsDashboard.AddUser);
         }
 
         public void ClickAddUserButton()
         {
-            Driver.FindElement(Pages.UserAccountsDashboard.AddUser).Click();
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.AddUser).Click();
         }
 
         public bool ViewUserLinksDisplayed()
         {
-            Driver.WaitForJsToComplete(Wait);
-            return ElementDisplayed(Pages.UserAccountsDashboard.ViewUserLinks);
+            Wait.WaitForJsToComplete();
+            return ElementDisplayed(Objects.Pages.UserAccountsDashboard.ViewUserLinks);
         }
 
         public string ClickUserLink(int? index = null)
         {
-            Wait.Until(d => d.FindElements(Pages.UserAccountsDashboard.ViewUserLinks).Count > 0);
-            var users = Driver.FindElements(Pages.UserAccountsDashboard.ViewUserLinks);
+            Wait.Until(d => d.FindElements(Objects.Pages.UserAccountsDashboard.ViewUserLinks).Count > 0);
+            var users = Driver.FindElements(Objects.Pages.UserAccountsDashboard.ViewUserLinks);
 
             IWebElement user;
 
@@ -76,7 +76,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void ClickUserLink(string name)
         {
             Thread.Sleep(500);
-            Driver.WaitForJsToComplete(Wait);
+            Wait.WaitForJsToComplete();
             Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(name)));
             Driver.FindElement(By.LinkText(name)).Click();
             Wait.Until(ElementExtensions.InvisibilityOfElement(By.LinkText(name)));
@@ -84,11 +84,11 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool ExpectedUserHasDisabledFlag(string Username)
         {
-            var rows = Driver.FindElement(Pages.UserAccountsDashboard.UserTable).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"));
+            var rows = Driver.FindElement(Objects.Pages.UserAccountsDashboard.UserTable).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"));
 
             var row = rows.Single(s => s.FindElement(By.TagName("a")).Text.Equals(Username, StringComparison.OrdinalIgnoreCase));
 
-            return row.FindElements(Pages.UserAccountsDashboard.DisabledAccountFlag).Count == 1;
+            return row.FindElements(Objects.Pages.UserAccountsDashboard.DisabledAccountFlag).Count == 1;
         }
 
         private bool ElementDisplayed(By by)

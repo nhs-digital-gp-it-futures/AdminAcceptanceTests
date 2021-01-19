@@ -11,61 +11,61 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public void EnterPassword(string password)
         {
-            Driver.FindElement(Pages.Login.Password).Click();
-            Driver.FindElement(Pages.Login.Password).SendKeys(password);
-            Wait.Until(d => d.FindElement(Pages.Login.Password).GetAttribute("value") != "");
+            Driver.FindElement(Objects.Pages.Login.Password).Click();
+            Driver.FindElement(Objects.Pages.Login.Password).SendKeys(password);
+            Wait.Until(d => d.FindElement(Objects.Pages.Login.Password).GetAttribute("value") != "");
         }
 
         public void EnterUsername(string username)
         {
-            Driver.WaitForJsToComplete(Wait);
-            Wait.Until(d => d.FindElements(Pages.Login.Username).Count == 1);
-            Wait.Until(d => d.FindElement(Pages.Login.Username).GetAttribute("value") == "");
-            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.Username));
-            Driver.FindElement(Pages.Login.Username).Click();
-            Driver.FindElement(Pages.Login.Username).SendKeys(username);
-            Wait.Until(d => d.FindElement(Pages.Login.Username).GetAttribute("value") != "");
+            Wait.WaitForJsToComplete();
+            Wait.Until(d => d.FindElements(Objects.Pages.Login.Username).Count == 1);
+            Wait.Until(d => d.FindElement(Objects.Pages.Login.Username).GetAttribute("value") == "");
+            Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.Login.Username));
+            Driver.FindElement(Objects.Pages.Login.Username).Click();
+            Driver.FindElement(Objects.Pages.Login.Username).SendKeys(username);
+            Wait.Until(d => d.FindElement(Objects.Pages.Login.Username).GetAttribute("value") != "");
         }
 
         public void Login()
         {
-            Driver.WaitForJsToComplete(Wait);
-            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.LoginButton));
-            Driver.FindElement(Pages.Login.LoginButton).Click();
+            Wait.WaitForJsToComplete();
+            Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.Login.LoginButton));
+            Driver.FindElement(Objects.Pages.Login.LoginButton).Click();
         }
 
         public void WaitForLoginPageToNotBeDisplayed()
         {
-            Driver.WaitForJsToComplete(Wait);
-            Wait.Until(ElementExtensions.InvisibilityOfElement(Pages.Login.LoginButton));
+            Wait.WaitForJsToComplete();
+            Wait.Until(ElementExtensions.InvisibilityOfElement(Objects.Pages.Login.LoginButton));
         }
 
         public bool RequestAnAccountLinkIsDisplayed()
         {
-            return Driver.FindElements(Pages.Login.RequestAnAccountLink).Count > 0;
+            return Driver.FindElements(Objects.Pages.Login.RequestAnAccountLink).Count > 0;
         }
 
         public void ClickRequestAnAccountLink()
         {
-            Driver.FindElement(Pages.Login.RequestAnAccountLink).Click();
+            Driver.FindElement(Objects.Pages.Login.RequestAnAccountLink).Click();
         }
 
         public bool InvalidCredentialsErrorDisplayed()
         {
-            return Driver.FindElements(Pages.Login.ErrorSummaryBox).Count > 0;
+            return Driver.FindElements(Objects.Pages.Login.ErrorSummaryBox).Count > 0;
         }
 
         public void WaitForErrorSummaryToBeDisplayed()
         {
-            Wait.Until(d => d.FindElements(Pages.Login.ErrorSummaryBox).Count > 0);
+            Wait.Until(d => d.FindElements(Objects.Pages.Login.ErrorSummaryBox).Count > 0);
         }
 
         public void ClickForgotPassword()
         {
-            Driver.WaitForJsToComplete(Wait);
-            Wait.Until(d => d.FindElements(Pages.Login.ForgotPassword).Count > 0);
-            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Login.ForgotPassword));
-            Driver.FindElement(Pages.Login.ForgotPassword).Click();        
+            Wait.WaitForJsToComplete();
+            Wait.Until(d => d.FindElements(Objects.Pages.Login.ForgotPassword).Count > 0);
+            Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.Login.ForgotPassword));
+            Driver.FindElement(Objects.Pages.Login.ForgotPassword).Click();        
         }
     }
 }

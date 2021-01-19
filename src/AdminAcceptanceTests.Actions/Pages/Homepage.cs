@@ -14,35 +14,35 @@ namespace AdminAcceptanceTests.Actions.Pages
         }
         public void PageDisplayed()
         {
-            Driver.WaitForJsToComplete(Wait);
-            Wait.Until(s => s.FindElements(Pages.Homepage.Title).Count == 1);
+            Wait.WaitForJsToComplete();
+            Wait.Until(s => s.FindElements(Objects.Pages.Homepage.Title).Count == 1);
         }
 
         public void ClickLoginButton()
         {
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
-            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Homepage.LoginLogoutLink));
-            Driver.FindElement(Pages.Homepage.LoginLogoutLink).Click();
+            Wait.Until(s => s.FindElements(Objects.Pages.Homepage.LoginLogoutLink).Count == 1);
+            Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.Homepage.LoginLogoutLink));
+            Driver.FindElement(Objects.Pages.Homepage.LoginLogoutLink).Click();
         }
 
         public bool LoginLogoutLinkText(string expectedValue)
         {
-            Driver.WaitForJsToComplete(Wait);
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
-            return Driver.FindElement(Pages.Homepage.LoginLogoutLink).Text.Contains(expectedValue, StringComparison.OrdinalIgnoreCase);
+            Wait.WaitForJsToComplete();
+            Wait.Until(s => s.FindElements(Objects.Pages.Homepage.LoginLogoutLink).Count == 1);
+            return Driver.FindElement(Objects.Pages.Homepage.LoginLogoutLink).Text.Contains(expectedValue, StringComparison.OrdinalIgnoreCase);
         }
 
         public void WaitUntilLoggedInFully()
         {
             PageDisplayed();
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);            
+            Wait.Until(s => s.FindElements(Objects.Pages.Homepage.LoginLogoutLink).Count == 1);            
             Wait.Until(s => LoginLogoutLinkText("Log Out"));
         }
 
         public void WaitUntilLoggedOutFully()
         {
             PageDisplayed();
-            Wait.Until(s => s.FindElements(Pages.Homepage.LoginLogoutLink).Count == 1);
+            Wait.Until(s => s.FindElements(Objects.Pages.Homepage.LoginLogoutLink).Count == 1);
             Wait.Until(s => LoginLogoutLinkText("Log in"));
         }
 
@@ -60,18 +60,18 @@ namespace AdminAcceptanceTests.Actions.Pages
 
         public bool AdminTileIsDisplayed()
         {
-            return Driver.FindElements(Pages.Homepage.AdminTile).Count == 1;
+            return Driver.FindElements(Objects.Pages.Homepage.AdminTile).Count == 1;
         }
 
         public void ClickAdminTile()
         {
             Thread.Sleep(500);
-            Driver.WaitForJsToComplete(Wait);
-            Wait.Until(d => d.FindElements(Pages.Homepage.AdminTile).Count == 1);
-            Wait.Until(ElementExtensions.ElementToBeVisible(Pages.Homepage.AdminTile));
-            Wait.Until(ElementExtensions.ElementToBeClickable(Pages.Homepage.AdminTile));
-            Driver.FindElement(Pages.Homepage.AdminTile).Click();
-            Wait.Until(d => d.FindElements(Pages.Homepage.AdminTile).Count == 0);
+            Wait.WaitForJsToComplete();
+            Wait.Until(d => d.FindElements(Objects.Pages.Homepage.AdminTile).Count == 1);
+            Wait.Until(ElementExtensions.ElementToBeVisible(Objects.Pages.Homepage.AdminTile));
+            Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.Homepage.AdminTile));
+            Driver.FindElement(Objects.Pages.Homepage.AdminTile).Click();
+            Wait.Until(d => d.FindElements(Objects.Pages.Homepage.AdminTile).Count == 0);
         }
     }
 }
