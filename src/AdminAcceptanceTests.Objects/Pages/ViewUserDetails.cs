@@ -1,8 +1,5 @@
 ﻿using AdminAcceptanceTests.Objects.Utils;
 using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace AdminAcceptanceTests.Objects.Pages
 {
@@ -15,6 +12,5 @@ namespace AdminAcceptanceTests.Objects.Pages
         public static By EmailAddress => CustomBy.DataTestId("user-email");
         public static By DisableUserButton => CustomBy.DataTestId("change-account-status-button", "button");
         public static By DisabledReenableUserConfirmationPageTitle => By.CssSelector("[data-test-id$=-user-confirmation-page-title]");
-
     }
 }

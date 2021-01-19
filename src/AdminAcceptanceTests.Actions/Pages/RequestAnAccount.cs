@@ -22,6 +22,5 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             return Driver.FindElement(Objects.Pages.RequestAnAccount.RequestAnAccountButton).GetAttribute("href");
         }
-
     }
 }
