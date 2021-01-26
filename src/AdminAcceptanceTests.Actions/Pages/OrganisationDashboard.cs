@@ -1,14 +1,14 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using AdminAcceptanceTests.TestData.Information;
-using OpenQA.Selenium;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using AdminAcceptanceTests.Actions.Utils;
+    using AdminAcceptanceTests.TestData.Information;
+    using OpenQA.Selenium;
+
     public sealed class OrganisationDashboard : PageAction
     {
-        public OrganisationDashboard(IWebDriver driver) : base(driver)
+        public OrganisationDashboard(IWebDriver driver)
+            : base(driver)
         {
-
         }
 
         public void PageDisplayed()
@@ -48,7 +48,7 @@ namespace AdminAcceptanceTests.Actions.Pages
                 org = organisations[index.Value];
             }
 
-            string orgName = org.Text;
+            var orgName = org.Text;
             Wait.Until(d => d.FindElement(By.LinkText(org.Text)).Displayed);
             Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(org.Text)));
             org.Click();

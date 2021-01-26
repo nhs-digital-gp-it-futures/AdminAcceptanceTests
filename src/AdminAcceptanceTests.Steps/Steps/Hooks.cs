@@ -1,15 +1,16 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using AdminAcceptanceTests.Steps.Utils;
-using AdminAcceptanceTests.TestData;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps
+﻿namespace AdminAcceptanceTests.Steps.Steps
 {
+    using System.Threading.Tasks;
+    using AdminAcceptanceTests.Actions.Utils;
+    using AdminAcceptanceTests.Steps.Utils;
+    using AdminAcceptanceTests.TestData;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public sealed class Hooks : TestBase
     {
-        public Hooks(UITest test, ScenarioContext context) : base(test, context)
+        public Hooks(UITest test, ScenarioContext context)
+            : base(test, context)
         {
         }
 
@@ -26,18 +27,22 @@ namespace AdminAcceptanceTests.Steps.Steps
             {
                 ((User)Context["CreatedUser"]).Delete(Test.ConnectionString);
             }
+
             if (Context.ContainsKey("Email"))
             {
                 await EmailServerDriver.ClearEmailAsync(Test.Url, ((Email)Context["Email"]).Id);
             }
+
             if (Context.ContainsKey("CreatedOrganisation"))
             {
                 ((Organisation)Context["CreatedOrganisation"]).Delete(Test.ConnectionString);
             }
+
             if (Context.ContainsKey("DeletedOrganisation"))
             {
                 ((Organisation)Context["DeletedOrganisation"]).Create(Test.ConnectionString);
-            }            
+            }
+
             Test.Driver.Quit();
         }
     }

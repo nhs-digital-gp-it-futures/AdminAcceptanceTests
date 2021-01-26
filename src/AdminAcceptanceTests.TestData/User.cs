@@ -1,33 +1,53 @@
-﻿using AdminAcceptanceTests.TestData.Utils;
-using Bogus;
-using Microsoft.AspNetCore.Identity;
-using System;
-using System.Linq;
-
-namespace AdminAcceptanceTests.TestData
+﻿namespace AdminAcceptanceTests.TestData
 {
+    using System;
+    using System.Linq;
+    using AdminAcceptanceTests.TestData.Utils;
+    using Bogus;
+    using Microsoft.AspNetCore.Identity;
+
     public sealed class User
     {
-        public Guid Id { get; set; } = new Guid();
+        public Guid Id { get; set; } = default;
+
         public string UserName { get; set; }
+
         public string NormalizedUserName { get; set; }
+
         public string Email { get; set; }
+
         public string NormalizedEmail { get; set; }
+
         public int EmailConfirmed { get; set; }
+
         public string PasswordHash { get; set; }
+
         public string SecurityStamp { get; set; }
-        public Guid ConcurrencyStamp { get; set; } = new Guid();
+
+        public Guid ConcurrencyStamp { get; set; } = default;
+
         public string PhoneNumber { get; set; }
+
         public int PhoneNumberConfirmed { get; set; }
+
         public int TwoFactorEnabled { get; set; }
+
         public string LockoutEnd { get; set; }
+
         public int LockoutEnabled { get; set; }
+
         public int AccessFailedCount { get; set; }
-        public Guid PrimaryOrganisationId { get; set; } = new Guid();
+
+        public Guid PrimaryOrganisationId { get; set; } = default;
+
         public string OrganisationFunction { get; set; }
+
         public int Disabled { get; set; }
+
         public int CatalogueAgreementSigned { get; set; }
+
         public string FirstName { get; set; }
+
         public string LastName { get; set; }
 
         public static string ConcatDisplayName(User user)
@@ -35,14 +55,11 @@ namespace AdminAcceptanceTests.TestData
             return string.Join(" ", user.FirstName, user.LastName);
         }
 
-        public static string GenericTestPassword()
-        {
-            return "BuyingC@t4logue";
-        }
+        public static string GenericTestPassword() => "BuyingC@t4logue";
 
-        public User GenerateRandomUser(bool BuyingUser = true, Guid PrimaryOrganisationId = new Guid())
+        public User GenerateRandomUser(bool buyingUser = true, Guid primaryOrganisationId = default)
         {
-            Faker faker = new Faker();
+            Faker faker = new();
             var generatedEmail = faker.Internet.Email();
             return new User
             {
@@ -61,12 +78,12 @@ namespace AdminAcceptanceTests.TestData
                 LockoutEnd = null,
                 LockoutEnabled = 1,
                 AccessFailedCount = 0,
-                PrimaryOrganisationId = PrimaryOrganisationId,
-                OrganisationFunction = BuyingUser ? "Buyer" : "Authority",
+                PrimaryOrganisationId = primaryOrganisationId,
+                OrganisationFunction = buyingUser ? "Buyer" : "Authority",
                 Disabled = 0,
                 CatalogueAgreementSigned = 0,
                 FirstName = faker.Name.FirstName(),
-                LastName = faker.Name.LastName()               
+                LastName = faker.Name.LastName(),
             };
         }
 
@@ -176,10 +193,9 @@ namespace AdminAcceptanceTests.TestData
                       ,[LastName]
                     FROM [dbo].[AspNetUsers] WHERE OrganisationFunction='Buyer'";
             var listOfItems = SqlExecutor.Execute<User>(connectionString, query, this);
-            return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() -1));
+            return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
         }
 
-        
         public void Update(string connectionString)
         {
             var query = @"UPDATE AspNetUsers 
@@ -208,12 +224,12 @@ namespace AdminAcceptanceTests.TestData
 
             SqlExecutor.Execute<User>(connectionString, query, this);
         }
+
         public void Delete(string connectionString)
         {
             var query = @"DELETE FROM AspNetUsers WHERE UserName=@userName";
 
             SqlExecutor.Execute<User>(connectionString, query, this);
         }
-
     }
 }

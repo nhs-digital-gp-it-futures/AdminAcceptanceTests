@@ -1,9 +1,9 @@
-﻿using OpenQA.Selenium;
-using Polly;
-using System;
-
-namespace AdminAcceptanceTests.Steps.Utils
+﻿namespace AdminAcceptanceTests.Steps.Utils
 {
+    using System;
+    using OpenQA.Selenium;
+    using Polly;
+
     internal static class Policies
     {
         internal static ISyncPolicy GetPolicy()

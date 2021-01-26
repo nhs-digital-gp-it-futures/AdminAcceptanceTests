@@ -1,12 +1,12 @@
-﻿using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
-
-namespace AdminAcceptanceTests.Actions.Utils
+﻿namespace AdminAcceptanceTests.Actions.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Net.Http;
+    using System.Threading.Tasks;
+    using Newtonsoft.Json.Linq;
+
     public static class EmailServerDriver
     {
         public static async Task<int> GetEmailCountAsync(string hostUrl, string emailToCheck = null)
@@ -49,6 +49,7 @@ namespace AdminAcceptanceTests.Actions.Utils
                     {
                         emailList = emailList.Where(e => e.To.Equals(emailToCheck, StringComparison.OrdinalIgnoreCase));
                     }
+
                     return emailList;
                 }
             }
@@ -61,6 +62,7 @@ namespace AdminAcceptanceTests.Actions.Utils
             using var client = NewHttpClient();
             await client.DeleteAsync(DeleteAllEmailsUrl(hostUrl));
         }
+
         public static async Task ClearEmailAsync(string hostUrl, string id)
         {
             using var client = NewHttpClient();
@@ -71,8 +73,9 @@ namespace AdminAcceptanceTests.Actions.Utils
         {
             var handler = new HttpClientHandler
             {
-                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+                ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
             };
+
             return new HttpClient(handler);
         }
 
@@ -92,6 +95,7 @@ namespace AdminAcceptanceTests.Actions.Utils
             {
                 return new Uri(DowngradeHttps($"{hostUrl}:1080/email/email"));
             }
+
             return new Uri($"{hostUrl}/email/email");
         }
 
@@ -101,14 +105,17 @@ namespace AdminAcceptanceTests.Actions.Utils
             {
                 return new Uri(DowngradeHttps($"{hostUrl}:1080/email/email/all"));
             }
+
             return new Uri($"{hostUrl}/email/email/all");
         }
+
         private static Uri DeleteEmailUrl(string hostUrl, string id)
         {
             if (IsRunningLocal(hostUrl))
             {
                 return new Uri(DowngradeHttps($"{hostUrl}:1080/email/email/{id}"));
             }
+
             return new Uri($"{hostUrl}/email/email/{id}");
         }
     }

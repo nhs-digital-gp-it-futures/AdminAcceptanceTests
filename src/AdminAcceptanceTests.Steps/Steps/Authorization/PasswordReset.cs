@@ -1,27 +1,27 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using AdminAcceptanceTests.Steps.Utils;
-using AdminAcceptanceTests.TestData;
-using FluentAssertions;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.Authorization
+﻿namespace AdminAcceptanceTests.Steps.Steps.Authorization
 {
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using AdminAcceptanceTests.Actions.Utils;
+    using AdminAcceptanceTests.Steps.Utils;
+    using AdminAcceptanceTests.TestData;
+    using FluentAssertions;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class PasswordReset : TestBase
     {
-        public PasswordReset(UITest test, ScenarioContext context) : base(test, context)
+        public PasswordReset(UITest test, ScenarioContext context)
+            : base(test, context)
         {
-
         }
 
         [Given(@"that a user wants to reset their password")]
         public void GivenThatAUserWantsToResetTheirPassword()
         {
-            var CurrentOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
-            User user = new User().GenerateRandomUser(PrimaryOrganisationId: CurrentOrganisation.OrganisationId);
+            var currentOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
             user.Create(Test.ConnectionString);
             Context.Add("CreatedUser", user);
         }
@@ -29,7 +29,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Given(@"that an unknown user wants to reset their password")]
         public void GivenThatAnUnknownUserWantsToResetTheirPassword()
         {
-            User user = new User().GenerateRandomUser();
+            var user = new User().GenerateRandomUser();
             Context.Add("CreatedUser", user);
         }
 
@@ -68,7 +68,7 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         [Then(@"the reset url navigates to the password reset page")]
         public void ThenTheResetUrlNavigatesToThePasswordResetPage()
         {
-            Email email = (Email)Context["Email"];
+            var email = (Email)Context["Email"];
             var url = email.ExtractUrlFromHtmlBody();
             Test.Driver.Navigate().GoToUrl(url);
             Test.Pages.SetNewPassword.PageDisplayed().Should().BeTrue();
@@ -129,6 +129,5 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         {
             Test.Pages.SetNewPassword.ErrorDisplayed().Should().BeTrue();
         }
-
     }
 }

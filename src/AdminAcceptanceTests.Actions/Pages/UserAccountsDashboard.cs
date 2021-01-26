@@ -1,16 +1,17 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using AdminAcceptanceTests.TestData.Information;
-using FluentAssertions;
-using OpenQA.Selenium;
-using System;
-using System.Linq;
-using System.Threading;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using System;
+    using System.Linq;
+    using System.Threading;
+    using AdminAcceptanceTests.Actions.Utils;
+    using AdminAcceptanceTests.TestData.Information;
+    using FluentAssertions;
+    using OpenQA.Selenium;
+
     public sealed class UserAccountsDashboard : PageAction
     {
-        public UserAccountsDashboard(IWebDriver driver) : base(driver)
+        public UserAccountsDashboard(IWebDriver driver)
+            : base(driver)
         {
         }
 
@@ -31,6 +32,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             return ElementDisplayed(Objects.Pages.UserAccountsDashboard.EditOrganisation);
         }
+
         public void ClickEditOrganisationButton()
         {
             Driver.FindElement(Objects.Pages.UserAccountsDashboard.EditOrganisation).Click();
@@ -68,7 +70,7 @@ namespace AdminAcceptanceTests.Actions.Pages
                 user = users[index.Value];
             }
 
-            string userName = user.Text;
+            var userName = user.Text;
             user.Click();
             return userName;
         }
@@ -82,11 +84,11 @@ namespace AdminAcceptanceTests.Actions.Pages
             Wait.Until(ElementExtensions.InvisibilityOfElement(By.LinkText(name)));
         }
 
-        public bool ExpectedUserHasDisabledFlag(string Username)
+        public bool ExpectedUserHasDisabledFlag(string username)
         {
             var rows = Driver.FindElement(Objects.Pages.UserAccountsDashboard.UserTable).FindElement(By.TagName("tbody")).FindElements(By.TagName("tr"));
 
-            var row = rows.Single(s => s.FindElement(By.TagName("a")).Text.Equals(Username, StringComparison.OrdinalIgnoreCase));
+            var row = rows.Single(s => s.FindElement(By.TagName("a")).Text.Equals(username, StringComparison.OrdinalIgnoreCase));
 
             return row.FindElements(Objects.Pages.UserAccountsDashboard.DisabledAccountFlag).Count == 1;
         }

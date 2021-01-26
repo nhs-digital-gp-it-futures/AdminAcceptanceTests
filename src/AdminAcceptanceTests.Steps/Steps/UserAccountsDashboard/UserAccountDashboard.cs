@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using AdminAcceptanceTests.Steps.Utils;
-using FluentAssertions;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
+﻿namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 {
+    using AdminAcceptanceTests.Steps.Utils;
+    using FluentAssertions;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class UserAccountDashboard : TestBase
     {
-        public UserAccountDashboard(UITest test, ScenarioContext context) : base(test, context)
+        public UserAccountDashboard(UITest test, ScenarioContext context)
+            : base(test, context)
         {
         }
 
@@ -31,6 +29,5 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         {
             Test.Pages.UserAccountsDashboard.ViewUserLinksDisplayed().Should().BeTrue();
         }
-
     }
 }

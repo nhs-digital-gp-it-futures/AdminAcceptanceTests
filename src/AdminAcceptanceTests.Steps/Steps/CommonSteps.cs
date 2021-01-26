@@ -1,15 +1,16 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
-using AdminAcceptanceTests.TestData;
-using FluentAssertions;
-using System.Threading;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps
+﻿namespace AdminAcceptanceTests.Steps.Steps
 {
+    using System.Threading;
+    using AdminAcceptanceTests.Steps.Utils;
+    using AdminAcceptanceTests.TestData;
+    using FluentAssertions;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public sealed class CommonSteps : TestBase
     {
-        public CommonSteps(UITest test, ScenarioContext context) : base(test, context)
+        public CommonSteps(UITest test, ScenarioContext context)
+            : base(test, context)
         {
         }
 
@@ -29,20 +30,20 @@ namespace AdminAcceptanceTests.Steps.Steps
         public void GivenTheAuthorityUserIsManagingOrganisationsAndUsers()
         {
             GivenThatAnAuthorityUserHasLoggedInOnPublicBrowse();
-            var OrganisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
-            OrganisationDashboardSteps.WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage();
-            OrganisationDashboardSteps.ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
+            var organisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
+            organisationDashboardSteps.WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage();
+            organisationDashboardSteps.ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
         }
 
         [Given(@"I am on a random organisation user account dashboard")]
         public void GivenIAmOnARandomOrganisationUserAccountDashboard()
         {
             GivenTheAuthorityUserIsManagingOrganisationsAndUsers();
-            var OrganisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
-            OrganisationDashboardSteps.WhenAnOrganisationIsSelected();
-            OrganisationDashboardSteps.ThenTheUserAccountsDashboardForThatOrganisationIsDisplayed();
-            string ODSCode = Test.Pages.UserAccountsDashboard.GetODSCode();
-            Context.Add("ODSCode", ODSCode);
+            var organisationDashboardSteps = new OrganisationDashboard.OrganisationsDashboard(Test, Context);
+            organisationDashboardSteps.WhenAnOrganisationIsSelected();
+            organisationDashboardSteps.ThenTheUserAccountsDashboardForThatOrganisationIsDisplayed();
+            var odsCode = Test.Pages.UserAccountsDashboard.GetODSCode();
+            Context.Add("ODSCode", odsCode);
         }
 
         [When(@"a specific organisation is selected")]
@@ -57,7 +58,6 @@ namespace AdminAcceptanceTests.Steps.Steps
         [When(@"they select to view a user's details from the organisation's user accounts dashboard")]
         public void WhenTheySelectToViewAUserSUserAccountsDashboard()
         {
-            
             GivenTheAuthorityUserIsManagingOrganisationsAndUsers();
             new OrganisationDashboard.OrganisationsDashboard(Test, Context).ThenTheAuthorityUserIsDirectedToTheOrganisationsDashboard();
             WhenASpecificOrganisationIsSelected();

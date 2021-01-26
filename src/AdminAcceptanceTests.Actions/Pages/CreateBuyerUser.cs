@@ -1,16 +1,15 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using AdminAcceptanceTests.TestData;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Interactions;
-using System.Threading;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using System.Threading;
+    using AdminAcceptanceTests.Actions.Utils;
+    using AdminAcceptanceTests.TestData;
+    using OpenQA.Selenium;
+
     public sealed class CreateBuyerUser : PageAction
     {
-        public CreateBuyerUser(IWebDriver driver) : base(driver)
+        public CreateBuyerUser(IWebDriver driver)
+            : base(driver)
         {
-
         }
 
         public bool PageDisplayed()
@@ -37,23 +36,28 @@ namespace AdminAcceptanceTests.Actions.Pages
             Driver.FindElement(Objects.Pages.CreateBuyerUser.FirstName).Click();
             Driver.FindElement(Objects.Pages.CreateBuyerUser.FirstName).Clear();
             Driver.FindElement(Objects.Pages.CreateBuyerUser.FirstName).SendKeys(value);
-            if (value != "") {
+            if (value != string.Empty)
+            {
                 Wait.Until(d => d.FindElement(Objects.Pages.CreateBuyerUser.FirstName).GetAttribute("value") == value);
             }
         }
+
         public void EnterLastName(string value)
         {
             Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.CreateBuyerUser.LastName));
             Driver.FindElement(Objects.Pages.CreateBuyerUser.LastName).SendKeys(value);
         }
+
         public void EnterPhoneNumber(string value)
         {
             Driver.FindElement(Objects.Pages.CreateBuyerUser.PhoneNumber).SendKeys(value);
         }
+
         public void EnterEmailAddress(string value)
         {
             Driver.FindElement(Objects.Pages.CreateBuyerUser.EmailAddress).SendKeys(value);
         }
+
         public void SubmitUserDetails()
         {
             Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.CreateBuyerUser.CreateUser));
@@ -94,22 +98,27 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             return Driver.FindElements(Objects.Pages.CreateBuyerUser.EmailRequired).Count > 0;
         }
+
         public bool PhoneNumberRequiredErrorDisplayed()
         {
             return Driver.FindElements(Objects.Pages.CreateBuyerUser.PhoneNumberRequired).Count > 0;
         }
+
         public bool EmailTooLongErrorDisplayed()
         {
             return Driver.FindElements(Objects.Pages.CreateBuyerUser.EmailTooLong).Count > 0;
         }
+
         public bool FirstNameTooLongErrorDisplayed()
         {
             return Driver.FindElements(Objects.Pages.CreateBuyerUser.FirstNameTooLong).Count > 0;
         }
+
         public bool LastNameTooLongErrorDisplayed()
         {
             return Driver.FindElements(Objects.Pages.CreateBuyerUser.LastNameTooLong).Count > 0;
         }
+
         public bool PhoneNumberTooLongErrorDisplayed()
         {
             return Driver.FindElements(Objects.Pages.CreateBuyerUser.PhoneNumberTooLong).Count > 0;

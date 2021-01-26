@@ -1,17 +1,17 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using FluentAssertions;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
-using System;
-using System.Threading;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using System;
+    using System.Threading;
+    using AdminAcceptanceTests.Actions.Utils;
+    using OpenQA.Selenium;
+
     public sealed class Homepage : PageAction
     {
-        public Homepage(IWebDriver driver) : base(driver)
+        public Homepage(IWebDriver driver)
+            : base(driver)
         {
         }
+
         public void PageDisplayed()
         {
             Wait.WaitForJsToComplete();
@@ -35,7 +35,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         public void WaitUntilLoggedInFully()
         {
             PageDisplayed();
-            Wait.Until(s => s.FindElements(Objects.Pages.Homepage.LoginLogoutLink).Count == 1);            
+            Wait.Until(s => s.FindElements(Objects.Pages.Homepage.LoginLogoutLink).Count == 1);
             Wait.Until(s => LoginLogoutLinkText("Log Out"));
         }
 

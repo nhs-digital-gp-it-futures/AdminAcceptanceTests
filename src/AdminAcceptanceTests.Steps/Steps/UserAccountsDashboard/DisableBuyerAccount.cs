@@ -1,24 +1,24 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
-using AdminAcceptanceTests.TestData;
-using FluentAssertions;
-using System.Threading;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
+﻿namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 {
+    using System.Threading;
+    using AdminAcceptanceTests.Steps.Utils;
+    using AdminAcceptanceTests.TestData;
+    using FluentAssertions;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class DisableBuyerAccount : TestBase
     {
-        public DisableBuyerAccount(UITest test, ScenarioContext context) : base(test, context)
+        public DisableBuyerAccount(UITest test, ScenarioContext context)
+            : base(test, context)
         {
-
         }
 
         [Given(@"a buyer account is currently enabled")]
         public void GivenABuyerAccountIsCurrentlyEnabled()
-        {;
+        {
             var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
-            User buyerUser = new User().GenerateRandomUser(PrimaryOrganisationId: taretOrganisation.OrganisationId);
+            var buyerUser = new User().GenerateRandomUser(primaryOrganisationId: taretOrganisation.OrganisationId);
             buyerUser.Disabled = 0;
             buyerUser.Create(Test.ConnectionString);
 
@@ -31,7 +31,7 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         public void GivenABuyerAccountIsCurrentlyDisabled()
         {
             var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
-            User buyerUser = new User().GenerateRandomUser(PrimaryOrganisationId: taretOrganisation.OrganisationId);
+            var buyerUser = new User().GenerateRandomUser(primaryOrganisationId: taretOrganisation.OrganisationId);
             buyerUser.Disabled = 1;
             buyerUser.Create(Test.ConnectionString);
 
@@ -48,10 +48,11 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
             Thread.Sleep(500);
             Test.Pages.ViewUserDetails.PageDisplayed();
             Test.Pages.ViewUserDetails.DisableAccount();
-            //go back to the user account dashboard
-            Test.Driver.Navigate().Back();            
+
+            // go back to the user account dashboard
+            Test.Driver.Navigate().Back();
             Test.Pages.ViewUserDetails.PageDisplayed();
-            Test.Driver.Navigate().Back();            
+            Test.Driver.Navigate().Back();
             Test.Driver.Navigate().Refresh();
             Test.Pages.UserAccountsDashboard.OrganisationNameMatches(((Organisation)Context["Organisation"]).Name);
         }

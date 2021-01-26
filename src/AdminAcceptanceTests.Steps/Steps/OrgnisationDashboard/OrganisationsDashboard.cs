@@ -1,16 +1,15 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
-using AdminAcceptanceTests.TestData;
-using FluentAssertions;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.OrganisationDashboard
+﻿namespace AdminAcceptanceTests.Steps.Steps.OrganisationDashboard
 {
+    using AdminAcceptanceTests.Steps.Utils;
+    using FluentAssertions;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class OrganisationsDashboard : TestBase
     {
-        public OrganisationsDashboard(UITest test, ScenarioContext context) : base(test, context)
+        public OrganisationsDashboard(UITest test, ScenarioContext context)
+            : base(test, context)
         {
-
         }
 
         [StepDefinition(@"an Authority User clicks the admin tile on the Public Browse homepage")]

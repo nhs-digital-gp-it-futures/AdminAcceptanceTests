@@ -1,19 +1,10 @@
-﻿using AdminAcceptanceTests.TestData;
-using Microsoft.Extensions.Configuration;
-
-namespace AdminAcceptanceTests.Steps.Utils
+﻿namespace AdminAcceptanceTests.Steps.Utils
 {
+    using AdminAcceptanceTests.TestData;
+    using Microsoft.Extensions.Configuration;
+
     public sealed class Settings
     {
-        public string HubUrl { get; set; }
-
-        public string PBUrl { get; set; }
-
-        public string Browser { get; set; }
-
-        public DatabaseSettings DatabaseSettings { get; set; }
-        public User AdminUser { get; set; }
-
         public Settings(IConfiguration config)
         {
             HubUrl = config.GetValue<string>("hubUrl");
@@ -22,6 +13,18 @@ namespace AdminAcceptanceTests.Steps.Utils
             DatabaseSettings = SetUpDatabaseSettings(config);
             AdminUser = GetAdminUser(config);
         }
+
+        public string HubUrl { get; set; }
+
+        public string PBUrl { get; set; }
+
+        public string Browser { get; set; }
+
+        public DatabaseSettings DatabaseSettings { get; set; }
+
+        public User AdminUser { get; set; }
+
+        private static string ConnectionStringTemplate => @"Server={0};Initial Catalog={1};Persist Security Info=false;User Id={2};Password={3}";
 
         private static DatabaseSettings SetUpDatabaseSettings(IConfiguration config)
         {
@@ -39,9 +42,7 @@ namespace AdminAcceptanceTests.Steps.Utils
             return config.GetSection("adminUser").Get<User>();
         }
 
-        private static string ConstructDatabaseConnectionString(string serverUrl, string databaseName, string user, string password) =>
-            string.Format(ConnectionStringTemplate, serverUrl, databaseName, user, password);
-
-        private static string ConnectionStringTemplate => @"Server={0};Initial Catalog={1};Persist Security Info=false;User Id={2};Password={3}";
+        private static string ConstructDatabaseConnectionString(string serverUrl, string databaseName, string user, string password)
+            => string.Format(ConnectionStringTemplate, serverUrl, databaseName, user, password);
     }
 }

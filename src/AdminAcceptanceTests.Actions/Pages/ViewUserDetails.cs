@@ -1,13 +1,13 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using OpenQA.Selenium;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using AdminAcceptanceTests.Actions.Utils;
+    using OpenQA.Selenium;
+
     public sealed class ViewUserDetails : PageAction
     {
-        public ViewUserDetails(IWebDriver driver) : base(driver)
+        public ViewUserDetails(IWebDriver driver)
+            : base(driver)
         {
-
         }
 
         public void PageDisplayed()
@@ -45,7 +45,7 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.ViewUserDetails.DisableUserButton));
             Driver.FindElement(Objects.Pages.ViewUserDetails.DisableUserButton).Click();
-            Wait.Until(d => d.FindElements(Objects.Pages.ViewUserDetails.DisabledReenableUserConfirmationPageTitle).Count == 1);
+            Wait.Until(d => d.FindElements(Objects.Pages.ViewUserDetails.DisabledReenableUserConfirmationPageTitle).Count > 0);
         }
     }
 }
