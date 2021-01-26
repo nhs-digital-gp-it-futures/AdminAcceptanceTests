@@ -1,15 +1,15 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
-using FluentAssertions;
-using OpenQA.Selenium;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.Authorization
+﻿namespace AdminAcceptanceTests.Steps.Steps.Authorization
 {
+    using AdminAcceptanceTests.Steps.Utils;
+    using FluentAssertions;
+    using OpenQA.Selenium;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class Authorization : TestBase
     {
-
-        public Authorization(UITest test, ScenarioContext context) : base(test, context)
+        public Authorization(UITest test, ScenarioContext context)
+            : base(test, context)
         {
         }
 
@@ -108,6 +108,5 @@ namespace AdminAcceptanceTests.Steps.Steps.Authorization
         {
             Test.Pages.Homepage.WaitUntilLoggedOutFully();
         }
-
     }
 }

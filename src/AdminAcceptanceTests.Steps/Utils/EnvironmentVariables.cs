@@ -1,15 +1,15 @@
-﻿using AdminAcceptanceTests.TestData;
-using Newtonsoft.Json.Linq;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-
-namespace AdminAcceptanceTests.Steps.Utils
+﻿namespace AdminAcceptanceTests.Steps.Utils
 {
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+    using AdminAcceptanceTests.TestData;
+    using Newtonsoft.Json.Linq;
+
     internal static class EnvironmentVariables
     {
-        internal static (string, string, string, string, string, string, string) Get()
+        internal static (string Url, string HubUrl, string Browser, string ServerUrl, string DatabaseName, string DbUser, string DbPassword) Get()
         {
             var url = Url();
             var hubUrl = HubUrl();
@@ -36,14 +36,14 @@ namespace AdminAcceptanceTests.Steps.Utils
             return Environment.GetEnvironmentVariable("BROWSER") ?? "ChromeLocal";
         }
 
-        internal static (string serverUrl, string databaseName, string dbUser, string dbPassword) DbConnectionDetails()
+        internal static (string ServerUrl, string DatabaseName, string DbUser, string DbPassword) DbConnectionDetails()
         {
             var serverUrl = Environment.GetEnvironmentVariable("SERVERURL") ?? "127.0.0.1,1450";
             var databaseName = Environment.GetEnvironmentVariable("DATABASENAME") ?? "CatalogueUsers";
             var dbUser = JsonConfigValues("user", "NHSD-ISAPI");
             var dbPassword = JsonConfigValues("password", "DisruptTheMarket1!");
 
-            return (serverUrl, databaseName, dbUser, dbPassword);
+            return (ServerUrl: serverUrl, DatabaseName: databaseName, DbUser: dbUser, DbPassword: dbPassword);
         }
 
         internal static string DbConnectionString()
@@ -53,9 +53,28 @@ namespace AdminAcceptanceTests.Steps.Utils
             return string.Format(ConnectionString.GPitFutures, serverUrl, databaseName, dbUser, dbPassword);
         }
 
+        internal static User AdminUser()
+        {
+            var path = Path.Combine(
+                Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory),
+                "Utils",
+                "tokens.json");
+            var jsonSection = JObject.Parse(File.ReadAllText(path))["adminUser"];
+            var user = jsonSection.ToObject<User>();
+
+            if (user.UserName.Contains("#{") || user.PasswordHash.Contains("#{"))
+            {
+                user = new User { UserName = "BobSmith@email.com", PasswordHash = "Pass123$" };
+            }
+
+            return user;
+        }
+
         private static string JsonConfigValues(string section, string defaultValue)
         {
-            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), "Utils",
+            var path = Path.Combine(
+                Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory),
+                "Utils",
                 "tokens.json");
             var jsonSection = JObject.Parse(File.ReadAllText(path))[section];
 
@@ -73,24 +92,5 @@ namespace AdminAcceptanceTests.Steps.Utils
 
             return uri;
         }
-
-        internal static User AdminUser()
-        {
-            var path = Path.Combine(Path.GetDirectoryName(AppDomain.CurrentDomain.BaseDirectory), "Utils",
-                "tokens.json");
-            var jsonSection = JObject.Parse(File.ReadAllText(path))["adminUser"];
-            var user = jsonSection.ToObject<User>();
-            if (user.UserName.Contains("#{") || user.PasswordHash.Contains("#{"))
-            {
-                user = new User { UserName = "BobSmith@email.com", PasswordHash = "Pass123$" };
-            }
-            return user;
-        }
-    }
-
-    public static class ConnectionString
-    {
-        internal const string GPitFutures =
-            @"Server={0};Initial Catalog={1};Persist Security Info=false;User Id={2};Password={3}";
     }
 }

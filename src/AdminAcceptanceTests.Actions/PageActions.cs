@@ -1,9 +1,9 @@
-﻿using AdminAcceptanceTests.Actions.Collections;
-using AdminAcceptanceTests.Actions.Pages;
-using OpenQA.Selenium;
-
-namespace AdminAcceptanceTests.Actions
+﻿namespace AdminAcceptanceTests.Actions
 {
+    using AdminAcceptanceTests.Actions.Collections;
+    using AdminAcceptanceTests.Actions.Pages;
+    using OpenQA.Selenium;
+
     public sealed class PageActions
     {
         public PageActions(IWebDriver driver)
@@ -20,7 +20,7 @@ namespace AdminAcceptanceTests.Actions
                 RequestAnAccount = new RequestAnAccount(driver),
                 RequestPasswordReset = new RequestPasswordReset(driver),
                 SetNewPassword = new SetNewPassword(driver),
-                OrganisationDashboard = new OrganisationDashboard(driver)
+                OrganisationDashboard = new OrganisationDashboard(driver),
             };
         }
 

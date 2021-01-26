@@ -1,14 +1,14 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
+﻿namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
 {
+    using AdminAcceptanceTests.Steps.Utils;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class EditOrganisation : TestBase
     {
-        public EditOrganisation(UITest test, ScenarioContext context) : base(test, context)
+        public EditOrganisation(UITest test, ScenarioContext context)
+            : base(test, context)
         {
-
         }
 
         [Given(@"that an authority user is editing an organisation's account details")]

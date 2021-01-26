@@ -1,73 +1,73 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
-using AdminAcceptanceTests.TestData;
-using FluentAssertions;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
+﻿namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
 {
+    using AdminAcceptanceTests.Steps.Utils;
+    using AdminAcceptanceTests.TestData;
+    using FluentAssertions;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class BuyerOrganisationCreation : TestBase
     {
-        public BuyerOrganisationCreation(UITest test, ScenarioContext context) : base(test, context)
+        public BuyerOrganisationCreation(UITest test, ScenarioContext context)
+            : base(test, context)
         {
-
         }
 
         [Given(@"a Buyer Organisation does not already exist in the Buying Catalogue")]
         public void GivenABuyerOrganisationDoesNotAlreadyExistInTheBuyingCatalogue()
-        {            
-            var Organisation = new Organisation().RetrieveRandomOrganisationWithNoUsers(Test.ConnectionString);
-            Organisation.Delete(Test.ConnectionString);
-            Context.Add("Organisation", Organisation);
-            Context.Add("CreatedOrganisation", Organisation);
-            Context.Add("DeletedOrganisation", Organisation);
+        {
+            var organisation = new Organisation().RetrieveRandomOrganisationWithNoUsers(Test.ConnectionString);
+            organisation.Delete(Test.ConnectionString);
+            Context.Add("Organisation", organisation);
+            Context.Add("CreatedOrganisation", organisation);
+            Context.Add("DeletedOrganisation", organisation);
         }
-        
+
         [Given(@"that a User enters an ODS code for a non-Buyer Organisation")]
         public void GivenThatAUserEntersAnODSCodeForANon_BuyerOrganisation()
         {
-            var KnownNonBuyerOrganisationODSCode = "RAE01";
-            Organisation Organisation = new()
+            var knownNonBuyerOrganisationODSCode = "RAE01";
+            Organisation organisation = new()
             {
-                OdsCode = KnownNonBuyerOrganisationODSCode
+                OdsCode = knownNonBuyerOrganisationODSCode,
             };
-            Context.Add("Organisation", Organisation);
-            Context.Add("CreatedOrganisation", Organisation);
+            Context.Add("Organisation", organisation);
+            Context.Add("CreatedOrganisation", organisation);
         }
-        
+
         [Given(@"that the User enters a code unrecognised by ODS")]
         public void GivenThatTheUserEntersACodeUnrecognisedByODS()
         {
-            var UnkownOrganisationODSCode = "TEST";
-            Organisation Organisation = new()
+            var unkownOrganisationODSCode = "TEST";
+            Organisation organisation = new()
             {
-                OdsCode = UnkownOrganisationODSCode
+                OdsCode = unkownOrganisationODSCode,
             };
-            Context.Add("Organisation", Organisation);
-            Context.Add("CreatedOrganisation", Organisation);
+            Context.Add("Organisation", organisation);
+            Context.Add("CreatedOrganisation", organisation);
         }
-        
+
         [Given(@"a Buyer Organisation already exists in the Buying Catalogue")]
         public void GivenABuyerOrganisationAlreadyExistsInTheBuyingCatalogue()
         {
-            var Organisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
-            Context.Add("Organisation", Organisation);
+            var organisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            Context.Add("Organisation", organisation);
         }
-        
+
         [When(@"the Organisation is being created")]
         public void WhenTheOrganisationIsBeingCreated()
         {
             WhenTheUserAttemptsToCreateTheOrganisation();
             Test.Pages.CreateBuyingOrganisation.ConfirmationPageDisplayed();
         }
-        
+
         [When(@"the Organisation is searched for")]
         public void WhenTheOrganisationIsSearchedFor()
         {
-            var Organisation = (Organisation)Context["Organisation"];
+            var organisation = (Organisation)Context["Organisation"];
             Test.Pages.OrganisationDashboard.ClickAddOrganisationsButton();
             Test.Pages.CreateBuyingOrganisation.SearchPageDisplayed();
-            Test.Pages.CreateBuyingOrganisation.EnterODSCode(Organisation.OdsCode);
+            Test.Pages.CreateBuyingOrganisation.EnterODSCode(organisation.OdsCode);
             Test.Pages.CreateBuyingOrganisation.SearchOrganisation();
         }
 
@@ -78,26 +78,26 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
             Test.Pages.CreateBuyingOrganisation.SelectOrganisationPageDisplayed();
             Test.Pages.CreateBuyingOrganisation.SelectOrganisation();
             Test.Pages.CreateBuyingOrganisation.CreateOrganisationPageDisplayed();
-            Test.Pages.CreateBuyingOrganisation.CreateOrganisation();            
+            Test.Pages.CreateBuyingOrganisation.CreateOrganisation();
         }
 
         [Then(@"the Organisation exists in the Buying Catalogue")]
         public void ThenTheOrganisationExistsInTheBuyingCatalogue()
         {
-            var Organisation = (Organisation)Context["Organisation"];
-            var OrgInDb = TestData.Organisation.RetrieveByODSCode(Test.ConnectionString, Organisation.OdsCode);
-            OrgInDb.Should().NotBeNull();
+            var organisation = (Organisation)Context["Organisation"];
+            var orgInDb = Organisation.RetrieveByODSCode(Test.ConnectionString, organisation.OdsCode);
+            orgInDb.Should().NotBeNull();
         }
-        
+
         [Then(@"the Primary Role ID from ODS identifies the Organisation as a Buyer Organisation")]
         public void ThenThePrimaryRoleIDFromODSIdentifiesTheOrganisationAsABuyerOrganisation()
         {
-            var Organisation = (Organisation)Context["Organisation"];
-            var OrgInDb = TestData.Organisation.RetrieveByODSCode(Test.ConnectionString, Organisation.OdsCode);
-            OrgInDb.PrimaryRoleId.Should().NotBeNull();
-            OrgInDb.PrimaryRoleId.Should().BeOneOf("RO98", "RO177", "RO213", "RO272");
+            var organisation = (Organisation)Context["Organisation"];
+            var orgInDb = Organisation.RetrieveByODSCode(Test.ConnectionString, organisation.OdsCode);
+            orgInDb.PrimaryRoleId.Should().NotBeNull();
+            orgInDb.PrimaryRoleId.Should().BeOneOf("RO98", "RO177", "RO213", "RO272");
         }
-        
+
         [Then(@"a validation error message will be returned")]
         public void ThenAValidationErrorMessageWillBeReturned()
         {
@@ -109,6 +109,5 @@ namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
         {
             Test.Pages.CreateBuyingOrganisation.OrganisationAlreadyExistsPageDisplayed();
         }
-
     }
 }

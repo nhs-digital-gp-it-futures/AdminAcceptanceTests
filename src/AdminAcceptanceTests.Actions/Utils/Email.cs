@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
-
-namespace AdminAcceptanceTests.Actions.Utils
+﻿namespace AdminAcceptanceTests.Actions.Utils
 {
+    using System.Text.RegularExpressions;
+
     public sealed class Email
     {
         public string Id { get; set; }
+
         public string From { get; set; }
 
         public string To { get; set; }
@@ -20,8 +18,8 @@ namespace AdminAcceptanceTests.Actions.Utils
 
         public string ExtractUrlFromHtmlBody()
         {
-            Regex r = new Regex("<a href=\"(?<url>.*)\"");
-            Match match = r.Match(this.HtmlBody);
+            Regex r = new("<a href=\"(?<url>.*)\"");
+            var match = r.Match(HtmlBody);
             return match.Groups["url"].Value;
         }
     }

@@ -1,11 +1,12 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using OpenQA.Selenium;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using AdminAcceptanceTests.Actions.Utils;
+    using OpenQA.Selenium;
+
     public sealed class Authorization : PageAction
     {
-        public Authorization(IWebDriver driver) : base(driver)
+        public Authorization(IWebDriver driver)
+            : base(driver)
         {
         }
 
@@ -13,18 +14,18 @@ namespace AdminAcceptanceTests.Actions.Pages
         {
             Driver.FindElement(Objects.Pages.Login.Password).Click();
             Driver.FindElement(Objects.Pages.Login.Password).SendKeys(password);
-            Wait.Until(d => d.FindElement(Objects.Pages.Login.Password).GetAttribute("value") != "");
+            Wait.Until(d => d.FindElement(Objects.Pages.Login.Password).GetAttribute("value") != string.Empty);
         }
 
         public void EnterUsername(string username)
         {
             Wait.WaitForJsToComplete();
             Wait.Until(d => d.FindElements(Objects.Pages.Login.Username).Count == 1);
-            Wait.Until(d => d.FindElement(Objects.Pages.Login.Username).GetAttribute("value") == "");
+            Wait.Until(d => d.FindElement(Objects.Pages.Login.Username).GetAttribute("value") == string.Empty);
             Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.Login.Username));
             Driver.FindElement(Objects.Pages.Login.Username).Click();
             Driver.FindElement(Objects.Pages.Login.Username).SendKeys(username);
-            Wait.Until(d => d.FindElement(Objects.Pages.Login.Username).GetAttribute("value") != "");
+            Wait.Until(d => d.FindElement(Objects.Pages.Login.Username).GetAttribute("value") != string.Empty);
         }
 
         public void Login()
@@ -65,7 +66,7 @@ namespace AdminAcceptanceTests.Actions.Pages
             Wait.WaitForJsToComplete();
             Wait.Until(d => d.FindElements(Objects.Pages.Login.ForgotPassword).Count > 0);
             Wait.Until(ElementExtensions.ElementToBeClickable(Objects.Pages.Login.ForgotPassword));
-            Driver.FindElement(Objects.Pages.Login.ForgotPassword).Click();        
+            Driver.FindElement(Objects.Pages.Login.ForgotPassword).Click();
         }
     }
 }

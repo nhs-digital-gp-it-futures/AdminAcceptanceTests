@@ -1,7 +1,7 @@
-﻿using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Utils
+﻿namespace AdminAcceptanceTests.Steps.Utils
 {
+    using TechTalk.SpecFlow;
+
     public abstract class TestBase
     {
         internal readonly ScenarioContext Context;

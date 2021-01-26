@@ -1,13 +1,13 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using OpenQA.Selenium;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using AdminAcceptanceTests.Actions.Utils;
+    using OpenQA.Selenium;
+
     public sealed class EditOrganisation : PageAction
     {
-        public EditOrganisation(IWebDriver driver) : base(driver)
+        public EditOrganisation(IWebDriver driver)
+            : base(driver)
         {
-
         }
 
         public void PageDisplayed()

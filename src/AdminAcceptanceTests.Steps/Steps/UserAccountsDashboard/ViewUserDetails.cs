@@ -1,16 +1,16 @@
-﻿using AdminAcceptanceTests.Steps.Utils;
-using AdminAcceptanceTests.TestData;
-using FluentAssertions;
-using TechTalk.SpecFlow;
-
-namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
+﻿namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 {
+    using AdminAcceptanceTests.Steps.Utils;
+    using AdminAcceptanceTests.TestData;
+    using FluentAssertions;
+    using TechTalk.SpecFlow;
+
     [Binding]
     public class ViewUserDetails : TestBase
     {
-        public ViewUserDetails(UITest test, ScenarioContext context) : base(test, context)
+        public ViewUserDetails(UITest test, ScenarioContext context)
+            : base(test, context)
         {
-
         }
 
         [Given(@"that a User elects to view a buying user's details")]
@@ -60,6 +60,5 @@ namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
         {
             Test.Pages.ViewUserDetails.OrganisationNameDisplayed().Should().BeTrue();
         }
-
     }
 }

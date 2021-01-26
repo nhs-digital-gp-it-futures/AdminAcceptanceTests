@@ -1,16 +1,13 @@
-﻿using AdminAcceptanceTests.Actions.Utils;
-using OpenQA.Selenium;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace AdminAcceptanceTests.Actions.Pages
+﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using AdminAcceptanceTests.Actions.Utils;
+    using OpenQA.Selenium;
+
     public sealed class SetNewPassword : PageAction
     {
-        public SetNewPassword(IWebDriver driver) : base(driver)
+        public SetNewPassword(IWebDriver driver)
+            : base(driver)
         {
-
         }
 
         public bool PageDisplayed()
