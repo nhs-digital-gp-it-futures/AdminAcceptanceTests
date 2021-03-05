@@ -1,6 +1,7 @@
 ﻿namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 {
     using System.Threading;
+    using System.Threading.Tasks;
     using AdminAcceptanceTests.Steps.Utils;
     using AdminAcceptanceTests.TestData;
     using FluentAssertions;
@@ -15,12 +16,12 @@
         }
 
         [Given(@"a buyer account is currently enabled")]
-        public void GivenABuyerAccountIsCurrentlyEnabled()
+        public async Task GivenABuyerAccountIsCurrentlyEnabled()
         {
-            var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            var taretOrganisation = await new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
             var buyerUser = new User().GenerateRandomUser(primaryOrganisationId: taretOrganisation.OrganisationId);
             buyerUser.Disabled = 0;
-            buyerUser.Create(Test.ConnectionString);
+            await buyerUser.Create(Test.ConnectionString);
 
             Context.Add("Organisation", taretOrganisation);
             Context.Add("BuyingUser", buyerUser);
@@ -28,14 +29,14 @@
         }
 
         [Given(@"a buyer account is currently disabled")]
-        public void GivenABuyerAccountIsCurrentlyDisabled()
+        public async Task GivenABuyerAccountIsCurrentlyDisabled()
         {
-            var taretOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
-            var buyerUser = new User().GenerateRandomUser(primaryOrganisationId: taretOrganisation.OrganisationId);
+            var targetOrganisation = await new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            var buyerUser = new User().GenerateRandomUser(primaryOrganisationId: targetOrganisation.OrganisationId);
             buyerUser.Disabled = 1;
-            buyerUser.Create(Test.ConnectionString);
+            await buyerUser.Create(Test.ConnectionString);
 
-            Context.Add("Organisation", taretOrganisation);
+            Context.Add("Organisation", targetOrganisation);
             Context.Add("BuyingUser", buyerUser);
             Context.Add("CreatedUser", buyerUser);
         }

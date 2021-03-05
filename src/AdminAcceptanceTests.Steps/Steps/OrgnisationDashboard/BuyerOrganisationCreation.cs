@@ -1,5 +1,6 @@
 ﻿namespace AdminAcceptanceTests.Steps.Steps.OrgnisationDashboard
 {
+    using System.Threading.Tasks;
     using AdminAcceptanceTests.Steps.Utils;
     using AdminAcceptanceTests.TestData;
     using FluentAssertions;
@@ -14,10 +15,10 @@
         }
 
         [Given(@"a Buyer Organisation does not already exist in the Buying Catalogue")]
-        public void GivenABuyerOrganisationDoesNotAlreadyExistInTheBuyingCatalogue()
+        public async Task GivenABuyerOrganisationDoesNotAlreadyExistInTheBuyingCatalogue()
         {
-            var organisation = new Organisation().RetrieveRandomOrganisationWithNoUsers(Test.ConnectionString);
-            organisation.Delete(Test.ConnectionString);
+            var organisation = await new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            await organisation.Delete(Test.ConnectionString);
             Context.Add("Organisation", organisation);
             Context.Add("CreatedOrganisation", organisation);
             Context.Add("DeletedOrganisation", organisation);
@@ -48,9 +49,9 @@
         }
 
         [Given(@"a Buyer Organisation already exists in the Buying Catalogue")]
-        public void GivenABuyerOrganisationAlreadyExistsInTheBuyingCatalogue()
+        public async Task GivenABuyerOrganisationAlreadyExistsInTheBuyingCatalogue()
         {
-            var organisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            var organisation = await new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
             Context.Add("Organisation", organisation);
         }
 
@@ -82,18 +83,18 @@
         }
 
         [Then(@"the Organisation exists in the Buying Catalogue")]
-        public void ThenTheOrganisationExistsInTheBuyingCatalogue()
+        public async Task ThenTheOrganisationExistsInTheBuyingCatalogue()
         {
             var organisation = (Organisation)Context["Organisation"];
-            var orgInDb = Organisation.RetrieveByODSCode(Test.ConnectionString, organisation.OdsCode);
+            var orgInDb = await Organisation.RetrieveByODSCode(Test.ConnectionString, organisation.OdsCode);
             orgInDb.Should().NotBeNull();
         }
 
         [Then(@"the Primary Role ID from ODS identifies the Organisation as a Buyer Organisation")]
-        public void ThenThePrimaryRoleIDFromODSIdentifiesTheOrganisationAsABuyerOrganisation()
+        public async Task ThenThePrimaryRoleIDFromODSIdentifiesTheOrganisationAsABuyerOrganisation()
         {
             var organisation = (Organisation)Context["Organisation"];
-            var orgInDb = Organisation.RetrieveByODSCode(Test.ConnectionString, organisation.OdsCode);
+            var orgInDb = await Organisation.RetrieveByODSCode(Test.ConnectionString, organisation.OdsCode);
             orgInDb.PrimaryRoleId.Should().NotBeNull();
             orgInDb.PrimaryRoleId.Should().BeOneOf("RO98", "RO177", "RO213", "RO272");
         }

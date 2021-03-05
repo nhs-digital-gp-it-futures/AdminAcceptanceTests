@@ -1,6 +1,7 @@
 ﻿namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 {
     using System;
+    using System.Threading.Tasks;
     using AdminAcceptanceTests.Steps.Utils;
     using AdminAcceptanceTests.TestData;
     using Bogus;
@@ -16,20 +17,20 @@
         }
 
         [Given(@"account details have been provided")]
-        public void GivenAccountDetailsHaveBeenProvided()
+        public async Task GivenAccountDetailsHaveBeenProvided()
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
             Context.Add("BuyingUser", user);
             Context.Add("OrganisationId", currentOrganisation.OrganisationId);
         }
 
         [Given(@"that mandatory data '(.*)' has not been added")]
-        public void GivenThatMandatoryDataHasNotBeenAdded(string missingField)
+        public async Task GivenThatMandatoryDataHasNotBeenAdded(string missingField)
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
 
             switch (missingField.ToLower())
@@ -54,10 +55,10 @@
         }
 
         [Given(@"the e-mail address is not unique")]
-        public void GivenTheE_MailAddressIsNotUnique()
+        public async Task GivenTheE_MailAddressIsNotUnique()
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
             user.Email = "alicesmith@email.com";
             Context.Add("BuyingUser", user);
@@ -107,10 +108,10 @@
         }
 
         [Then(@"the account will be associated with an organisation")]
-        public void ThenTheAccountWillBeAssociatedWithAnOrganisation()
+        public async Task ThenTheAccountWillBeAssociatedWithAnOrganisation()
         {
             var enteredUser = (User)Context["BuyingUser"];
-            var retrievedUser = enteredUser.Retrieve(Test.ConnectionString);
+            var retrievedUser = await enteredUser.Retrieve(Test.ConnectionString);
             var expectedOrganisationId = (Guid)Context["OrganisationId"];
             retrievedUser.PrimaryOrganisationId.Should().Be(expectedOrganisationId);
         }
@@ -125,10 +126,10 @@
         }
 
         [Given(@"I enter too long an email address")]
-        public void GivenIEnterTooLongAnEmailAddress()
+        public async Task GivenIEnterTooLongAnEmailAddress()
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
             var longname = new Faker().Random.AlphaNumeric(257);
             user.Email = new Faker().Internet.Email(firstName: longname);
@@ -136,40 +137,40 @@
         }
 
         [Given(@"I enter too long a first name")]
-        public void GivenIEnterTooLongAFirstName()
+        public async Task GivenIEnterTooLongAFirstName()
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
             user.FirstName = new Faker().Random.AlphaNumeric(101);
             Context.Add("BuyingUser", user);
         }
 
         [Given(@"I enter too long a last name")]
-        public void GivenIEnterTooLongALastName()
+        public async Task GivenIEnterTooLongALastName()
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
             user.LastName = new Faker().Random.AlphaNumeric(101);
             Context.Add("BuyingUser", user);
         }
 
         [Given(@"I enter too long a phone number")]
-        public void GivenIEnterTooLongAPhoneNumber()
+        public async Task GivenIEnterTooLongAPhoneNumber()
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
             user.PhoneNumber = string.Join(string.Empty, new Faker().Random.Digits(36));
             Context.Add("BuyingUser", user);
         }
 
         [Given(@"I enter an invalid email address format")]
-        public void GivenIEnterAnInvalidEmailAddressFormat()
+        public async Task GivenIEnterAnInvalidEmailAddressFormat()
         {
             var odsCode = (string)Context["ODSCode"];
-            var currentOrganisation = Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
+            var currentOrganisation = await Organisation.RetrieveByODSCode(Test.ConnectionString, odsCode);
             var user = new User().GenerateRandomUser(true, currentOrganisation.OrganisationId);
             user.Email = new Faker().Internet.Email(provider: "in@valid");
             Context.Add("BuyingUser", user);
