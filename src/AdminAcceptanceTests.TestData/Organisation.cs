@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using AdminAcceptanceTests.TestData.Utils;
     using Bogus;
 
@@ -21,19 +22,21 @@
 
         public DateTime LastUpdated { get; set; }
 
-        public static Organisation RetrieveByODSCode(string connectionString, string odsCode)
+        public static async Task<Organisation> RetrieveByODSCode(string connectionString, string odsCode)
         {
             var query = @"SELECT * FROM [dbo].[Organisations] WHERE OdsCode=@ODSCode";
-            return SqlExecutor.Execute<Organisation>(connectionString, query, new { odsCode }).Single();
+            var result = await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, new { odsCode });
+            return result.Single();
         }
 
-        public static Organisation RetrieveById(string connectionString, Guid id)
+        public static async Task<Organisation> RetrieveById(string connectionString, Guid id)
         {
             var query = @"SELECT * FROM [dbo].[Organisations] WHERE OrganisationId=@id";
-            return SqlExecutor.Execute<Organisation>(connectionString, query, new { id }).Single();
+            var results = await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, new { id });
+            return results.Single();
         }
 
-        public void Create(string connectionString)
+        public async Task Create(string connectionString)
         {
             var query = @"INSERT INTO [dbo].[Organisations] (
                             OrganisationId
@@ -54,29 +57,20 @@
                             ,@lastUpdated
                         )";
 
-            SqlExecutor.Execute<User>(connectionString, query, this);
+            await SqlExecutor.ExecuteAsync<User>(connectionString, query, this);
         }
 
-        public Organisation RetrieveRandomOrganisation(string connectionString)
+        public async Task<Organisation> RetrieveRandomOrganisation(string connectionString)
         {
             var query = @"SELECT * FROM [dbo].[Organisations]";
-            var listOfItems = SqlExecutor.Execute<Organisation>(connectionString, query, this);
+            var listOfItems = await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, this);
             return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
         }
 
-        public Organisation RetrieveRandomOrganisationWithNoUsers(string connectionString)
-        {
-            var query = @"SELECT [dbo].[Organisations].* FROM [dbo].[Organisations]
-                          LEFT JOIN AspNetUsers on AspNetUsers.PrimaryOrganisationId=[Organisations].OrganisationId
-                          WHERE AspNetUsers.Id IS NULL;";
-            var listOfItems = SqlExecutor.Execute<Organisation>(connectionString, query, this);
-            return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
-        }
-
-        public void Delete(string connectionString)
+        public async Task Delete(string connectionString)
         {
             var query = @"DELETE FROM  [dbo].[Organisations] WHERE OrganisationId=@organisationId OR OdsCode=@odsCode";
-            SqlExecutor.Execute<Organisation>(connectionString, query, this);
+            await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, this);
         }
     }
 }

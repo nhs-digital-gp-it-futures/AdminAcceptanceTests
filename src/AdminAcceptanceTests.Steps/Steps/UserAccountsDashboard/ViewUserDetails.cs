@@ -1,5 +1,6 @@
 ﻿namespace AdminAcceptanceTests.Steps.Steps.UserAccountsDashboard
 {
+    using System.Threading.Tasks;
     using AdminAcceptanceTests.Steps.Utils;
     using AdminAcceptanceTests.TestData;
     using FluentAssertions;
@@ -14,10 +15,10 @@
         }
 
         [Given(@"that a User elects to view a buying user's details")]
-        public void GivenThatAUserElectsToViewABuyingUserSDetails()
+        public async Task GivenThatAUserElectsToViewABuyingUserSDetails()
         {
-            var targetUser = new User().RetrieveRandomBuyerUser(Test.ConnectionString);
-            var taretOrganisation = Organisation.RetrieveById(Test.ConnectionString, targetUser.PrimaryOrganisationId);
+            var targetUser = await new User().RetrieveRandomBuyerUser(Test.ConnectionString);
+            var taretOrganisation = await Organisation.RetrieveById(Test.ConnectionString, targetUser.PrimaryOrganisationId);
             Context.Add("BuyingUser", targetUser);
             Context.Add("Organisation", taretOrganisation);
         }

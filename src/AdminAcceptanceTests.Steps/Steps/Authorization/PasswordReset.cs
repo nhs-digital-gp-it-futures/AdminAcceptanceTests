@@ -18,11 +18,11 @@
         }
 
         [Given(@"that a user wants to reset their password")]
-        public void GivenThatAUserWantsToResetTheirPassword()
+        public async Task GivenThatAUserWantsToResetTheirPassword()
         {
-            var currentOrganisation = new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
+            var currentOrganisation = await new Organisation().RetrieveRandomOrganisation(Test.ConnectionString);
             var user = new User().GenerateRandomUser(primaryOrganisationId: currentOrganisation.OrganisationId);
-            user.Create(Test.ConnectionString);
+            await user.Create(Test.ConnectionString);
             Context.Add("CreatedUser", user);
         }
 
@@ -77,7 +77,7 @@
         [Given(@"the User is resetting their password and has followed the reset url")]
         public async Task GivenTheUserIsResettingTheirPasswordAndHasFollowedTheResetUrlAsync()
         {
-            GivenThatAUserWantsToResetTheirPassword();
+            await GivenThatAUserWantsToResetTheirPassword();
             await WhenTheUserHasFollowedTheRequestAPasswordResetJourneyAndEnteredTheirE_MailAddress();
             await ThenTheResetUrlIsSentToTheE_MailAddress();
             ThenTheResetUrlNavigatesToThePasswordResetPage();

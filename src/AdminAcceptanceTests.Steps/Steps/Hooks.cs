@@ -25,7 +25,7 @@
         {
             if (Context.ContainsKey("CreatedUser"))
             {
-                ((User)Context["CreatedUser"]).Delete(Test.ConnectionString);
+                await ((User)Context["CreatedUser"]).Delete(Test.ConnectionString);
             }
 
             if (Context.ContainsKey("Email"))
@@ -35,12 +35,12 @@
 
             if (Context.ContainsKey("CreatedOrganisation"))
             {
-                ((Organisation)Context["CreatedOrganisation"]).Delete(Test.ConnectionString);
+                await ((Organisation)Context["CreatedOrganisation"]).Delete(Test.ConnectionString);
             }
 
             if (Context.ContainsKey("DeletedOrganisation"))
             {
-                ((Organisation)Context["DeletedOrganisation"]).Create(Test.ConnectionString);
+                await ((Organisation)Context["DeletedOrganisation"]).Create(Test.ConnectionString);
             }
 
             Test.Driver.Quit();

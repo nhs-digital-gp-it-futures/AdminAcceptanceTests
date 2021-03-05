@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Threading.Tasks;
     using AdminAcceptanceTests.TestData.Utils;
     using Bogus;
     using Microsoft.AspNetCore.Identity;
@@ -87,7 +88,7 @@
             };
         }
 
-        public void Create(string connectionString)
+        public async Task Create(string connectionString)
         {
             var query = @"INSERT INTO AspNetUsers (
                             Id,
@@ -136,10 +137,10 @@
                             @lastName
                         )";
 
-            SqlExecutor.Execute<User>(connectionString, query, this);
+            await SqlExecutor.ExecuteAsync<User>(connectionString, query, this);
         }
 
-        public User Retrieve(string connectionString)
+        public async Task<User> Retrieve(string connectionString)
         {
             var query = @"SELECT 
                     Convert(UniqueIdentifier, Id) as Id
@@ -164,10 +165,11 @@
                       ,[FirstName]
                       ,[LastName]
                     FROM [dbo].[AspNetUsers] WHERE Email=@email";
-            return SqlExecutor.Execute<User>(connectionString, query, this).Single();
+            var users = await SqlExecutor.ExecuteAsync<User>(connectionString, query, this);
+            return users.Single();
         }
 
-        public User RetrieveRandomBuyerUser(string connectionString)
+        public async Task<User> RetrieveRandomBuyerUser(string connectionString)
         {
             var query = @"SELECT 
                     Convert(UniqueIdentifier, Id) as Id
@@ -192,11 +194,11 @@
                       ,[FirstName]
                       ,[LastName]
                     FROM [dbo].[AspNetUsers] WHERE OrganisationFunction='Buyer'";
-            var listOfItems = SqlExecutor.Execute<User>(connectionString, query, this);
+            var listOfItems = await SqlExecutor.ExecuteAsync<User>(connectionString, query, this);
             return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
         }
 
-        public void Update(string connectionString)
+        public async Task Update(string connectionString)
         {
             var query = @"UPDATE AspNetUsers 
                         SET 
@@ -222,14 +224,14 @@
                             LastName=@lastName
                         WHERE Id=@id";
 
-            SqlExecutor.Execute<User>(connectionString, query, this);
+            await SqlExecutor.ExecuteAsync<User>(connectionString, query, this);
         }
 
-        public void Delete(string connectionString)
+        public async Task Delete(string connectionString)
         {
             var query = @"DELETE FROM AspNetUsers WHERE UserName=@userName";
 
-            SqlExecutor.Execute<User>(connectionString, query, this);
+            await SqlExecutor.ExecuteAsync<User>(connectionString, query, this);
         }
     }
 }
