@@ -1,10 +1,11 @@
 ﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using System;
+    using System.Collections.Generic;
     using System.Linq;
     using AdminAcceptanceTests.Actions.Utils;
     using AdminAcceptanceTests.TestData.Information;
     using OpenQA.Selenium;
-    using System.Collections.Generic;
 
     public sealed class OrganisationDashboard : PageAction
     {
@@ -68,6 +69,14 @@
             Wait.Until(d => d.FindElements(By.LinkText(organisationName)).Count == 1);
             Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(organisationName)));
             Driver.FindElement(By.LinkText(organisationName)).Click();
+        }
+
+        public void SelectOrganisationById(string orgId)
+        {
+            var url = new Uri(Driver.Url);
+            url = new Uri(url, $"organisations/{orgId}");
+
+            Driver.Navigate().GoToUrl(url);
         }
     }
 }

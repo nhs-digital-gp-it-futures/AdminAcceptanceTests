@@ -1,18 +1,43 @@
 ﻿namespace AdminAcceptanceTests.Actions.Pages
 {
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using AdminAcceptanceTests.Actions.Utils;
-using AdminAcceptanceTests.TestData.Information;
-using FluentAssertions;
-using OpenQA.Selenium;
-public sealed class UserAccountsDashboard : PageAction
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading;
+    using System.Threading.Tasks;
+    using AdminAcceptanceTests.Actions.Utils;
+    using AdminAcceptanceTests.TestData;
+    using AdminAcceptanceTests.TestData.Information;
+    using FluentAssertions;
+    using OpenQA.Selenium;
+
+    public sealed class UserAccountsDashboard : PageAction
     {
         public UserAccountsDashboard(IWebDriver driver)
             : base(driver)
         {
+        }
+
+        public static async Task<string> SetProxyRelationship(string connectionString)
+        {
+            var allOrganisationIds = (await Organisation.GetAllIds(connectionString)).ToList();
+
+            var rng = new Random();
+            var index = rng.Next(allOrganisationIds.Count);
+            var primaryOrg = allOrganisationIds[index];
+
+            var nonMainOrgs = allOrganisationIds;
+            nonMainOrgs.RemoveAt(index);
+
+            var relatedOrg = nonMainOrgs[rng.Next(nonMainOrgs.Count)];
+
+            await new RelatedOrganisations
+            {
+                OrganisationId = primaryOrg,
+                RelatedOrganisationId = relatedOrg,
+            }.SetRelatedOrgs(connectionString);
+
+            return primaryOrg.ToString();
         }
 
         public void OrganisationNameMatches(string organisationName)
@@ -20,7 +45,7 @@ public sealed class UserAccountsDashboard : PageAction
             Wait.Until(d => d.FindElements(Objects.Pages.UserAccountsDashboard.OrganisationName).Count == 1);
             var name = Driver.FindElement(Objects.Pages.UserAccountsDashboard.OrganisationName).Text;
 
-            name.Should().BeEquivalentTo(organisationName);
+            name.Should().ContainEquivalentOf(organisationName);
         }
 
         public string GetODSCode()
@@ -93,9 +118,11 @@ public sealed class UserAccountsDashboard : PageAction
             Driver.FindElement(Objects.Pages.UserAccountsDashboard.BackLink).Click();
         }
 
-        public void ClickRemoveLink()
+        public async Task ClickRemoveLinkAsync(string connectionString, string orgId)
         {
-            Driver.FindElement(Objects.Pages.UserAccountsDashboard.RemoveLink).Click();
+            var relatedOrganisation = await RelatedOrganisations.GetRelatedOrganisations(connectionString, new Guid(orgId));
+
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.RemoveLink(relatedOrganisation.First().RelatedOrganisationId.ToString())).Click();
         }
 
         public List<string> GetRadioButtonText()
@@ -174,7 +201,7 @@ public sealed class UserAccountsDashboard : PageAction
 
         public bool RemoveLinkDisplayed()
         {
-            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RemoveLink).Count > 0;
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RemoveLinkStart).Count > 0;
         }
 
         public bool RemoveButtonDisplayed()
@@ -211,7 +238,12 @@ public sealed class UserAccountsDashboard : PageAction
 
         public bool RelatedNameAndOdsDisplayed()
         {
-            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.OrganisationName).Count > 0 && Driver.FindElements(Objects.Pages.UserAccountsDashboard.ODSCode).Count > 0;
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RelatedOdsCodes).Count > 0;
+        }
+
+        public void ClickCancelLink()
+        {
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.CancelLink).Click();
         }
 
         private bool ElementDisplayed(By by)

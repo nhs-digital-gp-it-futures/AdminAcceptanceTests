@@ -41,7 +41,11 @@
 
         public static By RemoveButton => CustomBy.DataTestId("submit-button");
 
-        public static By RemoveLink => CustomBy.LinkText("Cancel");
+        public static By RemoveLinkStart => By.CssSelector("[data-test-id^= related-org-remove-]");
+
+        public static By CancelLink => By.LinkText("Cancel");
+
+        public static By RemoveLink(string orgId) => CustomBy.DataTestId($"related-org-remove-{orgId.ToLower()}");
 
         public static By RelatedOrgName(string orgId) => CustomBy.DataTestId($"related-org-name-{orgId.ToLower()}");
     }

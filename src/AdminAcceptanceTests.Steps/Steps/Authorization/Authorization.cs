@@ -97,9 +97,16 @@
             Test.Pages.Authorization.WaitForLoginPageToNotBeDisplayed();
         }
 
+        [When(@"the User logs out")]
+        public void WhenTheUserLogsOut()
+        {
+            Test.Pages.Homepage.LogOut();
+        }
+
+        [Then(@"the User is logged out")]
         public void ThenTheUserIsLoggedOut()
         {
-            Test.Pages.Homepage.WaitUntilLoggedInFully();
+            Test.Pages.Homepage.WaitUntilLoggedOutFully();
         }
     }
 }

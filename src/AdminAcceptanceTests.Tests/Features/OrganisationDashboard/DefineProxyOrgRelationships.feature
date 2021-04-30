@@ -18,7 +18,6 @@ Scenario: Define Proxy Organisation Relationships - Choosing Related Organisatio
     When an organisation is selected
     Then the user can see a list of all available organisations in the Buying Catalogue
     And the list of organisations is presented in alphabetical order
-    And user can select an Organisation
 
 Scenario: Define Proxy Organisation Relationships - Error Message
     Given that the user is on the user account dashboard

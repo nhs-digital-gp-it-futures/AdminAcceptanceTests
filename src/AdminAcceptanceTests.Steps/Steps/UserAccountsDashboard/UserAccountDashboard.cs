@@ -156,34 +156,32 @@
         public void ThatTheUserWantsToManageTheProxRelationship()
         {
             Test.Pages.Homepage.ClickAdminTile();
-            Context.Add("Organisation", Test.Pages.OrganisationDashboard.SelectOrganisation());
+            Test.Pages.OrganisationDashboard.SelectOrganisationById(Context.Get<string>("Organisation"));
         }
 
         [StepDefinition(@"there is a control to remove the organisation")]
-        [Given(@"there is a control to remove the organisation")]
         public void GivenTheRemoveOrganisationInformationPageIsPresented()
         {
             Test.Pages.UserAccountsDashboard.RemoveLinkDisplayed();
         }
 
         [When(@"the user clicks the remove link")]
-        public void WhenTheUserClicksTheRemoveLink()
+        public async Task WhenTheUserClicksTheRemoveLinkAsync()
         {
-            Test.Pages.UserAccountsDashboard.ClickRemoveLink();
+            await Test.Pages.UserAccountsDashboard.ClickRemoveLinkAsync(Test.ConnectionString, Context.Get<string>("Organisation"));
         }
 
         [Given(@"the user is on the confirmation page,")]
-        public void GivenTheUserIsOnTheConfirmationPage()
+        public async Task GivenTheUserIsOnTheConfirmationPageAsync()
         {
             Test.Pages.Homepage.ClickAdminTile();
             Context.Add("Organisation", Test.Pages.OrganisationDashboard.SelectOrganisation());
             Test.Pages.UserAccountsDashboard.ClickAddAnOrganisationButton();
             Test.Pages.UserAccountsDashboard.ClickRadioButton();
             Test.Pages.UserAccountsDashboard.ClickConfirmButton();
-            Test.Pages.UserAccountsDashboard.ClickRemoveLink();
+            await Test.Pages.UserAccountsDashboard.ClickRemoveLinkAsync(Test.ConnectionString, Context.Get<string>("Organisation"));
             Test.Pages.UserAccountsDashboard.NamedPageTitleDisplayed("Remove organisation");
         }
-
 
         [Then(@"the user can select one organisation")]
         public void ThenTheUserCanSelectOneOrganisation()
@@ -216,9 +214,22 @@
         }
 
         [When(@"the user chooses to cancel")]
-        public void WhenTheUserChoosesToCancel()
+        public void WhenTheUserChoosesToCancelAsync()
         {
-         Test.Pages.UserAccountsDashboard.ClickRemoveLink();
+            Test.Pages.UserAccountsDashboard.ClickCancelLink();
+        }
+
+        [Given(@"an organisation has a proxy relationship")]
+        public async Task GivenAnOrganisationHasAProxyRelationship()
+        {
+            var organisation = await Actions.Pages.UserAccountsDashboard.SetProxyRelationship(Test.ConnectionString);
+            Context.Add("Organisation", organisation);
+        }
+
+        [StepDefinition(@"the organisation remains in the related organisations section")]
+        public void WhenTheOrganisationRemainsInTheRelatedOrganisationsSection()
+        {
+            Test.Pages.UserAccountsDashboard.RelatedNameAndOdsDisplayed().Should().BeTrue();
         }
     }
 }

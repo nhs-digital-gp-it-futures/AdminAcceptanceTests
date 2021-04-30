@@ -38,6 +38,7 @@
             Test.Pages.OrganisationDashboard.AddOrganisationsButtonIsDisplayed().Should().BeTrue();
         }
 
+        [Then(@"the User can select an Organisation")]
         public void ThenTheUserCanSelectAnOrganisation()
         {
             Test.Pages.OrganisationDashboard.LinksToManageOrganisationsAreDisplayed().Should().BeTrue();
@@ -47,7 +48,6 @@
         public void WhenAnOrganisationIsSelected()
         {
             Context.Add("Organisation", Test.Pages.OrganisationDashboard.SelectOrganisation());
-            Test.Pages.UserAccountsDashboard.ClickAddAnOrganisationButton();
         }
 
         [Then(@"the User Accounts Dashboard for that organisation is displayed")]
