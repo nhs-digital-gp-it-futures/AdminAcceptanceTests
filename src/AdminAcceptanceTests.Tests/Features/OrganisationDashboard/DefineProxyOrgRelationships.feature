@@ -39,4 +39,3 @@ Scenario: Define Proxy Organisation Relationships - Go Back
     Given that the user is on the user account dashboard
     When the user chooses to go back
     Then the user is taken back to the Organisation's information page
-   

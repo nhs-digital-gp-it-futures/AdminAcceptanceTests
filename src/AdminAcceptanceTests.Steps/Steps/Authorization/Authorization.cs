@@ -96,5 +96,10 @@
             WhenAUserProvidesRecognisedAuthenticationDetailsToLoginLocally();
             Test.Pages.Authorization.WaitForLoginPageToNotBeDisplayed();
         }
+
+        public void ThenTheUserIsLoggedOut()
+        {
+            Test.Pages.Homepage.WaitUntilLoggedInFully();
+        }
     }
 }

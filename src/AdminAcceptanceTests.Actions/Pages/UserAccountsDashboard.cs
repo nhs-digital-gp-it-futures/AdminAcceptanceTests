@@ -8,7 +8,6 @@ using AdminAcceptanceTests.Actions.Utils;
 using AdminAcceptanceTests.TestData.Information;
 using FluentAssertions;
 using OpenQA.Selenium;
-
 public sealed class UserAccountsDashboard : PageAction
     {
         public UserAccountsDashboard(IWebDriver driver)
@@ -186,15 +185,6 @@ public sealed class UserAccountsDashboard : PageAction
         public void ClickRemoveButton()
         {
             Driver.FindElement(Objects.Pages.UserAccountsDashboard.RemoveButton).Click();
-        }
-
-        public string ClickRelatedRemoveButton(int index = 0)
-        {
-            Wait.Until(d => NumberOfRadioButtonsDisplayed() > index);
-            var element = Driver.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton)[index];
-            element.Click();
-            Wait.Until(d => bool.Parse(d.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton)[index].GetProperty("checked")));
-            return element.GetAttribute("name");
         }
 
         public bool NamedPageTitleDisplayed(string namedSectionPageTitle)

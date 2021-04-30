@@ -192,7 +192,6 @@
         }
 
         [StepDefinition(@"the remove organisation information page is presented")]
-        
         public void ThenTheOrganisationSInformationPageIsPresented()
         {
             Test.Pages.EditOrganisation.PageDisplayed();

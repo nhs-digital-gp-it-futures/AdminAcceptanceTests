@@ -5,7 +5,6 @@
     using AdminAcceptanceTests.TestData.Information;
     using OpenQA.Selenium;
     using System.Collections.Generic;
-    
 
     public sealed class OrganisationDashboard : PageAction
     {
