@@ -1,8 +1,11 @@
 ﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using System.Linq;
     using AdminAcceptanceTests.Actions.Utils;
     using AdminAcceptanceTests.TestData.Information;
     using OpenQA.Selenium;
+    using System.Collections.Generic;
+    
 
     public sealed class OrganisationDashboard : PageAction
     {
@@ -24,6 +27,11 @@
         public bool LinksToManageOrganisationsAreDisplayed()
         {
             return Driver.FindElements(Objects.Pages.OrganisationDashboard.OrganisationLinks).Count > 0;
+        }
+
+        public IEnumerable<string> GetOrganisationNames()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.OrganisationName).Select(s => s.Text);
         }
 
         public void ClickAddOrganisationsButton()

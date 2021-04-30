@@ -12,6 +12,8 @@
         {
         }
 
+        [Given(@"that the user wants to define a new proxy relationship")]
+        [Given(@"that the user is on the Manage Organisations page")]
         [StepDefinition(@"an Authority User clicks the admin tile on the Public Browse homepage")]
         public void WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage()
         {
@@ -36,7 +38,6 @@
             Test.Pages.OrganisationDashboard.AddOrganisationsButtonIsDisplayed().Should().BeTrue();
         }
 
-        [Then(@"the User can select an Organisation")]
         public void ThenTheUserCanSelectAnOrganisation()
         {
             Test.Pages.OrganisationDashboard.LinksToManageOrganisationsAreDisplayed().Should().BeTrue();
@@ -46,6 +47,7 @@
         public void WhenAnOrganisationIsSelected()
         {
             Context.Add("Organisation", Test.Pages.OrganisationDashboard.SelectOrganisation());
+            Test.Pages.UserAccountsDashboard.ClickAddAnOrganisationButton();
         }
 
         [Then(@"the User Accounts Dashboard for that organisation is displayed")]
