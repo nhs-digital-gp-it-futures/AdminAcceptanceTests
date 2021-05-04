@@ -1,6 +1,7 @@
 ﻿namespace AdminAcceptanceTests.TestData
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading.Tasks;
     using AdminAcceptanceTests.TestData.Utils;
@@ -24,21 +25,27 @@
 
         public static async Task<Organisation> RetrieveByODSCode(string connectionString, string odsCode)
         {
-            var query = @"SELECT * FROM [dbo].[Organisations] WHERE OdsCode=@ODSCode";
+            var query = @"SELECT * FROM dbo.Organisations WHERE OdsCode=@ODSCode";
             var result = await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, new { odsCode });
             return result.Single();
         }
 
         public static async Task<Organisation> RetrieveById(string connectionString, Guid id)
         {
-            var query = @"SELECT * FROM [dbo].[Organisations] WHERE OrganisationId=@id";
+            var query = @"SELECT * FROM dbo.Organisations WHERE OrganisationId=@id";
             var results = await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, new { id });
             return results.Single();
         }
 
+        public static async Task<IEnumerable<Guid>> GetAllIds(string connectionString)
+        {
+            var query = @"SELECT OrganisationId FROM dbo.Organisations";
+            return await SqlExecutor.ExecuteAsync<Guid>(connectionString, query, null);
+        }
+
         public async Task Create(string connectionString)
         {
-            var query = @"INSERT INTO [dbo].[Organisations] (
+            var query = @"INSERT INTO dbo.Organisations (
                             OrganisationId
                             ,Name
                             ,Address
@@ -62,14 +69,14 @@
 
         public async Task<Organisation> RetrieveRandomOrganisation(string connectionString)
         {
-            var query = @"SELECT * FROM [dbo].[Organisations]";
+            var query = @"SELECT * FROM dbo.Organisations WHERE OrganisationId NOT IN (SELECT DISTINCT OrganisationId FROM RelatedOrganisations)";
             var listOfItems = await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, this);
             return listOfItems.ElementAt(new Faker().Random.Number(listOfItems.Count() - 1));
         }
 
         public async Task Delete(string connectionString)
         {
-            var query = @"DELETE FROM  [dbo].[Organisations] WHERE OrganisationId=@organisationId OR OdsCode=@odsCode";
+            var query = @"DELETE FROM  dbo.Organisations WHERE OrganisationId=@organisationId OR OdsCode=@odsCode";
             await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, this);
         }
     }

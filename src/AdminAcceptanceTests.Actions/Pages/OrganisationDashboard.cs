@@ -1,5 +1,8 @@
 ﻿namespace AdminAcceptanceTests.Actions.Pages
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
     using AdminAcceptanceTests.Actions.Utils;
     using AdminAcceptanceTests.TestData.Information;
     using OpenQA.Selenium;
@@ -24,6 +27,11 @@
         public bool LinksToManageOrganisationsAreDisplayed()
         {
             return Driver.FindElements(Objects.Pages.OrganisationDashboard.OrganisationLinks).Count > 0;
+        }
+
+        public IEnumerable<string> GetOrganisationNames()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.OrganisationName).Select(s => s.Text);
         }
 
         public void ClickAddOrganisationsButton()
@@ -61,6 +69,14 @@
             Wait.Until(d => d.FindElements(By.LinkText(organisationName)).Count == 1);
             Wait.Until(ElementExtensions.ElementToBeClickable(By.LinkText(organisationName)));
             Driver.FindElement(By.LinkText(organisationName)).Click();
+        }
+
+        public void SelectOrganisationById(string orgId)
+        {
+            var url = new Uri(Driver.Url);
+            url = new Uri(url, $"organisations/{orgId}");
+
+            Driver.Navigate().GoToUrl(url);
         }
     }
 }

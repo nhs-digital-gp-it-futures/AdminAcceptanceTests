@@ -12,6 +12,8 @@
         {
         }
 
+        [Given(@"that the user wants to define a new proxy relationship")]
+        [Given(@"that the user is on the Manage Organisations page")]
         [StepDefinition(@"an Authority User clicks the admin tile on the Public Browse homepage")]
         public void WhenAnAuthorityUserClicksTheAdminTileOnThePublicBrowseHomepage()
         {

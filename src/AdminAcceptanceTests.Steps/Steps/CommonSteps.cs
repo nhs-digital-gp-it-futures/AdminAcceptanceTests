@@ -1,5 +1,9 @@
 ﻿namespace AdminAcceptanceTests.Steps.Steps
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
     using System.Threading;
     using AdminAcceptanceTests.Steps.Utils;
     using AdminAcceptanceTests.TestData;
@@ -12,6 +16,23 @@
         public CommonSteps(UITest test, ScenarioContext context)
             : base(test, context)
         {
+        }
+
+        [StepDefinition(@"no organisation is selected")]
+        public static void DoNothing()
+        {
+            // do nothing
+        }
+
+        public static void AssertListOfStringsIsInAscendingOrder(IEnumerable<string> stringList)
+        {
+            var hexList = stringList
+                .Select(s => s.ToLower())
+                .Select(s => Encoding.UTF8.GetBytes(s))
+                .Select(h => BitConverter.ToString(h))
+                .Select(r => r.Replace("-", string.Empty))
+                .ToList();
+            hexList.Should().BeInAscendingOrder();
         }
 
         [Given(@"that an Authority User has logged in on Public Browse")]

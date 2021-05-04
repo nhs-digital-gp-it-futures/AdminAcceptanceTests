@@ -10,5 +10,7 @@
         public static By AddOrgButton => CustomBy.DataTestId("add-org-button", "a");
 
         public static By OrganisationLinks => CustomBy.DataTestId("org-table", "a");
+
+        public static By OrganisationLinksId(string id) => CustomBy.DataTestId($"org-name-{id}");
     }
 }

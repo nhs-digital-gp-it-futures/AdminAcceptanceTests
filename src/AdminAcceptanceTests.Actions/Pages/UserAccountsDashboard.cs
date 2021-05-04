@@ -1,9 +1,12 @@
 ﻿namespace AdminAcceptanceTests.Actions.Pages
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Threading;
+    using System.Threading.Tasks;
     using AdminAcceptanceTests.Actions.Utils;
+    using AdminAcceptanceTests.TestData;
     using AdminAcceptanceTests.TestData.Information;
     using FluentAssertions;
     using OpenQA.Selenium;
@@ -15,12 +18,34 @@
         {
         }
 
+        public static async Task<string> SetProxyRelationship(string connectionString)
+        {
+            var allOrganisationIds = (await Organisation.GetAllIds(connectionString)).ToList();
+
+            var rng = new Random();
+            var index = rng.Next(allOrganisationIds.Count);
+            var primaryOrg = allOrganisationIds[index];
+
+            var nonMainOrgs = allOrganisationIds;
+            nonMainOrgs.RemoveAt(index);
+
+            var relatedOrg = nonMainOrgs[rng.Next(nonMainOrgs.Count)];
+
+            await new RelatedOrganisations
+            {
+                OrganisationId = primaryOrg,
+                RelatedOrganisationId = relatedOrg,
+            }.SetRelatedOrgs(connectionString);
+
+            return primaryOrg.ToString();
+        }
+
         public void OrganisationNameMatches(string organisationName)
         {
             Wait.Until(d => d.FindElements(Objects.Pages.UserAccountsDashboard.OrganisationName).Count == 1);
             var name = Driver.FindElement(Objects.Pages.UserAccountsDashboard.OrganisationName).Text;
 
-            name.Should().BeEquivalentTo(organisationName);
+            name.Should().ContainEquivalentOf(organisationName);
         }
 
         public string GetODSCode()
@@ -28,9 +53,39 @@
             return Driver.FindElement(Objects.Pages.UserAccountsDashboard.ODSCode).Text;
         }
 
+        public bool OrgNameAndODSCodeIsDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.OrganisationName).Count > 0 && Driver.FindElements(Objects.Pages.UserAccountsDashboard.ODSCode).Count > 0;
+        }
+
         public bool EditOrganisationButtonDisplayed()
         {
             return ElementDisplayed(Objects.Pages.UserAccountsDashboard.EditOrganisation);
+        }
+
+        public List<string> OrganisationNames()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RadioButtonLabel).Select(s => s.Text).ToList();
+        }
+
+        public IEnumerable<string> GetRelatedODSCodes()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RelatedOdsCodes).Select(o => o.Text);
+        }
+
+        public bool AddOrganisationPageDisplayed()
+        {
+            return ElementDisplayed(Objects.Pages.UserAccountsDashboard.OrganisationName);
+        }
+
+        public bool AddAnOrganisationButtonDisplayed()
+        {
+            return ElementDisplayed(Objects.Pages.UserAccountsDashboard.AddAnOrganisationButton);
+        }
+
+        public void ClickAddAnOrganisationButton()
+        {
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.AddAnOrganisationButton).Click();
         }
 
         public void ClickEditOrganisationButton()
@@ -46,6 +101,47 @@
         public void ClickAddUserButton()
         {
             Driver.FindElement(Objects.Pages.UserAccountsDashboard.AddUser).Click();
+        }
+
+        public bool ConfirmButtonDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.ConfirmButton).Count == 1;
+        }
+
+        public void ClickConfirmButton()
+        {
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.ConfirmButton).Click();
+        }
+
+        public void ClickBackLink()
+        {
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.BackLink).Click();
+        }
+
+        public async Task ClickRemoveLinkAsync(string connectionString, string orgId)
+        {
+            var relatedOrganisation = await RelatedOrganisations.GetRelatedOrganisations(connectionString, new Guid(orgId));
+
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.RemoveLink(relatedOrganisation.First().RelatedOrganisationId.ToString())).Click();
+        }
+
+        public List<string> GetRadioButtonText()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton).Select(s => s.Text).ToList();
+        }
+
+        public int NumberOfRadioButtonsDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton).Count;
+        }
+
+        public string ClickRadioButton(int index = 0)
+        {
+            Wait.Until(d => NumberOfRadioButtonsDisplayed() > index);
+            var element = Driver.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton)[index];
+            element.Click();
+            Wait.Until(s => bool.Parse(s.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton)[index].GetProperty("checked")));
+            return element.GetAttribute("value");
         }
 
         public bool ViewUserLinksDisplayed()
@@ -91,6 +187,63 @@
             var row = rows.Single(s => s.FindElement(By.TagName("a")).Text.Equals(username, StringComparison.OrdinalIgnoreCase));
 
             return row.FindElements(Objects.Pages.UserAccountsDashboard.DisabledAccountFlag).Count == 1;
+        }
+
+        public bool ErrorSummaryDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.CreateBuyerUser.ErrorSummary).Count > 0;
+        }
+
+        public bool ErrorMessagesDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.ErrorMessages).Count > 0;
+        }
+
+        public bool RemoveLinkDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RemoveLinkStart).Count > 0;
+        }
+
+        public bool RemoveButtonDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RemoveButton).Count > 0;
+        }
+
+        public void ClickRemoveButton()
+        {
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.RemoveButton).Click();
+        }
+
+        public bool NamedPageTitleDisplayed(string namedSectionPageTitle)
+        {
+            try
+            {
+                Wait.Until(d => d.FindElement(Objects.Pages.UserAccountsDashboard.OrganisationName).Text.Contains(namedSectionPageTitle, StringComparison.OrdinalIgnoreCase));
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public string ClickCheckboxReturnName(int index = 0)
+        {
+            Wait.Until(d => NumberOfRadioButtonsDisplayed() > index);
+            var element = Driver.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton)[index];
+            element.Click();
+            Wait.Until(d => bool.Parse(d.FindElements(Objects.Pages.UserAccountsDashboard.RadioButton)[index].GetProperty("checked")));
+            return element.GetAttribute("name");
+        }
+
+        public bool RelatedNameAndOdsDisplayed()
+        {
+            return Driver.FindElements(Objects.Pages.UserAccountsDashboard.RelatedOdsCodes).Count > 0;
+        }
+
+        public void ClickCancelLink()
+        {
+            Driver.FindElement(Objects.Pages.UserAccountsDashboard.CancelLink).Click();
         }
 
         private bool ElementDisplayed(By by)
