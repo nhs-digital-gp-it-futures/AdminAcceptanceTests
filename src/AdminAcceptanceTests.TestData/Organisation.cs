@@ -76,6 +76,9 @@
 
         public async Task Delete(string connectionString)
         {
+            var relatedQuery = @"DELETE FROM dbo.RelatedOrganisations WHERE OrganisationId=@organisationId OR RelatedOrganisationId=@organisationId;";
+            await SqlExecutor.ExecuteAsync<Organisation>(connectionString, relatedQuery, this);
+
             var query = @"DELETE FROM  dbo.Organisations WHERE OrganisationId=@organisationId OR OdsCode=@odsCode";
             await SqlExecutor.ExecuteAsync<Organisation>(connectionString, query, this);
         }
